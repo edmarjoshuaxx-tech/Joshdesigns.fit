@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Josh, Licensed Architect</title>
+  <meta name="description" content="About Josh, a Registered and Licensed Architect in the Philippines specializing in Revit, CAD, and architectural visualization.">
+  <link rel="canonical" href="https://joshdesigns.fit/about.html">
+  
+  <meta property="og:title" content="About | Josh, Licensed Architect">
+  <meta property="og:description" content="Registered and Licensed Architect, Philippines — Revit, CAD, and visualization">
+  <meta property="og:image" content="https://joshdesigns.fit/images/about-headshot.jpg">
+  <meta property="og:url" content="https://joshdesigns.fit/about.html">
+  <meta property="og:type" content="website">
+  
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav-container">
+      <a href="index.html" class="logo">Josh</a>
+      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section>
+    <h2>About</h2>
+    
+    <div class="about-grid">
+      <img src="images/about-headshot.jpg" alt="Headshot of Josh, licensed architect" loading="lazy">
+      
+      <div>
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+          Registered and Licensed Architect, Philippines<br>
+          <span style="color: var(--text-muted); font-size: 0.95rem;">License No. [LICENSE NUMBER]</span>
+        </p>
+        
+        <p>[BIO] Replace this with a short professional bio. Focus on your approach to documentation, collaboration, and design communication. Keep it warm and direct.</p>
+        
+        <p style="margin-top: 1rem;">[Additional bio paragraph if desired.]</p>
+        
+        <h3 style="margin-top: 2rem;">Software & Skills</h3>
+        <div class="skills">
+          <span class="skill-tag">Revit</span>
+          <span class="skill-tag">AutoCAD</span>
+          <span class="skill-tag">Enscape</span>
+          <span class="skill-tag">Lumion</span>
+          <span class="skill-tag">Photoshop</span>
+          <span class="skill-tag">SketchUp</span>
+        </div>
+        
+        <h3 style="margin-top: 2rem;">Education</h3>
+        <p>[EDUCATION PLACEHOLDER]<br>
+        <span style="color: var(--text-muted);">Bachelor of Science in Architecture, [University], [Year]</span></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; <span id="year"></span> Josh · <a href="https://joshdesigns.fit">joshdesigns.fit</a></p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <script src="js/main.js"></script>
+</body>
+</html>

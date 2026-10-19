@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects | Josh Architect Portfolio</title>
+  <meta name="description" content="Selected architecture, Revit modeling, CAD drafting, and visualization projects by Josh, licensed architect in the Philippines.">
+  <link rel="canonical" href="https://joshdesigns.fit/projects.html">
+  
+  <meta property="og:title" content="Projects | Josh">
+  <meta property="og:description" content="Architecture, Revit & CAD, and Renderings portfolio">
+  <meta property="og:image" content="https://joshdesigns.fit/images/project-1-01.jpg">
+  <meta property="og:url" content="https://joshdesigns.fit/projects.html">
+  <meta property="og:type" content="website">
+  
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav-container">
+      <a href="index.html" class="logo">Josh</a>
+      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section>
+    <h2>Projects</h2>
+    <p style="margin-bottom: 2rem; color: var(--text-muted);">A selection of work across architecture, Revit modeling, CAD documentation, and visualization.</p>
+    
+    <!-- Filters -->
+    <div class="filters" role="tablist">
+      <button class="filter-btn active" data-filter="all" role="tab">All</button>
+      <button class="filter-btn" data-filter="architecture" role="tab">Architecture</button>
+      <button class="filter-btn" data-filter="revit" role="tab">Revit & CAD</button>
+      <button class="filter-btn" data-filter="renderings" role="tab">Renderings</button>
+    </div>
+    
+    <!-- Projects Grid - 6 placeholders. Edit data-category, titles, images, and links -->
+    <div class="projects-grid">
+      
+      <article class="project-card" data-category="renderings">
+        <a href="projects/project-1.html">
+          <img src="images/project-1-01.jpg" alt="[PROJECT 1 TITLE]" loading="lazy">
+          <div class="project-info">
+            <span class="project-category">Renderings</span>
+            <h3>[PROJECT 1 TITLE]</h3>
+          </div>
+        </a>
+      </article>
+      
+      <article class="project-card" data-category="architecture">
+        <a href="projects/project-2.html">
+          <img src="images/project-2-01.jpg" alt="[PROJECT 2 TITLE]" loading="lazy">
+          <div class="project-info">
+            <span class="project-category">Architecture</span>
+            <h3>[PROJECT 2 TITLE]</h3>
+          </div>
+        </a>
+      </article>
+      
+      <article class="project-card" data-category="revit">
+        <a href="projects/project-3.html">
+          <img src="images/project-3-01.jpg" alt="[PROJECT 3 TITLE]" loading="lazy">
+          <div class="project-info">
+            <span class="project-category">Revit & CAD</span>
+            <h3>[PROJECT 3 TITLE]</h3>
+          </div>
+        </a>
+      </article>
+      
+      <article class="project-card" data-category="renderings">
+        <a href="projects/project-4.html">
+          <img src="images/project-4-01.jpg" alt="[PROJECT 4 TITLE]" loading="lazy">
+          <div class="project-info">
+            <span class="project-category">Renderings</span>
+            <h3>[PROJECT 4 TITLE]</h3>
+          </div>
+        </a>
+      </article>
+      
+      <article class="project-card" data-category="architecture">
+        <a href="projects/project-5.html">
+          <img src="images/project-5-01.jpg" alt="[PROJECT 5 TITLE]" loading="lazy">
+          <div class="project-info">
+            <span class="project-category">Architecture</span>
+            <h3>[PROJECT 5 TITLE]</h3>
+          </div>
+        </a>
+      </article>
+      
+      <article class="project-card" data-category="revit">
+        <a href="projects/project-6.html">
+          <img src="images/project-6-01.jpg" alt="[PROJECT 6 TITLE]" loading="lazy">
+          <div class="project-info">
+            <span class="project-category">Revit & CAD</span>
+            <h3>[PROJECT 6 TITLE]</h3>
+          </div>
+        </a>
+      </article>
+      
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; <span id="year"></span> Josh · <a href="https://joshdesigns.fit">joshdesigns.fit</a></p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <script src="js/main.js"></script>
+</body>
+</html>

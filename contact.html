@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | Josh Architect</title>
+  <meta name="description" content="Get in touch with Josh for Revit modeling, CAD drafting, or architectural visualization projects.">
+  <link rel="canonical" href="https://joshdesigns.fit/contact.html">
+  
+  <meta property="og:title" content="Contact | Josh Architect">
+  <meta property="og:description" content="Get in touch for Revit modeling, CAD drafting, or visualization work">
+  <meta property="og:image" content="https://joshdesigns.fit/images/hero.jpg">
+  <meta property="og:url" content="https://joshdesigns.fit/contact.html">
+  <meta property="og:type" content="website">
+  
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav-container">
+      <a href="index.html" class="logo">Josh</a>
+      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section>
+    <h2>Contact</h2>
+    <p style="margin-bottom: 2rem; color: var(--text-muted); text-align: center;">Tell me a little about your project. I typically reply within one business day.</p>
+    
+    <!-- Formspree Form - Replace FORM_ID with your actual Formspree form ID -->
+    <form id="contact-form" class="contact-form" action="https://formspree.io/f/FORM_ID" method="POST">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="project-type">Project Type</label>
+        <select id="project-type" name="project-type">
+          <option value="revit-modeling">Revit Modeling</option>
+          <option value="cad-drafting">CAD Drafting</option>
+          <option value="visualization">Visualization / Rendering</option>
+          <option value="document-cleanup">Document Set Cleanup</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required placeholder="Briefly describe the project, timeline, and any files you can share."></textarea>
+      </div>
+      
+      <!-- Formspree honeypot for spam -->
+      <input type="text" name="_gotcha" style="display:none">
+      
+      <button type="submit" class="btn" style="width: 100%; border: none; cursor: pointer;">Send Message</button>
+    </form>
+    
+    <div class="contact-links">
+      <p>Or email directly: <a href="mailto:hello@joshdesigns.fit">hello@joshdesigns.fit</a></p>
+      <p style="margin-top: 1rem;">
+        <!-- Replace with your actual links -->
+        <a href="[LINKEDIN_URL]" aria-label="LinkedIn">LinkedIn</a>
+        <a href="[UPWORK_URL]" aria-label="Upwork">Upwork</a>
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; <span id="year"></span> Josh · <a href="https://joshdesigns.fit">joshdesigns.fit</a></p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <script src="js/main.js"></script>
+</body>
+</html>

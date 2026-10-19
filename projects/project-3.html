@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[PROJECT 3 TITLE] | Josh</title>
+  <meta name="description" content="[PROJECT 3 TITLE] - Architecture and visualization project by Josh.">
+  <link rel="canonical" href="https://joshdesigns.fit/projects/project-3.html">
+  
+  <meta property="og:title" content="[PROJECT 3 TITLE] | Josh">
+  <meta property="og:description" content="[PROJECT 3 TITLE] - Architecture and visualization project by Josh.">
+  <meta property="og:image" content="https://joshdesigns.fit/images/project-3-01.jpg">
+  <meta property="og:url" content="https://joshdesigns.fit/projects/project-3.html">
+  <meta property="og:type" content="website">
+  
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav-container">
+      <a href="../index.html" class="logo">Josh</a>
+      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../services.html">Services</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <article class="project-detail">
+    <a href="../projects.html" style="color: var(--text-muted); font-size: 0.9rem;">← Back to Projects</a>
+    
+    <h1 style="font-family: var(--font-serif); font-size: 2.5rem; margin: 1.5rem 0 0.5rem; font-weight: 400;">[PROJECT 3 TITLE]</h1>
+    
+    <div class="meta">
+      <span>Role: [ROLE, e.g. Designer / Modeler]</span>
+      <span>Software: Revit, Enscape / Lumion</span>
+      <span>Year: [YEAR]</span>
+    </div>
+    
+    <div class="project-gallery">
+      <img src="../images/project-3-01.jpg" alt="[PROJECT 3 TITLE] main view" loading="lazy" class="lightbox-trigger" data-full="../images/project-3-01.jpg">
+      <!-- Add more images: <img src="../images/project-3-02.jpg" alt="..." loading="lazy" class="lightbox-trigger" data-full="../images/project-3-02.jpg"> -->
+    </div>
+    
+    <div style="margin-top: 2rem;">
+      <h2>About the Project</h2>
+      <p>[Short description of the project. What was the challenge, your contribution, and the outcome? Keep it concise and image-led.]</p>
+      
+      <p style="margin-top: 1rem;">[Additional paragraph if needed.]</p>
+    </div>
+  </article>
+
+  <!-- Simple lightbox -->
+  <div id="lightbox" class="lightbox" hidden>
+    <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+    <img id="lightbox-img" alt="">
+  </div>
+
+  <footer>
+    <p>&copy; <span id="year"></span> Josh · <a href="https://joshdesigns.fit">joshdesigns.fit</a></p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
