@@ -97,4 +97,68 @@ document.addEventListener('DOMContentLoaded', function() {
     if (e.key === 'Escape' && lightbox && !lightbox.hidden) lightbox.hidden = true;
   });
 
+  // Contact forms: AJAX when fetch exists, native POST otherwise.
+  document.querySelectorAll('form.contact-form').forEach(function (form) {
+    const status = form.querySelector('[data-form-status]');
+    const submitButton = form.querySelector('[type="submit"]');
+    const successText = form.getAttribute('data-success') || 'Thanks. Your message was sent.';
+    const errorText = form.getAttribute('data-error') || 'The message could not be sent. Please try again.';
+
+    function setStatus(state, message) {
+      if (!status) return;
+      if (!state) {
+        status.textContent = '';
+        status.removeAttribute('data-state');
+        return;
+      }
+      status.dataset.state = state;
+      status.textContent = message;
+      status.focus();
+    }
+
+    form.addEventListener('submit', function (event) {
+      const gotcha = form.querySelector('[name="_gotcha"]');
+      if (gotcha && gotcha.value.trim() !== '') {
+        event.preventDefault();
+        form.reset();
+        setStatus('success', successText);
+        return;
+      }
+
+      if (typeof window.fetch !== 'function') return;
+
+      event.preventDefault();
+      const formData = new FormData(form);
+      if (submitButton) submitButton.disabled = true;
+      setStatus('', '');
+
+      fetch(form.action, {
+        method: (form.method || 'POST').toUpperCase(),
+        body: formData,
+        headers: { Accept: 'application/json' }
+      }).then(function (response) {
+        if (response.ok) {
+          form.reset();
+          setStatus('success', successText);
+          return;
+        }
+        return response.json().then(function (data) {
+          let message = errorText;
+          if (data && Array.isArray(data.errors) && data.errors.length) {
+            message = data.errors.map(function (err) { return err && err.message; }).filter(Boolean).join(' ');
+          } else if (data && typeof data.error === 'string' && data.error) {
+            message = data.error;
+          }
+          setStatus('error', message || errorText);
+        }).catch(function () {
+          setStatus('error', errorText);
+        });
+      }).catch(function () {
+        setStatus('error', errorText);
+      }).finally(function () {
+        if (submitButton) submitButton.disabled = false;
+      });
+    });
+  });
+
 });

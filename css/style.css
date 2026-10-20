@@ -453,6 +453,48 @@ input:focus, select:focus, textarea:focus {
   font-size: 1.2rem;
 }
 
+.form-status {
+  margin: 0 0 1.25rem;
+  padding: 0.85rem 1rem;
+  border-radius: 2px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.form-status:empty {
+  display: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.form-status:focus {
+  outline: 2px solid var(--warm-accent);
+  outline-offset: 2px;
+}
+
+.form-status[data-state="success"] {
+  background: #eef6ef;
+  color: #1e4d2b;
+  border: 1px solid #b7d7be;
+}
+
+.form-status[data-state="error"] {
+  background: #fdf2f0;
+  color: #7a2e24;
+  border: 1px solid #e4b8b0;
+}
+
+.form-status[data-state="info"] {
+  background: var(--white);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.contact-form button:disabled {
+  opacity: 0.65;
+}
+
 /* Footer */
 footer {
   background: var(--charcoal);

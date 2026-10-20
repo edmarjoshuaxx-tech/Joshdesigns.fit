@@ -39,8 +39,8 @@
     <h2>Contact</h2>
     <p style="margin-bottom: 2rem; color: var(--text-muted); text-align: center;">Tell me a little about your project. I typically reply within one business day.</p>
     
-    <!-- Formspree Form - Replace FORM_ID with your actual Formspree form ID -->
-    <form id="contact-form" class="contact-form" action="https://formspree.io/f/FORM_ID" method="POST">
+    <!-- Formspree form. Replace [FORM_ID] with your form id. Submits without JavaScript. -->
+    <form id="contact-form" class="contact-form" action="https://formspree.io/f/[FORM_ID]" method="POST" data-success="Thanks. Your message was sent, and I'll reply within one business day." data-error="The message could not be sent. Please try again, or email hello@joshdesigns.fit.">
       <div class="form-group">
         <label for="name">Name</label>
         <input type="text" id="name" name="name" required>
@@ -67,9 +67,17 @@
         <textarea id="message" name="message" required placeholder="Briefly describe the project, timeline, and any files you can share."></textarea>
       </div>
       
-      <!-- Formspree honeypot for spam -->
-      <input type="text" name="_gotcha" style="display:none">
-      
+      <!-- Spam honeypot. Formspree drops the submission when this is filled in. -->
+      <div class="sr-only" aria-hidden="true">
+        <label for="contact-gotcha">Website</label>
+        <input type="text" id="contact-gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
+      </div>
+
+      <p class="form-status" data-form-status tabindex="-1" role="status" aria-live="polite"></p>
+      <noscript>
+        <p class="form-status" data-state="info">JavaScript is off. Sending this form still works, and Formspree shows a confirmation page.</p>
+      </noscript>
+
       <button type="submit" class="btn" style="width: 100%; border: none; cursor: pointer;">Send Message</button>
     </form>
     
