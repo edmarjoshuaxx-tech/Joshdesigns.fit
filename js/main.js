@@ -399,6 +399,112 @@
     });
   }
 
+  /* ---------- Contact forms (AJAX + status) ---------- */
+  function initContactForms() {
+    document.querySelectorAll("form.contact-form").forEach(function (form) {
+      var status = form.querySelector("[data-form-status]");
+      var submitButton = form.querySelector('[type="submit"]');
+      var successText =
+        form.getAttribute("data-success") || "Thanks. Your message was sent.";
+      var errorText =
+        form.getAttribute("data-error") ||
+        "The message could not be sent. Please try again.";
+
+      function setStatus(state, message) {
+        if (!status) return;
+        if (!state) {
+          status.textContent = "";
+          status.removeAttribute("data-state");
+          return;
+        }
+        status.dataset.state = state;
+        status.textContent = message;
+        status.focus();
+      }
+
+      function resetMultiStep() {
+        if (!form.hasAttribute("data-multistep")) return;
+        var steps = form.querySelectorAll(".form-step");
+        var progress = form.querySelectorAll(".form-progress li");
+        steps.forEach(function (step, i) {
+          step.classList.toggle("is-active", i === 0);
+          step.querySelectorAll("input, select, textarea").forEach(function (field) {
+            if (field.name === "_gotcha") return;
+            if (i === 0) {
+              if (field.dataset.wasRequired === "true") field.required = true;
+            } else {
+              if (field.required) field.dataset.wasRequired = "true";
+              field.required = false;
+            }
+          });
+        });
+        progress.forEach(function (item, i) {
+          item.classList.toggle("is-active", i === 0);
+          item.classList.toggle("is-complete", false);
+          item.setAttribute("aria-current", i === 0 ? "step" : "false");
+        });
+        form.setAttribute("data-current-step", "1");
+      }
+
+      form.addEventListener("submit", function (event) {
+        var gotcha = form.querySelector('[name="_gotcha"]');
+        if (gotcha && gotcha.value.trim() !== "") {
+          event.preventDefault();
+          form.reset();
+          resetMultiStep();
+          setStatus("success", successText);
+          return;
+        }
+
+        if (typeof window.fetch !== "function") return;
+
+        event.preventDefault();
+        var formData = new FormData(form);
+        if (submitButton) submitButton.disabled = true;
+        setStatus("", "");
+
+        fetch(form.action, {
+          method: (form.method || "POST").toUpperCase(),
+          body: formData,
+          headers: { Accept: "application/json" },
+        })
+          .then(function (response) {
+            if (response.ok) {
+              form.reset();
+              resetMultiStep();
+              setStatus("success", successText);
+              return;
+            }
+            return response
+              .json()
+              .then(function (data) {
+                var message = errorText;
+                if (data && Array.isArray(data.errors) && data.errors.length) {
+                  message = data.errors
+                    .map(function (err) {
+                      return err && err.message;
+                    })
+                    .filter(Boolean)
+                    .join(" ");
+                } else if (data && typeof data.error === "string" && data.error) {
+                  message = data.error;
+                }
+                setStatus("error", message || errorText);
+              })
+              .catch(function () {
+                setStatus("error", errorText);
+              });
+          })
+          .catch(function () {
+            setStatus("error", errorText);
+          })
+          .finally(function () {
+            if (submitButton) submitButton.disabled = false;
+          });
+      });
+    });
+  }
+
   /* ---------- Boot ---------- */
   function boot() {
     initLoader();
@@ -410,6 +516,7 @@
     initFilters();
     initViewToggle();
     initMultiStepForm();
+    initContactForms();
     initLightbox();
     initYear();
     initAnchors();

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposal draft | Josh</title>
+  <meta name="description" content="Private browser-only draft for an Upwork proposal. Nothing entered here is sent anywhere.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://joshdesigns.fit/tools/proposal.html">
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .form-status { margin: 0 0 1rem; padding: 0.8rem 1rem; border-radius: 0; }
+    .form-status:empty { display: none; margin: 0; padding: 0; }
+    .form-status[data-state="success"] { background: #eef6ef; color: #1e4d2b; border: 1px solid #b7d7be; }
+    .form-status[data-state="error"] { background: #fdf2f0; color: #7a2e24; border: 1px solid #e4b8b0; }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav-container">
+      <a href="../index.html" class="logo">Josh</a>
+      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../services.html">Services</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section>
+    <h2>Proposal draft</h2>
+    <p style="margin-bottom: 2rem; color: var(--grey); text-align: center;">Paste an Upwork post and pick a service. The draft stays in this browser. Nothing is uploaded.</p>
+
+    <div class="contact-form">
+      <div class="form-group">
+        <label for="job-post">Upwork job post</label>
+        <textarea id="job-post" placeholder="Paste the job post here."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="service">Service</label>
+        <select id="service">
+          <option value="revit">Revit modeling</option>
+          <option value="bim">BIM</option>
+          <option value="mep">MEP backgrounds</option>
+          <option value="cad">CAD-to-Revit</option>
+          <option value="cd">CD cleanup</option>
+          <option value="families">Families</option>
+          <option value="rendering">Rendering</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="proposal">Proposal</label>
+        <textarea id="proposal" style="min-height: 320px;"></textarea>
+      </div>
+
+      <p class="form-status" id="copy-status" role="status" aria-live="polite"></p>
+      <button type="button" class="btn" id="copy-proposal" style="width: 100%; border: none; cursor: pointer;">Copy proposal</button>
+      <p style="margin-top: 1rem; color: var(--grey); font-size: 0.9rem;">Changing the job post or the service rewrites the draft. Edit the proposal after that. [RATE] stays until you replace it.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; <span id="year"></span> Josh · <a href="https://joshdesigns.fit">joshdesigns.fit</a></p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <script src="../js/main.js"></script>
+  <script>
+    (function () {
+      var SERVICES = {
+        revit: {
+          label: 'Revit modeling',
+          skills: [
+            'Revit architectural models from sketches, PDFs, or existing CAD',
+            'Walls, floors, roofs, view templates, and sheet setup',
+            'Clash-ready models for coordination'
+          ]
+        },
+        bim: {
+          label: 'BIM',
+          skills: [
+            'BIM production for architectural models',
+            'Shared models on BIM 360 / Autodesk Construction Cloud',
+            'LOD 200–350 models, families, and templates'
+          ]
+        },
+        mep: {
+          label: 'MEP backgrounds',
+          skills: [
+            'Architectural and basic MEP background models',
+            'Linked models and sheet setup',
+            'Clash review support in Navisworks'
+          ]
+        },
+        cad: {
+          label: 'CAD-to-Revit',
+          skills: [
+            'CAD-to-Revit and PDF-to-Revit conversion',
+            'Layer cleanup and standardization',
+            'Models from 2D plans and elevations, with design intent kept'
+          ]
+        },
+        cd: {
+          label: 'CD cleanup',
+          skills: [
+            'Construction document and permit set cleanup',
+            'Sheet organization, notes, and detail coordination',
+            'Title block and revision cleanup'
+          ]
+        },
+        families: {
+          label: 'Revit families',
+          skills: [
+            'Revit families, templates, and office standards',
+            'Title blocks and view templates',
+            'Annotation and sheet standards'
+          ]
+        },
+        rendering: {
+          label: 'Rendering',
+          skills: [
+            'Photorealistic stills and basic animations',
+            'Enscape, Lumion, or D5 from Revit or SketchUp',
+            'Material, lighting, and Photoshop post-processing'
+          ]
+        }
+      };
+
+      var jobPost = document.getElementById('job-post');
+      var service = document.getElementById('service');
+      var proposal = document.getElementById('proposal');
+      var copyButton = document.getElementById('copy-proposal');
+      var copyStatus = document.getElementById('copy-status');
+
+      function buildProposal() {
+        var chosen = SERVICES[service.value];
+        var pasted = jobPost.value.trim();
+        var excerpt = pasted || '[PASTE THE JOB POST]';
+        var skills = chosen.skills.map(function (line) { return '- ' + line; }).join('\n');
+        return [
+          'Hello,',
+          '',
+          'I can help with this ' + chosen.label + ' scope.',
+          '',
+          'From your post:',
+          excerpt,
+          '',
+          'How I would approach it:',
+          skills,
+          '',
+          'Rate: [RATE]',
+          '',
+          'I am a Philippine-licensed architect (License No. [LICENSE NUMBER]). I typically reply within one business day.',
+          '',
+          'Josh',
+          'hello@joshdesigns.fit'
+        ].join('\n');
+      }
+
+      function fillProposal() {
+        proposal.value = buildProposal();
+        copyStatus.textContent = '';
+        copyStatus.removeAttribute('data-state');
+      }
+
+      function showStatus(state, message) {
+        copyStatus.dataset.state = state;
+        copyStatus.textContent = message;
+      }
+
+      jobPost.addEventListener('input', fillProposal);
+      service.addEventListener('change', fillProposal);
+
+      copyButton.addEventListener('click', function () {
+        var text = proposal.value;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () {
+            showStatus('success', 'Copied.');
+          }).catch(function () {
+            proposal.focus();
+            proposal.select();
+            showStatus('error', 'Clipboard was blocked. The proposal is selected so you can copy it.');
+          });
+          return;
+        }
+        proposal.focus();
+        proposal.select();
+        showStatus('error', 'Clipboard is unavailable. The proposal is selected so you can copy it.');
+      });
+
+      fillProposal();
+    })();
+  </script>
+</body>
+</html>

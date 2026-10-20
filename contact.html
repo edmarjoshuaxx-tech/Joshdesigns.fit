@@ -12,6 +12,11 @@
   <meta property="og:image" content="https://joshdesigns.fit/images/hero.jpg">
   <meta property="og:url" content="https://joshdesigns.fit/contact.html">
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_PH">
+  <meta property="og:site_name" content="Josh Designs">
+  <meta property="og:image:alt" content="Modern architectural exterior of a contemporary residence with warm materials and clean lines">
+  <meta property="og:image:height" content="784">
+  <meta property="og:image:width" content="1168">
   
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
@@ -19,6 +24,101 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "ProfessionalService",
+        "Architect"
+      ],
+      "@id": "https://joshdesigns.fit/#business",
+      "name": "Josh",
+      "alternateName": "Josh Designs",
+      "url": "https://joshdesigns.fit/",
+      "email": "hello@joshdesigns.fit",
+      "image": "https://joshdesigns.fit/images/about-headshot.jpg",
+      "description": "Philippine-licensed architect offering Revit modeling, CAD drafting, and photorealistic visualization.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "PH"
+      },
+      "areaServed": "[AREA SERVED]",
+      "identifier": "[LICENSE NUMBER]",
+      "priceRange": "[PRICE]",
+      "knowsAbout": [
+        "Revit modeling",
+        "CAD drafting",
+        "Architectural visualization",
+        "BIM",
+        "MEP backgrounds",
+        "Construction documents"
+      ],
+      "sameAs": [
+        "[LINKEDIN_URL]",
+        "[UPWORK_URL]"
+      ],
+      "makesOffer": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Revit Modeling"
+          },
+          "price": "[PRICE]",
+          "priceCurrency": "[CURRENCY]"
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "CAD Drafting"
+          },
+          "price": "[PRICE]",
+          "priceCurrency": "[CURRENCY]"
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Visualization"
+          },
+          "price": "[PRICE]",
+          "priceCurrency": "[CURRENCY]"
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "CAD-to-Revit Conversion"
+          },
+          "price": "[PRICE]",
+          "priceCurrency": "[CURRENCY]"
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Construction Document Cleanup"
+          },
+          "price": "[PRICE]",
+          "priceCurrency": "[CURRENCY]"
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "MEP Backgrounds"
+          },
+          "price": "[PRICE]",
+          "priceCurrency": "[CURRENCY]"
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body class="is-loading">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -44,8 +144,8 @@
       <h2 class="reveal">Contact</h2>
       <p class="section-intro reveal" style="text-align: center; margin-left: auto; margin-right: auto;">Tell me a little about your project. I typically reply within one business day.</p>
       
-      <!-- Formspree Form - Replace FORM_ID with your actual Formspree form ID -->
-      <form id="contact-form" class="contact-form reveal" action="https://formspree.io/f/FORM_ID" method="POST" data-multistep>
+      <!-- Formspree form. Replace [FORM_ID] with your form id. Submits without JavaScript. -->
+      <form id="contact-form" class="contact-form reveal" action="https://formspree.io/f/[FORM_ID]" method="POST" data-multistep data-success="Thanks. Your message was sent, and I'll reply within one business day." data-error="The message could not be sent. Please try again, or email hello@joshdesigns.fit.">
         <ol class="form-progress" aria-label="Form progress">
           <li class="is-active" aria-current="step">Service</li>
           <li>Scope</li>
@@ -106,8 +206,17 @@
             <label for="message">Message</label>
             <textarea id="message" name="message" required placeholder="Anything else I should know?"></textarea>
           </div>
-          <!-- Formspree honeypot for spam -->
-          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+          <!-- Spam honeypot. Formspree drops the submission when this is filled in. -->
+          <div class="sr-only" aria-hidden="true">
+            <label for="contact-gotcha">Website</label>
+            <input type="text" id="contact-gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
+          </div>
+
+          <p class="form-status" data-form-status tabindex="-1" role="status" aria-live="polite"></p>
+          <noscript>
+            <p class="form-status" data-state="info">JavaScript is off. Sending this form still works, and Formspree shows a confirmation page.</p>
+          </noscript>
+
           <div class="form-nav">
             <button type="button" class="btn btn-secondary" data-prev>Back</button>
             <button type="submit" class="btn">Send Message</button>
