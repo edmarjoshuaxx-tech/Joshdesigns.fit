@@ -17,10 +17,14 @@
   <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
+<body class="is-loading">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page-loader" aria-hidden="true"><div class="page-loader__mark">Josh</div></div>
+  <div class="page-curtain" aria-hidden="true"></div>
+
   <nav class="nav" aria-label="Main navigation">
     <div class="nav-container">
       <a href="../index.html" class="logo">Josh</a>
@@ -35,29 +39,39 @@
     </div>
   </nav>
 
-  <article class="project-detail">
-    <a href="../projects.html" style="color: var(--text-muted); font-size: 0.9rem;">← Back to Projects</a>
-    
-    <h1 style="font-family: var(--font-serif); font-size: 2.5rem; margin: 1.5rem 0 0.5rem; font-weight: 400;">[PROJECT 5 TITLE]</h1>
-    
-    <div class="meta">
-      <span>Role: [ROLE, e.g. Designer / Modeler]</span>
-      <span>Software: Revit, Enscape / Lumion</span>
-      <span>Year: [YEAR]</span>
-    </div>
-    
-    <div class="project-gallery">
-      <img src="../images/project-5-01.jpg" alt="[PROJECT 5 TITLE] main view" loading="lazy" class="lightbox-trigger" data-full="../images/project-5-01.jpg">
-      <!-- Add more images: <img src="../images/project-5-02.jpg" alt="..." loading="lazy" class="lightbox-trigger" data-full="../images/project-5-02.jpg"> -->
-    </div>
-    
-    <div style="margin-top: 2rem;">
-      <h2>About the Project</h2>
-      <p>[Short description of the project. What was the challenge, your contribution, and the outcome? Keep it concise and image-led.]</p>
+  <main id="main">
+    <article class="project-detail">
+      <a href="../projects.html" class="back-link">← Back to Projects</a>
       
-      <p style="margin-top: 1rem;">[Additional paragraph if needed.]</p>
-    </div>
-  </article>
+      <h1>[PROJECT 5 TITLE]</h1>
+      <p class="project-story">[One-line story: a concise narrative hook for this project.]</p>
+      
+      <div class="meta project-details">
+        <span>[LOCATION]</span>
+        <span>[YEAR]</span>
+        <span>Architecture</span>
+        <span>[SCOPE]</span>
+      </div>
+      
+      <div class="project-gallery" aria-label="Project gallery">
+        <img src="../images/project-5-01.jpg" alt="[PROJECT 5 TITLE] main view" loading="lazy" class="lightbox-trigger" data-full="../images/project-5-01.jpg">
+        <!-- Add more images: <img src="../images/project-5-02.jpg" alt="..." loading="lazy" class="lightbox-trigger" data-full="../images/project-5-02.jpg"> -->
+      </div>
+      
+      <div class="reveal">
+        <h2>About the Project</h2>
+        <p>[Short description of the project. What was the challenge, your contribution, and the outcome? Keep it concise and image-led.]</p>
+        
+        <p style="margin-top: 1rem;">[Additional paragraph if needed.]</p>
+        <p style="margin-top: 1rem; color: var(--grey); font-size: 0.9rem;">Role: [ROLE, e.g. Designer / Modeler] · Software: Revit, Enscape / Lumion</p>
+      </div>
+
+      <div class="next-project reveal">
+        <span class="next-project__label">Next project</span>
+        <a href="project-6.html">[PROJECT 6 TITLE] →</a>
+      </div>
+    </article>
+  </main>
 
   <!-- Simple lightbox -->
   <div id="lightbox" class="lightbox" hidden>
@@ -69,9 +83,7 @@
     <p>&copy; <span id="year"></span> Josh · <a href="https://joshdesigns.fit">joshdesigns.fit</a></p>
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
   <script src="../js/main.js"></script>
 </body>
 </html>

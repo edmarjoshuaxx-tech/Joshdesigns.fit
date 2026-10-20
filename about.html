@@ -17,10 +17,14 @@
   <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="is-loading">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page-loader" aria-hidden="true"><div class="page-loader__mark">Josh</div></div>
+  <div class="page-curtain" aria-hidden="true"></div>
+
   <nav class="nav" aria-label="Main navigation">
     <div class="nav-container">
       <a href="index.html" class="logo">Josh</a>
@@ -29,52 +33,52 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="services.html">Services</a></li>
-        <li><a href="about.html">About</a></li>
+        <li><a href="about.html" aria-current="page">About</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </div>
   </nav>
 
-  <section>
-    <h2>About</h2>
-    
-    <div class="about-grid">
-      <img src="images/about-headshot.jpg" alt="Headshot of Josh, licensed architect" loading="lazy">
+  <main id="main">
+    <section>
+      <h2 class="reveal">About</h2>
       
-      <div>
-        <p style="font-size: 1.1rem; margin-bottom: 1rem;">
-          Registered and Licensed Architect, Philippines<br>
-          <span style="color: var(--text-muted); font-size: 0.95rem;">License No. [LICENSE NUMBER]</span>
-        </p>
+      <div class="about-grid reveal">
+        <img src="images/about-headshot.jpg" alt="Headshot of Josh, licensed architect" loading="lazy">
         
-        <p>[BIO] Replace this with a short professional bio. Focus on your approach to documentation, collaboration, and design communication. Keep it warm and direct.</p>
-        
-        <p style="margin-top: 1rem;">[Additional bio paragraph if desired.]</p>
-        
-        <h3 style="margin-top: 2rem;">Software & Skills</h3>
-        <div class="skills">
-          <span class="skill-tag">Revit</span>
-          <span class="skill-tag">AutoCAD</span>
-          <span class="skill-tag">Enscape</span>
-          <span class="skill-tag">Lumion</span>
-          <span class="skill-tag">Photoshop</span>
-          <span class="skill-tag">SketchUp</span>
+        <div>
+          <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+            Registered and Licensed Architect, Philippines<br>
+            <span style="color: var(--grey); font-size: 0.95rem;">License No. [LICENSE NUMBER]</span>
+          </p>
+          
+          <p>[BIO] Replace this with a short professional bio. Focus on your approach to documentation, collaboration, and design communication. Keep it warm and direct.</p>
+          
+          <p style="margin-top: 1rem;">[Additional bio paragraph if desired.]</p>
+          
+          <h3 style="margin-top: 2rem;">Software &amp; Skills</h3>
+          <div class="skills">
+            <span class="skill-tag">Revit</span>
+            <span class="skill-tag">AutoCAD</span>
+            <span class="skill-tag">Enscape</span>
+            <span class="skill-tag">Lumion</span>
+            <span class="skill-tag">Photoshop</span>
+            <span class="skill-tag">SketchUp</span>
+          </div>
+          
+          <h3 style="margin-top: 2rem;">Education</h3>
+          <p>[EDUCATION PLACEHOLDER]<br>
+          <span style="color: var(--grey);">Bachelor of Science in Architecture, [University], [Year]</span></p>
         </div>
-        
-        <h3 style="margin-top: 2rem;">Education</h3>
-        <p>[EDUCATION PLACEHOLDER]<br>
-        <span style="color: var(--text-muted);">Bachelor of Science in Architecture, [University], [Year]</span></p>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <footer>
     <p>&copy; <span id="year"></span> Josh · <a href="https://joshdesigns.fit">joshdesigns.fit</a></p>
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
