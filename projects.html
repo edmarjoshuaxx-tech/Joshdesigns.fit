@@ -23,7 +23,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 <script type="application/ld+json">
 {
@@ -121,14 +121,18 @@
 }
 </script>
 </head>
-<body>
+<body class="is-loading">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page-loader" aria-hidden="true"><div class="page-loader__mark">Josh</div></div>
+  <div class="page-curtain" aria-hidden="true"></div>
+
   <nav class="nav" aria-label="Main navigation">
     <div class="nav-container">
       <a href="index.html" class="logo">Josh</a>
       <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
-        <li><a href="projects.html">Projects</a></li>
+        <li><a href="projects.html" aria-current="page">Projects</a></li>
         <li><a href="services.html">Services</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
@@ -136,102 +140,151 @@
     </div>
   </nav>
 
-  <section>
-    <h2>Projects</h2>
-    <p style="margin-bottom: 2rem; color: var(--text-muted);">A selection of work across architecture, Revit modeling, CAD documentation, and visualization.</p>
-    
-    <!-- Filters -->
-    <div class="filters" role="tablist">
-      <button class="filter-btn active" data-filter="all" role="tab">All</button>
-      <button class="filter-btn" data-filter="architecture" role="tab">Architecture</button>
-      <button class="filter-btn" data-filter="revit" role="tab">Revit & CAD</button>
-      <button class="filter-btn" data-filter="renderings" role="tab">Renderings</button>
-    </div>
-    
-    <!-- Projects Grid. Copy the template card for a new project. See README.md. -->
-    <div class="projects-grid">
+  <main id="main">
+    <section>
+      <h2 class="reveal">Projects</h2>
+      <p class="section-intro reveal">A selection of work across architecture, Revit modeling, CAD documentation, and visualization.</p>
       
-      <article class="project-card" data-category="renderings">
-        <a href="projects/project-1.html">
-          <img src="images/project-1-01.jpg" alt="[PROJECT 1 TITLE] living room interior" loading="lazy">
-          <div class="project-info">
-            <span class="project-category">Renderings</span>
-            <h3>[PROJECT 1 TITLE]</h3>
-          </div>
-        </a>
-      </article>
-      
-      <article class="project-card" data-category="architecture">
-        <a href="projects/project-2.html">
-          <img src="images/project-2-01.jpg" alt="[PROJECT 2 TITLE] modern house exterior" loading="lazy">
-          <div class="project-info">
-            <span class="project-category">Architecture</span>
-            <h3>[PROJECT 2 TITLE]</h3>
-          </div>
-        </a>
-      </article>
-      
-      <article class="project-card" data-category="revit">
-        <a href="projects/project-3.html">
-          <img src="images/project-3-01.jpg" alt="[PROJECT 3 TITLE] kitchen interior" loading="lazy">
-          <div class="project-info">
-            <span class="project-category">Revit & CAD</span>
-            <h3>[PROJECT 3 TITLE]</h3>
-          </div>
-        </a>
-      </article>
-      
-      <article class="project-card" data-category="renderings">
-        <a href="projects/project-4.html">
-          <img src="images/project-4-01.jpg" alt="[PROJECT 4 TITLE] living room interior" loading="lazy">
-          <div class="project-info">
-            <span class="project-category">Renderings</span>
-            <h3>[PROJECT 4 TITLE]</h3>
-          </div>
-        </a>
-      </article>
-      
-      <article class="project-card" data-category="architecture">
-        <a href="projects/project-5.html">
-          <img src="images/project-5-01.jpg" alt="[PROJECT 5 TITLE] modern house exterior" loading="lazy">
-          <div class="project-info">
-            <span class="project-category">Architecture</span>
-            <h3>[PROJECT 5 TITLE]</h3>
-          </div>
-        </a>
-      </article>
-      
-      <article class="project-card" data-category="revit">
-        <a href="projects/project-6.html">
-          <img src="images/project-6-01.jpg" alt="[PROJECT 6 TITLE] kitchen interior" loading="lazy">
-          <div class="project-info">
-            <span class="project-category">Revit & CAD</span>
-            <h3>[PROJECT 6 TITLE]</h3>
-          </div>
-        </a>
-      </article>
+      <div class="projects-toolbar reveal">
+        <!-- Filters -->
+        <div class="filters" role="tablist" aria-label="Filter projects">
+          <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All</button>
+          <button class="filter-btn" data-filter="architecture" role="tab" aria-selected="false">Architecture</button>
+          <button class="filter-btn" data-filter="revit" role="tab" aria-selected="false">Revit &amp; CAD</button>
+          <button class="filter-btn" data-filter="renderings" role="tab" aria-selected="false">Renderings</button>
+        </div>
 
-      <!-- Template card. Copy this article when you copy projects/template/. -->
-      <article class="project-card" data-category="architecture">
-        <a href="projects/template/">
-          <img src="projects/template/cover.jpg" alt="[PROJECT TITLE]" loading="lazy">
-          <div class="project-info">
-            <span class="project-category">[CATEGORY]</span>
-            <h3>[PROJECT TITLE]</h3>
-          </div>
-        </a>
-      </article>
+        <div class="view-toggle" role="group" aria-label="Projects view">
+          <button type="button" class="view-btn active" data-view="grid" aria-pressed="true">Grid</button>
+          <button type="button" class="view-btn" data-view="list" aria-pressed="false">List</button>
+        </div>
+      </div>
       
-    </div>
-  </section>
+      <!-- Projects Grid. Copy the template card for a new project. See README.md. -->
+      <div class="projects-grid">
+        
+        <article class="project-card" data-category="renderings">
+          <a href="projects/project-1.html">
+            <img src="images/project-1-01.jpg" alt="[PROJECT 1 TITLE] living room interior" loading="lazy">
+            <div class="project-info">
+              <span class="project-category">Renderings</span>
+              <h3>[PROJECT 1 TITLE]</h3>
+              <div class="project-details">
+                <span>[LOCATION]</span>
+                <span>[YEAR]</span>
+                <span>Renderings</span>
+                <span>[SCOPE]</span>
+              </div>
+            </div>
+          </a>
+        </article>
+        
+        <article class="project-card" data-category="architecture">
+          <a href="projects/project-2.html">
+            <img src="images/project-2-01.jpg" alt="[PROJECT 2 TITLE] modern house exterior" loading="lazy">
+            <div class="project-info">
+              <span class="project-category">Architecture</span>
+              <h3>[PROJECT 2 TITLE]</h3>
+              <div class="project-details">
+                <span>[LOCATION]</span>
+                <span>[YEAR]</span>
+                <span>Architecture</span>
+                <span>[SCOPE]</span>
+              </div>
+            </div>
+          </a>
+        </article>
+        
+        <article class="project-card" data-category="revit">
+          <a href="projects/project-3.html">
+            <img src="images/project-3-01.jpg" alt="[PROJECT 3 TITLE] kitchen interior" loading="lazy">
+            <div class="project-info">
+              <span class="project-category">Revit &amp; CAD</span>
+              <h3>[PROJECT 3 TITLE]</h3>
+              <div class="project-details">
+                <span>[LOCATION]</span>
+                <span>[YEAR]</span>
+                <span>Revit &amp; CAD</span>
+                <span>[SCOPE]</span>
+              </div>
+            </div>
+          </a>
+        </article>
+        
+        <article class="project-card" data-category="renderings">
+          <a href="projects/project-4.html">
+            <img src="images/project-4-01.jpg" alt="[PROJECT 4 TITLE] living room interior" loading="lazy">
+            <div class="project-info">
+              <span class="project-category">Renderings</span>
+              <h3>[PROJECT 4 TITLE]</h3>
+              <div class="project-details">
+                <span>[LOCATION]</span>
+                <span>[YEAR]</span>
+                <span>Renderings</span>
+                <span>[SCOPE]</span>
+              </div>
+            </div>
+          </a>
+        </article>
+        
+        <article class="project-card" data-category="architecture">
+          <a href="projects/project-5.html">
+            <img src="images/project-5-01.jpg" alt="[PROJECT 5 TITLE] modern house exterior" loading="lazy">
+            <div class="project-info">
+              <span class="project-category">Architecture</span>
+              <h3>[PROJECT 5 TITLE]</h3>
+              <div class="project-details">
+                <span>[LOCATION]</span>
+                <span>[YEAR]</span>
+                <span>Architecture</span>
+                <span>[SCOPE]</span>
+              </div>
+            </div>
+          </a>
+        </article>
+        
+        <article class="project-card" data-category="revit">
+          <a href="projects/project-6.html">
+            <img src="images/project-6-01.jpg" alt="[PROJECT 6 TITLE] kitchen interior" loading="lazy">
+            <div class="project-info">
+              <span class="project-category">Revit &amp; CAD</span>
+              <h3>[PROJECT 6 TITLE]</h3>
+              <div class="project-details">
+                <span>[LOCATION]</span>
+                <span>[YEAR]</span>
+                <span>Revit &amp; CAD</span>
+                <span>[SCOPE]</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Template card. Copy this article when you copy projects/template/. -->
+        <article class="project-card" data-category="architecture">
+          <a href="projects/template/">
+            <img src="projects/template/cover.jpg" alt="[PROJECT TITLE]" loading="lazy">
+            <div class="project-info">
+              <span class="project-category">[CATEGORY]</span>
+              <h3>[PROJECT TITLE]</h3>
+              <div class="project-details">
+                <span>[LOCATION]</span>
+                <span>[YEAR]</span>
+                <span>[CATEGORY]</span>
+                <span>[SCOPE]</span>
+              </div>
+            </div>
+          </a>
+        </article>
+        
+      </div>
+    </section>
+  </main>
 
   <footer>
     <p>&copy; <span id="year"></span> Josh · <a href="https://joshdesigns.fit">joshdesigns.fit</a></p>
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

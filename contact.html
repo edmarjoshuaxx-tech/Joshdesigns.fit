@@ -22,7 +22,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 <script type="application/ld+json">
 {
@@ -120,7 +120,11 @@
 }
 </script>
 </head>
-<body>
+<body class="is-loading">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page-loader" aria-hidden="true"><div class="page-loader__mark">Josh</div></div>
+  <div class="page-curtain" aria-hidden="true"></div>
+
   <nav class="nav" aria-label="Main navigation">
     <div class="nav-container">
       <a href="index.html" class="logo">Josh</a>
@@ -130,74 +134,112 @@
         <li><a href="projects.html">Projects</a></li>
         <li><a href="services.html">Services</a></li>
         <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html" aria-current="page">Contact</a></li>
       </ul>
     </div>
   </nav>
 
-  <section>
-    <h2>Contact</h2>
-    <p style="margin-bottom: 2rem; color: var(--text-muted); text-align: center;">Tell me a little about your project. I typically reply within one business day.</p>
-    
-    <!-- Formspree form. Replace [FORM_ID] with your form id. Submits without JavaScript. -->
-    <form id="contact-form" class="contact-form" action="https://formspree.io/f/[FORM_ID]" method="POST" data-success="Thanks. Your message was sent, and I'll reply within one business day." data-error="The message could not be sent. Please try again, or email hello@joshdesigns.fit.">
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" required>
-      </div>
+  <main id="main">
+    <section>
+      <h2 class="reveal">Contact</h2>
+      <p class="section-intro reveal" style="text-align: center; margin-left: auto; margin-right: auto;">Tell me a little about your project. I typically reply within one business day.</p>
       
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="project-type">Project Type</label>
-        <select id="project-type" name="project-type">
-          <option value="revit-modeling">Revit Modeling</option>
-          <option value="cad-drafting">CAD Drafting</option>
-          <option value="visualization">Visualization / Rendering</option>
-          <option value="document-cleanup">Document Set Cleanup</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-      
-      <div class="form-group">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" required placeholder="Briefly describe the project, timeline, and any files you can share."></textarea>
-      </div>
-      
-      <!-- Spam honeypot. Formspree drops the submission when this is filled in. -->
-      <div class="sr-only" aria-hidden="true">
-        <label for="contact-gotcha">Website</label>
-        <input type="text" id="contact-gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
-      </div>
+      <!-- Formspree form. Replace [FORM_ID] with your form id. Submits without JavaScript. -->
+      <form id="contact-form" class="contact-form reveal" action="https://formspree.io/f/[FORM_ID]" method="POST" data-multistep data-success="Thanks. Your message was sent, and I'll reply within one business day." data-error="The message could not be sent. Please try again, or email hello@joshdesigns.fit.">
+        <ol class="form-progress" aria-label="Form progress">
+          <li class="is-active" aria-current="step">Service</li>
+          <li>Scope</li>
+          <li>Details</li>
+        </ol>
 
-      <p class="form-status" data-form-status tabindex="-1" role="status" aria-live="polite"></p>
-      <noscript>
-        <p class="form-status" data-state="info">JavaScript is off. Sending this form still works, and Formspree shows a confirmation page.</p>
-      </noscript>
+        <div class="form-step is-active" data-step="1">
+          <p class="form-step__title">What do you need help with?</p>
+          <div class="form-group">
+            <label for="project-type">Project Type</label>
+            <select id="project-type" name="project-type" required>
+              <option value="">Select a service</option>
+              <option value="revit-modeling">Revit Modeling</option>
+              <option value="cad-drafting">CAD Drafting</option>
+              <option value="visualization">Visualization / Rendering</option>
+              <option value="document-cleanup">Document Set Cleanup</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-nav">
+            <button type="button" class="btn" data-next>Continue</button>
+          </div>
+        </div>
 
-      <button type="submit" class="btn" style="width: 100%; border: none; cursor: pointer;">Send Message</button>
-    </form>
-    
-    <div class="contact-links">
-      <p>Or email directly: <a href="mailto:hello@joshdesigns.fit">hello@joshdesigns.fit</a></p>
-      <p style="margin-top: 1rem;">
-        <!-- Replace with your actual links -->
-        <a href="[LINKEDIN_URL]" aria-label="LinkedIn">LinkedIn</a>
-        <a href="[UPWORK_URL]" aria-label="Upwork">Upwork</a>
-      </p>
-    </div>
-  </section>
+        <div class="form-step" data-step="2">
+          <p class="form-step__title">Scope &amp; budget</p>
+          <div class="form-group">
+            <label for="scope">Scope overview</label>
+            <textarea id="scope" name="scope" required placeholder="Briefly describe the project, timeline, and any files you can share."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="budget">Budget range</label>
+            <select id="budget" name="budget">
+              <option value="">Prefer not to say</option>
+              <option value="under-500">Under $500</option>
+              <option value="500-1500">$500 – $1,500</option>
+              <option value="1500-5000">$1,500 – $5,000</option>
+              <option value="5000-plus">$5,000+</option>
+            </select>
+          </div>
+          <div class="form-nav">
+            <button type="button" class="btn btn-secondary" data-prev>Back</button>
+            <button type="button" class="btn" data-next>Continue</button>
+          </div>
+        </div>
+
+        <div class="form-step" data-step="3">
+          <p class="form-step__title">Your contact details</p>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required placeholder="Anything else I should know?"></textarea>
+          </div>
+          <!-- Spam honeypot. Formspree drops the submission when this is filled in. -->
+          <div class="sr-only" aria-hidden="true">
+            <label for="contact-gotcha">Website</label>
+            <input type="text" id="contact-gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
+          </div>
+
+          <p class="form-status" data-form-status tabindex="-1" role="status" aria-live="polite"></p>
+          <noscript>
+            <p class="form-status" data-state="info">JavaScript is off. Sending this form still works, and Formspree shows a confirmation page.</p>
+          </noscript>
+
+          <div class="form-nav">
+            <button type="button" class="btn btn-secondary" data-prev>Back</button>
+            <button type="submit" class="btn">Send Message</button>
+          </div>
+        </div>
+      </form>
+      
+      <div class="contact-links reveal">
+        <p>Or email directly: <a href="mailto:hello@joshdesigns.fit">hello@joshdesigns.fit</a></p>
+        <p style="margin-top: 1rem;">
+          <!-- Replace with your actual links -->
+          <a href="[LINKEDIN_URL]" aria-label="LinkedIn">LinkedIn</a>
+          <a href="[UPWORK_URL]" aria-label="Upwork">Upwork</a>
+        </p>
+      </div>
+    </section>
+  </main>
 
   <footer>
     <p>&copy; <span id="year"></span> Josh · <a href="https://joshdesigns.fit">joshdesigns.fit</a></p>
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

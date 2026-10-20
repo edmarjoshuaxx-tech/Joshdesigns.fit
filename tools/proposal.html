@@ -11,10 +11,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
   <style>
-    .form-status { margin: 0 0 1rem; padding: 0.8rem 1rem; border-radius: 2px; }
+    .form-status { margin: 0 0 1rem; padding: 0.8rem 1rem; border-radius: 0; }
     .form-status:empty { display: none; margin: 0; padding: 0; }
     .form-status[data-state="success"] { background: #eef6ef; color: #1e4d2b; border: 1px solid #b7d7be; }
     .form-status[data-state="error"] { background: #fdf2f0; color: #7a2e24; border: 1px solid #e4b8b0; }
@@ -37,7 +37,7 @@
 
   <section>
     <h2>Proposal draft</h2>
-    <p style="margin-bottom: 2rem; color: var(--text-muted); text-align: center;">Paste an Upwork post and pick a service. The draft stays in this browser. Nothing is uploaded.</p>
+    <p style="margin-bottom: 2rem; color: var(--grey); text-align: center;">Paste an Upwork post and pick a service. The draft stays in this browser. Nothing is uploaded.</p>
 
     <div class="contact-form">
       <div class="form-group">
@@ -65,7 +65,7 @@
 
       <p class="form-status" id="copy-status" role="status" aria-live="polite"></p>
       <button type="button" class="btn" id="copy-proposal" style="width: 100%; border: none; cursor: pointer;">Copy proposal</button>
-      <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;">Changing the job post or the service rewrites the draft. Edit the proposal after that. [RATE] stays until you replace it.</p>
+      <p style="margin-top: 1rem; color: var(--grey); font-size: 0.9rem;">Changing the job post or the service rewrites the draft. Edit the proposal after that. [RATE] stays until you replace it.</p>
     </div>
   </section>
 

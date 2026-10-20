@@ -26,7 +26,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="css/style.css">
 <script type="application/ld+json">
@@ -125,14 +125,18 @@
 }
 </script>
 </head>
-<body>
+<body class="is-loading">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page-loader" aria-hidden="true"><div class="page-loader__mark">Josh</div></div>
+  <div class="page-curtain" aria-hidden="true"></div>
+
   <!-- Navigation -->
   <nav class="nav" aria-label="Main navigation">
     <div class="nav-container">
       <a href="index.html" class="logo">Josh</a>
       <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html" aria-current="page">Home</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="services.html">Services</a></li>
         <li><a href="about.html">About</a></li>
@@ -143,90 +147,108 @@
 
   <!-- Hero -->
   <header class="hero">
-    <img src="images/hero.jpg" alt="Modern architectural exterior of a contemporary residence with warm materials and clean lines" loading="eager">
+    <img src="images/hero.jpg" alt="Modern architectural exterior of a contemporary residence with warm materials and clean lines" loading="eager" fetchpriority="high">
     <div class="hero-overlay">
       <div class="hero-content">
-        <h1>Josh</h1>
-        <p>Architect | Revit & CAD Drafting | Visualization</p>
+        <h1 class="hero-title">Josh</h1>
+        <p class="hero-sub">Architect | Revit &amp; CAD Drafting | Visualization</p>
       </div>
     </div>
   </header>
 
-  <!-- Featured Projects -->
-  <section>
-    <h2>Featured Work</h2>
-    <div class="featured-grid">
-      <!-- [PROJECT 1 TITLE] - Replace title, image, category, and link -->
-      <article class="project-card">
-        <a href="projects/project-1.html">
-          <img src="images/project-1-01.jpg" alt="[PROJECT 1 TITLE] living room interior" loading="lazy">
-          <div class="project-info">
-            <span class="project-category">Renderings</span>
-            <h3>[PROJECT 1 TITLE]</h3>
-            <p>Short description placeholder for the project.</p>
-          </div>
-        </a>
-      </article>
-      
-      <!-- [PROJECT 2 TITLE] -->
-      <article class="project-card">
-        <a href="projects/project-2.html">
-          <img src="images/project-2-01.jpg" alt="[PROJECT 2 TITLE] modern house exterior" loading="lazy">
-          <div class="project-info">
-            <span class="project-category">Architecture</span>
-            <h3>[PROJECT 2 TITLE]</h3>
-            <p>Short description placeholder for the project.</p>
-          </div>
-        </a>
-      </article>
-      
-      <!-- [PROJECT 3 TITLE] -->
-      <article class="project-card">
-        <a href="projects/project-3.html">
-          <img src="images/project-3-01.jpg" alt="[PROJECT 3 TITLE] kitchen interior" loading="lazy">
-          <div class="project-info">
-            <span class="project-category">Revit & CAD</span>
-            <h3>[PROJECT 3 TITLE]</h3>
-            <p>Short description placeholder for the project.</p>
-          </div>
-        </a>
-      </article>
-    </div>
-  </section>
+  <main id="main">
+    <!-- Featured Projects -->
+    <section>
+      <h2 class="reveal">Featured Work</h2>
+      <div class="featured-grid">
+        <!-- [PROJECT 1 TITLE] - Replace title, image, category, and link -->
+        <article class="project-card reveal reveal-delay-1">
+          <a href="projects/project-1.html">
+            <img src="images/project-1-01.jpg" alt="[PROJECT 1 TITLE] living room interior" loading="lazy">
+            <div class="project-info">
+              <span class="project-category">Renderings</span>
+              <h3>[PROJECT 1 TITLE]</h3>
+              <p>Short description placeholder for the project.</p>
+              <div class="project-details">
+                <span>[LOCATION]</span>
+                <span>[YEAR]</span>
+                <span>Renderings</span>
+                <span>[SCOPE]</span>
+              </div>
+            </div>
+          </a>
+        </article>
+        
+        <!-- [PROJECT 2 TITLE] -->
+        <article class="project-card reveal reveal-delay-2">
+          <a href="projects/project-2.html">
+            <img src="images/project-2-01.jpg" alt="[PROJECT 2 TITLE] modern house exterior" loading="lazy">
+            <div class="project-info">
+              <span class="project-category">Architecture</span>
+              <h3>[PROJECT 2 TITLE]</h3>
+              <p>Short description placeholder for the project.</p>
+              <div class="project-details">
+                <span>[LOCATION]</span>
+                <span>[YEAR]</span>
+                <span>Architecture</span>
+                <span>[SCOPE]</span>
+              </div>
+            </div>
+          </a>
+        </article>
+        
+        <!-- [PROJECT 3 TITLE] -->
+        <article class="project-card reveal reveal-delay-3">
+          <a href="projects/project-3.html">
+            <img src="images/project-3-01.jpg" alt="[PROJECT 3 TITLE] kitchen interior" loading="lazy">
+            <div class="project-info">
+              <span class="project-category">Revit &amp; CAD</span>
+              <h3>[PROJECT 3 TITLE]</h3>
+              <p>Short description placeholder for the project.</p>
+              <div class="project-details">
+                <span>[LOCATION]</span>
+                <span>[YEAR]</span>
+                <span>Revit &amp; CAD</span>
+                <span>[SCOPE]</span>
+              </div>
+            </div>
+          </a>
+        </article>
+      </div>
+    </section>
 
-  <!-- Services Strip -->
-  <div class="services-strip">
-    <div class="container">
-      <div class="service-item">
-        <h4>Revit Modeling</h4>
-        <p>Precise BIM models and documentation</p>
-      </div>
-      <div class="service-item">
-        <h4>CAD Drafting</h4>
-        <p>Clean construction documents</p>
-      </div>
-      <div class="service-item">
-        <h4>Visualization</h4>
-        <p>Photorealistic renderings</p>
+    <!-- Services Strip -->
+    <div class="services-strip">
+      <div class="container">
+        <div class="service-item reveal">
+          <h4>Revit Modeling</h4>
+          <p>Precise BIM models and documentation</p>
+        </div>
+        <div class="service-item reveal reveal-delay-1">
+          <h4>CAD Drafting</h4>
+          <p>Clean construction documents</p>
+        </div>
+        <div class="service-item reveal reveal-delay-2">
+          <h4>Visualization</h4>
+          <p>Photorealistic renderings</p>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- CTA -->
-  <section class="cta">
-    <h2>Let's discuss your project</h2>
-    <p>Available for Revit modeling, drafting, and visualization work.</p>
-    <a href="contact.html" class="btn">Get in Touch</a>
-  </section>
+    <!-- CTA -->
+    <section class="cta reveal">
+      <h2>Let's discuss your project</h2>
+      <p>Available for Revit modeling, drafting, and visualization work.</p>
+      <a href="contact.html" class="btn">Get in Touch</a>
+    </section>
+  </main>
 
   <!-- Footer -->
   <footer>
     <p>&copy; <span id="year"></span> Josh · <a href="https://joshdesigns.fit">joshdesigns.fit</a></p>
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

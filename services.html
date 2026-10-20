@@ -22,7 +22,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 <script type="application/ld+json">
 {
@@ -120,7 +120,11 @@
 }
 </script>
 </head>
-<body>
+<body class="is-loading">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page-loader" aria-hidden="true"><div class="page-loader__mark">Josh</div></div>
+  <div class="page-curtain" aria-hidden="true"></div>
+
   <nav class="nav" aria-label="Main navigation">
     <div class="nav-container">
       <a href="index.html" class="logo">Josh</a>
@@ -128,84 +132,84 @@
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="projects.html">Projects</a></li>
-        <li><a href="services.html">Services</a></li>
+        <li><a href="services.html" aria-current="page">Services</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </div>
   </nav>
 
-  <section>
-    <h2>Services</h2>
-    <p style="margin-bottom: 2rem; color: var(--text-muted);">Focused support for architects and design teams who need precise documentation and clear visualization.</p>
-    
-    <div class="service-card">
-      <h3>Revit Modeling & MEP Backgrounds</h3>
-      <p>Clean, coordinated Revit models built from sketches, PDFs, or existing CAD. Includes architectural and basic MEP background work for coordination.</p>
-      <ul>
-        <li>Accurate wall, floor, and roof families</li>
-        <li>View templates and sheet setup</li>
-        <li>Clash-ready models for coordination</li>
-      </ul>
-      <p style="margin-top: 1rem; font-style: italic; color: var(--text-muted);">Rates on request</p>
-    </div>
-    
-    <div class="service-card">
-      <h3>CAD-to-Revit Conversion</h3>
-      <p>Transform existing AutoCAD drawings into intelligent Revit models while preserving design intent and improving documentation quality.</p>
-      <ul>
-        <li>Layer cleanup and standardization</li>
-        <li>Model from 2D plans and elevations</li>
-        <li>Annotation and dimensioning in Revit</li>
-      </ul>
-      <p style="margin-top: 1rem; font-style: italic; color: var(--text-muted);">Rates on request</p>
-    </div>
-    
-    <div class="service-card">
-      <h3>Permit / Construction Document Set Cleanup</h3>
-      <p>Review and refine CD sets for consistency, completeness, and clarity before submission or construction.</p>
-      <ul>
-        <li>Sheet organization and numbering</li>
-        <li>Note and detail coordination</li>
-        <li>Title block and revision cloud cleanup</li>
-      </ul>
-      <p style="margin-top: 1rem; font-style: italic; color: var(--text-muted);">Rates on request</p>
-    </div>
-    
-    <div class="service-card">
-      <h3>AutoCAD Drafting</h3>
-      <p>Precise 2D drafting for plans, elevations, sections, and details when Revit is not the primary platform.</p>
-      <ul>
-        <li>Clean layer structure and standards</li>
-        <li>Dimensioning and annotation</li>
-        <li>PDF to CAD conversion</li>
-      </ul>
-      <p style="margin-top: 1rem; font-style: italic; color: var(--text-muted);">Rates on request</p>
-    </div>
-    
-    <div class="service-card">
-      <h3>Photorealistic Rendering</h3>
-      <p>High-quality stills and basic animations from Revit or SketchUp models for presentations and marketing.</p>
-      <ul>
-        <li>Material and lighting setup</li>
-        <li>Interior and exterior views</li>
-        <li>Post-processing for final delivery</li>
-      </ul>
-      <p style="margin-top: 1rem; font-style: italic; color: var(--text-muted);">Rates on request</p>
-    </div>
-    
-    <div style="text-align: center; margin-top: 3rem;">
-      <a href="contact.html" class="btn">Discuss a Project</a>
-    </div>
-  </section>
+  <main id="main">
+    <section>
+      <h2 class="reveal">Services</h2>
+      <p class="section-intro reveal">Focused support for architects and design teams who need precise documentation and clear visualization.</p>
+      
+      <div class="service-card reveal">
+        <h3>Revit Modeling &amp; MEP Backgrounds</h3>
+        <p>Clean, coordinated Revit models built from sketches, PDFs, or existing CAD. Includes architectural and basic MEP background work for coordination.</p>
+        <ul>
+          <li>Accurate wall, floor, and roof families</li>
+          <li>View templates and sheet setup</li>
+          <li>Clash-ready models for coordination</li>
+        </ul>
+        <p style="margin-top: 1rem; font-style: italic; color: var(--grey);">Rates on request</p>
+      </div>
+      
+      <div class="service-card reveal">
+        <h3>CAD-to-Revit Conversion</h3>
+        <p>Transform existing AutoCAD drawings into intelligent Revit models while preserving design intent and improving documentation quality.</p>
+        <ul>
+          <li>Layer cleanup and standardization</li>
+          <li>Model from 2D plans and elevations</li>
+          <li>Annotation and dimensioning in Revit</li>
+        </ul>
+        <p style="margin-top: 1rem; font-style: italic; color: var(--grey);">Rates on request</p>
+      </div>
+      
+      <div class="service-card reveal">
+        <h3>Permit / Construction Document Set Cleanup</h3>
+        <p>Review and refine CD sets for consistency, completeness, and clarity before submission or construction.</p>
+        <ul>
+          <li>Sheet organization and numbering</li>
+          <li>Note and detail coordination</li>
+          <li>Title block and revision cloud cleanup</li>
+        </ul>
+        <p style="margin-top: 1rem; font-style: italic; color: var(--grey);">Rates on request</p>
+      </div>
+      
+      <div class="service-card reveal">
+        <h3>AutoCAD Drafting</h3>
+        <p>Precise 2D drafting for plans, elevations, sections, and details when Revit is not the primary platform.</p>
+        <ul>
+          <li>Clean layer structure and standards</li>
+          <li>Dimensioning and annotation</li>
+          <li>PDF to CAD conversion</li>
+        </ul>
+        <p style="margin-top: 1rem; font-style: italic; color: var(--grey);">Rates on request</p>
+      </div>
+      
+      <div class="service-card reveal">
+        <h3>Photorealistic Rendering</h3>
+        <p>High-quality stills and basic animations from Revit or SketchUp models for presentations and marketing.</p>
+        <ul>
+          <li>Material and lighting setup</li>
+          <li>Interior and exterior views</li>
+          <li>Post-processing for final delivery</li>
+        </ul>
+        <p style="margin-top: 1rem; font-style: italic; color: var(--grey);">Rates on request</p>
+      </div>
+      
+      <div style="text-align: center; margin-top: 3rem;" class="reveal">
+        <a href="contact.html" class="btn">Discuss a Project</a>
+      </div>
+    </section>
+  </main>
 
   <footer>
     <p>&copy; <span id="year"></span> Josh · <a href="https://joshdesigns.fit">joshdesigns.fit</a></p>
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
