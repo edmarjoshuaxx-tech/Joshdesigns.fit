@@ -9,7 +9,7 @@
   "use strict";
 
   var MAX_PARTICLES = 150;
-  var SPAWN_SPACING = 16;
+  var SPAWN_SPACING = 12;
   var MAX_SPAWN_STEPS = 6;
   var MAX_DPR = 2;
   var Z_INDEX = "1500";
@@ -63,13 +63,13 @@
     particles.push({
       x: x + (Math.random() - 0.5) * 8,
       y: y + (Math.random() - 0.5) * 8,
-      vx: (Math.random() - 0.5) * 0.35,
-      vy: -(0.45 + Math.random() * 0.75),
-      radius: 8 + Math.random() * 10,
-      growth: 0.16 + Math.random() * 0.22,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: -(0.5 + Math.random() * 0.85),
+      radius: 14 + Math.random() * 16,
+      growth: 0.26 + Math.random() * 0.32,
       life: 0,
       ttl: 1000 + Math.random() * 500,
-      alpha: 0.16 + Math.random() * 0.12
+      alpha: 0.42 + Math.random() * 0.2
     });
   }
 
@@ -112,14 +112,16 @@
     p.vy -= 0.01 * step;
 
     var t = p.life / p.ttl;
-    var fadeIn = Math.min(1, p.life / 140);
-    var alpha = p.alpha * fadeIn * (1 - t);
+    var fadeIn = Math.min(1, p.life / 120);
+    var fadeOut = 1 - t * t;
+    var alpha = p.alpha * fadeIn * fadeOut;
     if (alpha <= 0.004) return true;
 
     var radius = p.radius + p.growth * (p.life / 16.67);
-    var gradient = ctx.createRadialGradient(p.x, p.y, radius * 0.08, p.x, p.y, radius);
+    var gradient = ctx.createRadialGradient(p.x, p.y, radius * 0.05, p.x, p.y, radius);
     gradient.addColorStop(0, rgba(255, 255, 255, alpha));
-    gradient.addColorStop(0.42, rgba(214, 214, 214, alpha * 0.5));
+    gradient.addColorStop(0.28, rgba(232, 232, 232, alpha * 0.7));
+    gradient.addColorStop(0.62, rgba(200, 200, 200, alpha * 0.28));
     gradient.addColorStop(1, rgba(255, 255, 255, 0));
     ctx.fillStyle = gradient;
     ctx.beginPath();
