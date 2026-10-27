@@ -1568,3 +1568,67 @@ body.home .nav:not(.is-solid) :focus-visible {
     overflow: visible;
   }
 }
+
+/* Custom cursor
+   Charcoal core for cream pages, soft amber edge for the dark film.
+   Active only after js/custom-cursor.js opts in (fine pointer, motion ok).
+   Sits above the nav (1000) and under the lightbox (2000) and page overlays. */
+html.has-custom-cursor,
+html.has-custom-cursor body,
+html.has-custom-cursor body * {
+  cursor: none !important;
+}
+
+html.has-custom-cursor body .lightbox,
+html.has-custom-cursor body .lightbox *,
+html.has-custom-cursor body .page-loader:not(.is-done),
+html.has-custom-cursor body .page-loader:not(.is-done) *,
+html.has-custom-cursor body .page-curtain.is-covering,
+html.has-custom-cursor body .page-curtain.is-covering * {
+  cursor: auto !important;
+}
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1500;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.custom-cursor.is-on {
+  opacity: 1;
+}
+
+.custom-cursor__dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  background: var(--near-black);
+  box-shadow: 0 0 0 1px var(--amber-soft);
+  transform: scale(1);
+  transition: transform 0.18s var(--ease);
+}
+
+.custom-cursor.is-hover .custom-cursor__dot {
+  transform: scale(2.25);
+}
+
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .custom-cursor {
+    display: none !important;
+  }
+
+  html.has-custom-cursor,
+  html.has-custom-cursor body,
+  html.has-custom-cursor body * {
+    cursor: auto !important;
+  }
+}
