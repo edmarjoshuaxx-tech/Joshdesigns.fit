@@ -145,6 +145,8 @@
   }
 
   function needsDecoderPrime() {
+    // iOS and Safari ignore currentTime until play() runs inside a user gesture.
+    // Android Chrome will seek a paused film, so it must not take this path.
     var ua = navigator.userAgent || "";
     var iOS =
       /iPad|iPhone|iPod/.test(ua) ||
@@ -177,6 +179,7 @@
     var lastRequested = -1;
     var lastSeekAt = 0;
     var primed = false;
+    var primeFlight = false;
     var holdPoster = false;
     var rafId = 0;
     var frameStep = 1 / 24;
@@ -269,39 +272,70 @@
       }
     }
 
+    function releasePoster() {
+      holdPoster = false;
+      if (desired > frameStep * 0.5 || video.currentTime > frameStep * 0.5) {
+        hero.classList.add("is-framed");
+      }
+    }
+
     function primeDecoder() {
-      if (primed || !needsDecoderPrime()) return;
-      primed = true;
+      if (primed || primeFlight || !needsDecoderPrime()) return;
+      if (!video.currentSrc && !video.src) return;
+      primeFlight = true;
       holdPoster = true;
       hero.classList.remove("is-framed");
       video.muted = true;
-      var pending = video.play();
+      video.autoplay = false;
+      var pending;
+      try {
+        pending = video.play();
+      } catch (err) {
+        primeFlight = false;
+        releasePoster();
+        return;
+      }
       if (pending && typeof pending.then === "function") {
-        pending
-          .then(function () {
+        pending.then(
+          function () {
+            primed = true;
+            primeFlight = false;
             video.pause();
-            holdPoster = false;
+            releasePoster();
             try {
               video.currentTime = desired;
             } catch (err) {
               /* Seek after the decoder unlock. */
             }
-          })
-          .catch(function () {
+          },
+          function () {
+            // Rejected when this was not a user gesture. Try again on the next tap.
             video.pause();
-            holdPoster = false;
-          });
+            primeFlight = false;
+            releasePoster();
+          }
+        );
       } else {
+        primed = true;
+        primeFlight = false;
         video.pause();
-        holdPoster = false;
+        releasePoster();
       }
     }
 
-    function tick() {
+    function onUserGesture() {
+      primeDecoder();
+    }
+
+    // iOS pauses requestAnimationFrame while a finger is down, so the pin and
+    // the frame have to follow the scroll events themselves. Touch listeners
+    // stay passive so the pan is the browser's own scroll.
+    function syncFromScroll() {
       if (prefersReducedMotion()) {
         track.classList.remove("is-scrub");
         hero.classList.remove("is-pinned", "is-done", "is-framed");
         video.pause();
+        if (rafId) window.cancelAnimationFrame(rafId);
         rafId = 0;
         return;
       }
@@ -315,7 +349,11 @@
       var view = window.innerHeight || document.documentElement.clientHeight;
       var offscreen = rect.bottom < -40 || rect.top > view + 40;
       if (!offscreen) paint();
+    }
 
+    function tick() {
+      syncFromScroll();
+      if (prefersReducedMotion()) return;
       rafId = window.requestAnimationFrame(tick);
     }
 
@@ -352,9 +390,21 @@
         rafId = 0;
         video.pause();
       } else if (!rafId && !prefersReducedMotion()) {
+        syncFromScroll();
         rafId = window.requestAnimationFrame(tick);
       }
     });
+
+    window.addEventListener("pointerdown", onUserGesture, { passive: true });
+    window.addEventListener("touchstart", onUserGesture, { passive: true });
+    window.addEventListener("wheel", onUserGesture, { passive: true });
+    window.addEventListener("scroll", syncFromScroll, { passive: true });
+    window.addEventListener("touchmove", syncFromScroll, { passive: true });
+    window.addEventListener("scrollend", syncFromScroll, { passive: true });
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("scroll", syncFromScroll, { passive: true });
+      window.visualViewport.addEventListener("resize", syncFromScroll, { passive: true });
+    }
 
     reveal();
     rafId = window.requestAnimationFrame(tick);

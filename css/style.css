@@ -1284,6 +1284,7 @@ footer a:hover {
   object-position: center center;
   opacity: 1;
   transform: none;
+  filter: none;
 }
 
 .hero--film .hero-video {
@@ -1461,6 +1462,12 @@ body.home .nav {
   transition: background 0.35s var(--ease), border-color 0.35s var(--ease);
 }
 
+/* The bar sits on the film. Keep that strip sharp; blur returns once the bar is solid. */
+body.home .nav:not(.is-solid):not(:has(.nav-links.active)) {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
 body.home .nav .logo,
 body.home .nav .nav-links a,
 body.home .nav .menu-toggle {
@@ -1570,7 +1577,7 @@ body.home .nav:not(.is-solid) :focus-visible {
 }
 
 /* Custom cursor
-   Charcoal core for cream pages, soft amber edge for the dark film.
+   All-white dot on the dark film and the cream band.
    Active only after js/custom-cursor.js opts in (fine pointer, motion ok).
    Sits above the nav (1000) and under the lightbox (2000) and page overlays. */
 html.has-custom-cursor,
@@ -1611,8 +1618,8 @@ html.has-custom-cursor body .page-curtain.is-covering * {
   height: 8px;
   margin: -4px 0 0 -4px;
   border-radius: 50%;
-  background: var(--near-black);
-  box-shadow: 0 0 0 1px var(--amber-soft);
+  background: #fff;
+  box-shadow: 0 0 0 1px #fff;
   transform: scale(1);
   transition: transform 0.18s var(--ease);
 }
