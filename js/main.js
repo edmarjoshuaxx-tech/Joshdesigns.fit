@@ -324,6 +324,16 @@
       video.pause();
     });
 
+    video.addEventListener("playing", function () {
+      if (holdPoster) return;
+      video.pause();
+      try {
+        video.currentTime = desired;
+      } catch (err) {
+        /* Keep the film parked on the scroll position. */
+      }
+    });
+
     video.addEventListener("seeked", function () {
       if (!holdPoster && (desired > frameStep * 0.5 || video.currentTime > frameStep * 0.5)) {
         hero.classList.add("is-framed");
