@@ -10,12 +10,12 @@
   <!-- Open Graph -->
   <meta property="og:title" content="Josh | Architect Portfolio">
   <meta property="og:description" content="Architect | Revit & CAD Drafting | Visualization">
-  <meta property="og:image" content="https://joshdesigns.fit/images/hero.jpg">
+  <meta property="og:image" content="https://joshdesigns.fit/images/hero-open-poster.jpg">
   <meta property="og:url" content="https://joshdesigns.fit/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_PH">
   <meta property="og:site_name" content="Josh Designs">
-  <meta property="og:image:alt" content="Modern architectural exterior of a contemporary residence with warm materials and clean lines">
+  <meta property="og:image:alt" content="Dusk view of a modern residence with warm interior light and a pale facade">
   <meta property="og:image:width" content="1168">
   <meta property="og:image:height" content="784">
   
@@ -28,6 +28,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   
+  <link rel="preload" as="image" href="images/hero-open-poster.jpg" fetchpriority="high">
   <link rel="stylesheet" href="css/style.css">
 <script type="application/ld+json">
 {
@@ -125,7 +126,7 @@
 }
 </script>
 </head>
-<body class="is-loading">
+<body class="is-loading home">
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="page-loader" aria-hidden="true"><div class="page-loader__mark">Josh</div></div>
   <div class="page-curtain" aria-hidden="true"></div>
@@ -145,18 +146,55 @@
     </div>
   </nav>
 
-  <!-- Hero -->
-  <header class="hero">
-    <img src="images/hero.jpg" alt="Modern architectural exterior of a contemporary residence with warm materials and clean lines" loading="eager" fetchpriority="high">
-    <div class="hero-overlay">
-      <div class="hero-content">
-        <h1 class="hero-title">Josh</h1>
-        <p class="hero-sub">Architect | Revit &amp; CAD Drafting | Visualization</p>
+  <!-- Opening film: paused, advanced by scroll. Poster stands in for reduced motion. -->
+  <div class="hero-scrub">
+    <header class="hero hero--film">
+      <div class="hero-media">
+        <video
+          class="hero-video"
+          muted
+          playsinline
+          webkit-playsinline
+          preload="none"
+          poster="images/hero-open-poster.jpg"
+          data-src="images/hero-open.mp4"
+          disablepictureinpicture
+          aria-hidden="true"
+          tabindex="-1"
+        ></video>
+        <img
+          class="hero-still"
+          src="images/hero-open-poster.jpg"
+          alt="Dusk view of a modern residence with warm interior light and a pale facade"
+          width="1168"
+          height="784"
+          fetchpriority="high"
+        >
       </div>
-    </div>
-  </header>
+      <div class="hero-overlay">
+        <div class="hero-content">
+          <span class="hero-rule" aria-hidden="true"></span>
+          <h1 class="hero-title">Josh</h1>
+          <p class="hero-sub">Architect | Revit &amp; CAD Drafting | Visualization</p>
+          <a class="hero-cta" href="contact.html">Get in Touch</a>
+          <div class="hero-hint" aria-hidden="true">Scroll</div>
+        </div>
+      </div>
+    </header>
+  </div>
 
   <main id="main">
+    <section class="editorial-band" aria-labelledby="practice-heading">
+      <div class="editorial-band__inner">
+        <p class="editorial-kicker">Philippine-licensed architect</p>
+        <h2 id="practice-heading" class="editorial-title">Precise documentation.<br>Clear visualization.</h2>
+        <div class="editorial-lede">
+          <p>A Philippine-licensed architect specializing in Revit modeling, CAD drafting, and photorealistic visualization.</p>
+          <p>Focused support for architects and design teams who need precise documentation and clear visualization.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Featured Projects -->
     <section>
       <h2 class="reveal">Featured Work</h2>

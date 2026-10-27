@@ -139,10 +139,201 @@
     });
   }
 
+  /* ---------- Scroll-scrubbed opening film ---------- */
+  function prefersReducedMotion() {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+
+  function needsDecoderPrime() {
+    var ua = navigator.userAgent || "";
+    var iOS =
+      /iPad|iPhone|iPod/.test(ua) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    var safari = /Safari/.test(ua) && !/Chrome|CriOS|FxiOS|Edg|OPR|Android/.test(ua);
+    return iOS || safari;
+  }
+
+  function initFilmScrub(hero) {
+    var track = hero.closest(".hero-scrub");
+    var video = hero.querySelector(".hero-video");
+
+    function reveal() {
+      hero.classList.add("is-ready");
+    }
+
+    if (!track || !video || prefersReducedMotion()) {
+      reveal();
+      return;
+    }
+
+    var src = video.getAttribute("data-src");
+    if (!src) {
+      reveal();
+      return;
+    }
+
+    var duration = 12;
+    var desired = 0;
+    var lastSeekAt = 0;
+    var primed = false;
+    var holdPoster = false;
+    var rafId = 0;
+    var frameStep = 1 / 24;
+    var epsilon = isTouch ? frameStep : frameStep * 0.5;
+    var minGap = isTouch ? 34 : 0;
+    var nav = document.querySelector("body.home .nav");
+
+    track.classList.add("is-scrub");
+    video.muted = true;
+    video.defaultMuted = true;
+    video.loop = false;
+    video.autoplay = false;
+    video.playsInline = true;
+    video.setAttribute("playsinline", "");
+    video.preload = "auto";
+    video.pause();
+    video.src = src;
+    video.load();
+
+    function scrubTime(progress) {
+      var end = Math.max(frameStep, duration - frameStep);
+      return Math.min(1, Math.max(0, progress)) * end;
+    }
+
+    function updatePin() {
+      var rect = track.getBoundingClientRect();
+      var view = window.innerHeight || document.documentElement.clientHeight;
+      var heroH = hero.offsetHeight || view;
+      var distance = Math.max(1, track.offsetHeight - heroH);
+      var traveled = Math.min(distance, Math.max(0, -rect.top));
+      var progress = traveled / distance;
+      var pastStart = rect.top < -0.5;
+      var pastEnd = rect.bottom <= view + 0.5;
+
+      if (pastEnd) {
+        hero.classList.remove("is-pinned");
+        hero.classList.add("is-done");
+        progress = 1;
+      } else if (pastStart) {
+        hero.classList.add("is-pinned");
+        hero.classList.remove("is-done");
+      } else {
+        hero.classList.remove("is-pinned", "is-done");
+        progress = 0;
+      }
+
+      if (nav) {
+        nav.classList.toggle("is-solid", rect.bottom <= 72);
+      }
+
+      return progress;
+    }
+
+    function paint() {
+      if (prefersReducedMotion() || video.readyState < 1) return;
+      if (!holdPoster && !video.paused) video.pause();
+      if (video.seeking) return;
+      var now = window.performance ? performance.now() : Date.now();
+      if (now - lastSeekAt < minGap) return;
+      if (Math.abs(video.currentTime - desired) < epsilon) return;
+      lastSeekAt = now;
+      try {
+        video.currentTime = desired;
+      } catch (err) {
+        /* Duration is not seekable yet. */
+      }
+    }
+
+    function primeDecoder() {
+      if (primed || !needsDecoderPrime()) return;
+      primed = true;
+      holdPoster = true;
+      hero.classList.remove("is-framed");
+      video.muted = true;
+      var pending = video.play();
+      if (pending && typeof pending.then === "function") {
+        pending
+          .then(function () {
+            video.pause();
+            holdPoster = false;
+            try {
+              video.currentTime = desired;
+            } catch (err) {
+              /* Seek after the decoder unlock. */
+            }
+          })
+          .catch(function () {
+            video.pause();
+            holdPoster = false;
+          });
+      } else {
+        video.pause();
+        holdPoster = false;
+      }
+    }
+
+    function tick() {
+      if (prefersReducedMotion()) {
+        track.classList.remove("is-scrub");
+        hero.classList.remove("is-pinned", "is-done", "is-framed");
+        video.pause();
+        rafId = 0;
+        return;
+      }
+
+      var progress = updatePin();
+      desired = scrubTime(progress);
+      hero.style.setProperty("--scrub", progress.toFixed(4));
+      if (progress > 0.004) primeDecoder();
+
+      var rect = track.getBoundingClientRect();
+      var view = window.innerHeight || document.documentElement.clientHeight;
+      var offscreen = rect.bottom < -40 || rect.top > view + 40;
+      if (!offscreen) paint();
+
+      rafId = window.requestAnimationFrame(tick);
+    }
+
+    video.addEventListener("loadedmetadata", function () {
+      if (isFinite(video.duration) && video.duration > 0) duration = video.duration;
+      video.pause();
+    });
+
+    video.addEventListener("seeked", function () {
+      if (!holdPoster && (desired > frameStep * 0.5 || video.currentTime > frameStep * 0.5)) {
+        hero.classList.add("is-framed");
+      }
+      if (Math.abs(video.currentTime - desired) >= epsilon) lastSeekAt = 0;
+    });
+
+    video.addEventListener("error", function () {
+      track.classList.remove("is-scrub");
+      hero.classList.remove("is-pinned", "is-done");
+    });
+
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) {
+        if (rafId) window.cancelAnimationFrame(rafId);
+        rafId = 0;
+        video.pause();
+      } else if (!rafId && !prefersReducedMotion()) {
+        rafId = window.requestAnimationFrame(tick);
+      }
+    });
+
+    reveal();
+    rafId = window.requestAnimationFrame(tick);
+  }
+
   /* ---------- Hero reveal ---------- */
   function initHero() {
     var hero = document.querySelector(".hero");
     if (!hero) return;
+
+    if (hero.classList.contains("hero--film")) {
+      initFilmScrub(hero);
+      return;
+    }
 
     function reveal() {
       hero.classList.add("is-ready");
@@ -511,6 +702,7 @@
     initCurtain();
     initMenu();
     initImageFade();
+    initLenis();
     initHero();
     initReveal();
     initFilters();
@@ -520,7 +712,6 @@
     initLightbox();
     initYear();
     initAnchors();
-    initLenis();
   }
 
   if (document.readyState === "loading") {
