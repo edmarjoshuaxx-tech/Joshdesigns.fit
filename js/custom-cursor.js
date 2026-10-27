@@ -1,6 +1,6 @@
 /* ========================================
    Josh Designs — custom cursor
-   Charcoal dot, soft amber edge.
+   All-white dot. Same size, grows on controls.
    Fine pointers only. No trail.
    ======================================== */
 

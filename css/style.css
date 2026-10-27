@@ -1570,7 +1570,7 @@ body.home .nav:not(.is-solid) :focus-visible {
 }
 
 /* Custom cursor
-   Charcoal core for cream pages, soft amber edge for the dark film.
+   All-white dot on the dark film and the cream band.
    Active only after js/custom-cursor.js opts in (fine pointer, motion ok).
    Sits above the nav (1000) and under the lightbox (2000) and page overlays. */
 html.has-custom-cursor,
@@ -1611,8 +1611,8 @@ html.has-custom-cursor body .page-curtain.is-covering * {
   height: 8px;
   margin: -4px 0 0 -4px;
   border-radius: 50%;
-  background: var(--near-black);
-  box-shadow: 0 0 0 1px var(--amber-soft);
+  background: #fff;
+  box-shadow: 0 0 0 1px #fff;
   transform: scale(1);
   transition: transform 0.18s var(--ease);
 }
