@@ -174,6 +174,7 @@
 
     var duration = 12;
     var desired = 0;
+    var lastRequested = -1;
     var lastSeekAt = 0;
     var primed = false;
     var holdPoster = false;
@@ -192,8 +193,22 @@
     video.setAttribute("playsinline", "");
     video.preload = "auto";
     video.pause();
-    video.src = src;
-    video.load();
+
+    // A blob URL is fully seekable. Plain static servers often omit
+    // Accept-Ranges, and Chrome then ignores currentTime on the file URL.
+    fetch(src)
+      .then(function (res) {
+        if (!res.ok) throw new Error("film " + res.status);
+        return res.blob();
+      })
+      .then(function (blob) {
+        if (prefersReducedMotion()) return;
+        video.src = URL.createObjectURL(blob);
+      })
+      .catch(function () {
+        if (prefersReducedMotion()) return;
+        video.src = src;
+      });
 
     function scrubTime(progress) {
       var end = Math.max(frameStep, duration - frameStep);
@@ -229,14 +244,24 @@
       return progress;
     }
 
+    function canSeek(time) {
+      var range = video.seekable;
+      if (!range || !range.length) return false;
+      return time >= range.start(0) - 0.01 && time <= range.end(range.length - 1) + 0.05;
+    }
+
     function paint() {
       if (prefersReducedMotion() || video.readyState < 1) return;
       if (!holdPoster && !video.paused) video.pause();
+      if (!canSeek(desired)) return;
+      // One seek at a time. The seeked handler clears the gap so the next
+      // frame jumps to wherever the scroll has moved.
       if (video.seeking) return;
       var now = window.performance ? performance.now() : Date.now();
       if (now - lastSeekAt < minGap) return;
       if (Math.abs(video.currentTime - desired) < epsilon) return;
       lastSeekAt = now;
+      lastRequested = desired;
       try {
         video.currentTime = desired;
       } catch (err) {
