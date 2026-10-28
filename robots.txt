@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /projects/template/
 
 Sitemap: https://joshdesigns.fit/sitemap.xml
