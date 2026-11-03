@@ -781,6 +781,30 @@
     });
   }
 
+  /* ---------- Site study → contact ---------- */
+  function initSiteInquiry() {
+    var params;
+    try {
+      params = new URLSearchParams(window.location.search);
+    } catch (err) {
+      return;
+    }
+    var site = params.get("site");
+    if (!site) return;
+
+    var area = params.get("area");
+    var message = document.getElementById("message");
+    if (message && !message.value) {
+      var lines = ["I'd like to talk about this site.", "", "Site: " + site];
+      if (area) lines.push("Lot area: " + area);
+      lines.push("", "Shared from the site study on joshdesigns.fit.");
+      message.value = lines.join("\n");
+    }
+
+    var type = document.getElementById("project-type");
+    if (type && !type.value) type.value = "other";
+  }
+
   /* ---------- Boot ---------- */
   function boot() {
     initLoader();
@@ -794,6 +818,7 @@
     initViewToggle();
     initMultiStepForm();
     initContactForms();
+    initSiteInquiry();
     initLightbox();
     initYear();
     initAnchors();
