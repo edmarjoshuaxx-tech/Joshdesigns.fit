@@ -1,8 +1,8 @@
 /**
  * Site study phases.
- * Phase 1 mounts lot measurement and sun. Later phases register a mount()
- * and a matching [data-phase] slot in the panel:
- *   wind, slope (elevation), hazards, summary (PDF).
+ * Phase 1 is lot measurement and sun. Phase 2 (radius, layers, modes,
+ * wind, slope, and the emailed PDF) lives in studio.js.
+ * Hazards can still register a mount() on the hazards slot.
  * mountLaterPhases() is a no-op until those functions exist.
  */
 export const phases = {

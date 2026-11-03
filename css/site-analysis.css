@@ -626,3 +626,240 @@ section.site-study {
     height: 4.5rem;
   }
 }
+
+.site-study__north {
+  position: absolute;
+  z-index: 2;
+  left: 0.85rem;
+  bottom: 1.8rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  color: var(--near-black);
+  pointer-events: none;
+}
+
+.site-study__north span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -0.15rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+.site-study__north i {
+  position: absolute;
+  left: 50%;
+  top: 0.55rem;
+  width: 1px;
+  height: 0.85rem;
+  background: currentColor;
+}
+
+.site-study__switchrow,
+.site-study__switch {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.site-study__switchrow {
+  margin-top: 0.85rem;
+}
+
+.site-study__switch {
+  flex: 1;
+}
+
+.site-study__switch button,
+.site-study__layers button,
+.site-study__textbtn {
+  font-family: var(--font-sans);
+  color: var(--near-black);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 0;
+}
+
+.site-study__switch button {
+  flex: 1;
+  padding: 0.38rem 0.4rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.site-study__switch button.is-on,
+.site-study__layers button.is-on {
+  background: var(--near-black);
+  color: var(--hero-cream);
+  border-color: var(--near-black);
+}
+
+.site-study__tiles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.4rem;
+  margin: 0.85rem 0 0.7rem;
+}
+
+.site-study__tiles button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 4.1rem;
+  padding: 0.45rem 0.2rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  color: var(--ink-soft);
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.site-study__tiles svg {
+  width: 1.35rem;
+  height: 1.35rem;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.4;
+}
+
+.site-study__tiles button.is-on {
+  background: var(--near-black);
+  color: var(--hero-cream);
+  border-color: var(--near-black);
+}
+
+.site-study__layers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.site-study__layers button {
+  padding: 0.28rem 0.5rem;
+  font-size: 0.72rem;
+}
+
+.site-study__stack {
+  margin: 0.7rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+.site-study__ratio {
+  display: grid;
+  grid-template-columns: 3.2rem 1fr 2.4rem;
+  gap: 0.45rem;
+  align-items: center;
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+.site-study__ratio b {
+  font-weight: 500;
+  color: var(--near-black);
+  text-align: right;
+}
+
+.site-study__track {
+  display: block;
+  height: 2px;
+  background: var(--border);
+}
+
+.site-study__track i {
+  display: block;
+  height: 100%;
+  background: var(--amber);
+}
+
+.site-study__textbtn {
+  margin-top: 0.35rem;
+  padding: 0.45rem 0.7rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.site-study__field {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+.site-study__field input,
+.site-study__field textarea {
+  display: block;
+  width: 100%;
+  margin-top: 0.3rem;
+  padding: 0.45rem 0;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  background: transparent;
+  color: var(--near-black);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.site-study__section {
+  display: block;
+  width: 100%;
+  margin-top: 0.6rem;
+  background: var(--off-white);
+  border: 1px solid var(--border);
+}
+
+.site-study__section polyline {
+  fill: none;
+  stroke: var(--near-black);
+  stroke-width: 1.4;
+}
+
+.site-study__section rect {
+  fill: var(--amber);
+  fill-opacity: 0.85;
+}
+
+.site-study__rose {
+  width: 7rem;
+  height: 7rem;
+  margin-top: 0.4rem;
+  color: var(--amber);
+}
+
+.site-study__rose text {
+  fill: var(--grey);
+  font-size: 9px;
+  font-family: var(--font-sans);
+}
+
+[data-panel-mode][hidden] {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .site-study__tiles button {
+    min-height: 3.6rem;
+    letter-spacing: 0.08em;
+  }
+
+  .site-study__north {
+    bottom: 7.4rem;
+  }
+}

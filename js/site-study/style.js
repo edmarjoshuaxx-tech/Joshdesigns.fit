@@ -106,3 +106,31 @@ export function quietLiberty(style) {
 
   return next;
 }
+
+/** Colors for the study plate. Diagram is figure-ground; dark is the night plate. */
+export function studyColors(theme, mode) {
+  const dark = theme === "dark";
+  const diagram = mode === "diagram";
+  return {
+    ground: dark ? "#1a1612" : diagram ? "#f4efe6" : "#e7dccb",
+    mask: dark ? "#100e0c" : "#f6f1e7",
+    building: dark ? (diagram ? "#f3eadf" : "#3d342c") : diagram ? "#2c241c" : "#e4d8c8",
+    water: dark ? "#243836" : "#9aada8",
+    green: dark ? "#243028" : diagram ? "#d5dece" : "#7f9468",
+    wood: dark ? "#1c2820" : diagram ? "#c9d4c2" : "#6d8258",
+    tree: dark ? "#3d5c40" : diagram ? "#3f5238" : "#5f7348",
+    paved: dark ? "#2a2622" : "#d5cbb8",
+    motorway: dark ? "#d7b48a" : diagram ? "#cbbba6" : "#8a4f28",
+    primary: dark ? "#c4b5a2" : diagram ? "#d9cfc2" : "#4e433a",
+    secondary: dark ? "#8a7b6c" : diagram ? "#e4d9cc" : "#8d7d6e",
+    minor: dark ? "#3a322c" : diagram ? "#efe6da" : "#f3ece3",
+    casing: dark ? "#241f1a" : "#d5c7b4",
+    path: dark ? "#6a5e52" : "#c4b5a2",
+    text: dark ? "#f3eadf" : "#4e433a",
+    halo: dark ? "#1a1612" : "#f6efe6",
+    sky: dark ? "#14110e" : "#f3eadf",
+    horizon: dark ? "#2a241e" : "#e7d3b4",
+    radius: dark ? "#f3eadf" : "#2c241c",
+    contour: dark ? "#a89880" : "#6f6256"
+  };
+}
