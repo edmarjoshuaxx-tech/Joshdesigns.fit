@@ -56,6 +56,8 @@ section.site-study {
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+  grid-template-rows: minmax(0, 1fr);
+  grid-template-areas: "map panel";
   height: clamp(560px, calc(100dvh - 11.5rem), 840px);
   margin: 0 clamp(0.75rem, 2vw, 1.5rem);
   background: #e6d9c8;
@@ -64,6 +66,7 @@ section.site-study {
 }
 
 .site-study__map {
+  grid-area: map;
   position: relative;
   min-width: 0;
   min-height: 0;
@@ -71,8 +74,7 @@ section.site-study {
   background: #e6d9c8;
 }
 
-.site-study__map .maplibregl-map,
-.site-study__map .maplibregl-canvas {
+.site-study__map.maplibregl-map {
   width: 100%;
   height: 100%;
 }
@@ -118,7 +120,7 @@ section.site-study {
 
 .site-study__tools {
   position: absolute;
-  z-index: 2;
+  z-index: 5;
   top: 0.85rem;
   left: 0.85rem;
   display: flex;
@@ -127,19 +129,27 @@ section.site-study {
 }
 
 .site-study button {
+  appearance: none;
   border-radius: 0;
+  font-family: var(--font-sans);
+  cursor: pointer;
 }
 
 .site-study__tools button,
 .site-study__modes button,
 .site-study__edits button,
+.site-study__switch button,
+.site-study__tiles button,
+.site-study__layers button,
+.site-study__textbtn,
 .site-study__handle,
 .site-study__results button {
   font-family: var(--font-sans);
   color: var(--near-black);
-  background: rgba(251, 247, 241, 0.94);
+  background: var(--white);
   border: 1px solid var(--border);
   border-radius: 0;
+  cursor: pointer;
 }
 
 .site-study__tools button {
@@ -157,10 +167,13 @@ section.site-study {
 }
 
 .site-study__panel {
+  grid-area: panel;
   display: flex;
   flex-direction: column;
   min-width: 0;
   min-height: 0;
+  height: 100%;
+  overflow: hidden;
   background: var(--white);
   border-left: 1px solid var(--border);
   color: var(--near-black);
@@ -298,7 +311,7 @@ section.site-study {
 }
 
 .site-study__place {
-  margin: 0 0 1rem;
+  margin: 0.95rem 0 1rem;
   font-family: var(--font-serif);
   font-size: 1.15rem;
   line-height: 1.3;
@@ -559,6 +572,7 @@ section.site-study {
     left: 0;
     right: 0;
     bottom: 0;
+    height: auto;
     max-height: min(82dvh, 680px);
     border-left: 0;
     border-radius: 1.15rem 1.15rem 0 0;
@@ -606,7 +620,7 @@ section.site-study {
   }
 
   .site-study__tools {
-    top: 0.7rem;
+    top: calc(var(--nav-height) + 0.55rem);
     left: 0.7rem;
   }
 }
@@ -629,7 +643,7 @@ section.site-study {
 
 .site-study__north {
   position: absolute;
-  z-index: 2;
+  z-index: 4;
   left: 0.85rem;
   bottom: 1.8rem;
   width: 1.6rem;
@@ -657,40 +671,46 @@ section.site-study {
   background: currentColor;
 }
 
-.site-study__switchrow,
+.site-study__switchrow {
+  display: flex;
+  gap: 0.45rem;
+  margin: 0.2rem 0 0.85rem;
+}
+
 .site-study__switch {
   display: flex;
-  gap: 0.35rem;
-}
-
-.site-study__switchrow {
-  margin-top: 0.85rem;
-}
-
-.site-study__switch {
   flex: 1;
-}
-
-.site-study__switch button,
-.site-study__layers button,
-.site-study__textbtn {
-  font-family: var(--font-sans);
-  color: var(--near-black);
-  background: transparent;
+  gap: 0.1rem;
+  min-width: 0;
+  padding: 0.16rem;
+  background: var(--cream-band);
   border: 1px solid var(--border);
-  border-radius: 0;
+  border-radius: 999px;
 }
 
 .site-study__switch button {
   flex: 1;
-  padding: 0.38rem 0.4rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
+  min-width: 0;
+  margin: 0;
+  padding: 0.4rem 0.3rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
   text-transform: uppercase;
 }
 
+.site-study__switch button:hover:not(.is-on) {
+  color: var(--near-black);
+}
+
 .site-study__switch button.is-on,
-.site-study__layers button.is-on {
+.site-study__layers button.is-on,
+.site-study__tiles button.is-on {
   background: var(--near-black);
   color: var(--hero-cream);
   border-color: var(--near-black);
@@ -699,8 +719,8 @@ section.site-study {
 .site-study__tiles {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.4rem;
-  margin: 0.85rem 0 0.7rem;
+  gap: 0.45rem;
+  margin: 0 0 0.75rem;
 }
 
 .site-study__tiles button {
@@ -708,42 +728,55 @@ section.site-study {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.35rem;
-  min-height: 4.1rem;
-  padding: 0.45rem 0.2rem;
-  background: transparent;
-  border: 1px solid var(--border);
-  border-radius: 0;
+  gap: 0.4rem;
+  min-height: 4.45rem;
+  padding: 0.55rem 0.2rem 0.48rem;
+  background: var(--white);
   color: var(--ink-soft);
-  font-family: var(--font-sans);
-  font-size: 0.62rem;
+  font-size: 0.6rem;
+  font-weight: 500;
   letter-spacing: 0.12em;
+  line-height: 1.15;
   text-transform: uppercase;
+}
+
+.site-study__tiles button:hover:not(.is-on) {
+  border-color: var(--amber-soft);
+  color: var(--near-black);
 }
 
 .site-study__tiles svg {
   width: 1.35rem;
   height: 1.35rem;
+  display: block;
   stroke: currentColor;
   fill: none;
   stroke-width: 1.4;
-}
-
-.site-study__tiles button.is-on {
-  background: var(--near-black);
-  color: var(--hero-cream);
-  border-color: var(--near-black);
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .site-study__layers {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
+  margin: 0 0 0.2rem;
 }
 
 .site-study__layers button {
-  padding: 0.28rem 0.5rem;
-  font-size: 0.72rem;
+  padding: 0.32rem 0.68rem;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+.site-study__layers button:hover:not(.is-on) {
+  border-color: var(--amber);
+  color: var(--near-black);
 }
 
 .site-study__stack {
@@ -784,11 +817,17 @@ section.site-study {
 }
 
 .site-study__textbtn {
-  margin-top: 0.35rem;
-  padding: 0.45rem 0.7rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
+  margin-top: 0.45rem;
+  padding: 0.48rem 0.75rem;
+  background: var(--white);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+.site-study__textbtn:hover {
+  border-color: var(--near-black);
 }
 
 .site-study__field {
@@ -855,7 +894,11 @@ section.site-study {
 
 @media (max-width: 800px) {
   .site-study__tiles button {
-    min-height: 3.6rem;
+    min-height: 3.7rem;
+    letter-spacing: 0.08em;
+  }
+
+  .site-study__switch button {
     letter-spacing: 0.08em;
   }
 
