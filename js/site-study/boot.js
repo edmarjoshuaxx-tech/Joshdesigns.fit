@@ -19,6 +19,7 @@ import {
 } from "./sun.js";
 import { footprintsFromFeatures, shadowCollection } from "./shadows.js";
 import { mountLaterPhases } from "./phases.js";
+import { createStudio } from "./studio.js";
 
 const MAP_CSS = "https://cdn.jsdelivr.net/npm/maplibre-gl@6.16.0/dist/maplibre-gl.css";
 const MAP_JS = "https://cdn.jsdelivr.net/npm/maplibre-gl@6.16.0/dist/maplibre-gl.mjs";
@@ -146,6 +147,7 @@ function bind(root, libs) {
     cooperativeGestures: true,
     fadeDuration: libs.reduceMotion ? 0 : 300,
     antialias: true,
+    canvasContextAttributes: { antialias: true, preserveDrawingBuffer: true },
     locale: {
       "CooperativeGesturesHandler.WindowsHelpText": "Ctrl + scroll to zoom the map.",
       "CooperativeGesturesHandler.MacHelpText": "⌘ + scroll to zoom the map.",
@@ -172,8 +174,11 @@ function bind(root, libs) {
     active: -1,
     pitched: true,
     reverseToken: 0,
-    searchToken: 0
+    searchToken: 0,
+    sectionArmed: false
   };
+
+  let studio = null;
 
   const geo = createGeoGate();
 
@@ -182,6 +187,7 @@ function bind(root, libs) {
     if (studyLayers) return;
     studyLayers = true;
     addLayers(map);
+    if (studio) studio.mount();
     refreshFootprints();
     scheduleDraw(true);
     if (window.ResizeObserver) {
@@ -201,10 +207,12 @@ function bind(root, libs) {
     if (!map.isStyleLoaded()) return;
     refreshFootprints();
     scheduleDraw(true);
+    if (studio) studio.refresh();
   });
 
   map.on("click", (event) => {
     if (state.dragging) return;
+    if (studio && studio.onClick(event)) return;
     if (state.mode === "pin") {
       state.pin = { lng: event.lngLat.lng, lat: event.lngLat.lat, label: "" };
       dropMarker(false);
@@ -317,13 +325,21 @@ function bind(root, libs) {
     });
   });
 
-  root.querySelector("[data-pitch]").addEventListener("click", () => {
-    state.pitched = !state.pitched;
-    root.querySelector("[data-pitch]").setAttribute("aria-pressed", state.pitched ? "true" : "false");
+  function setPitch(on) {
+    state.pitched = !!on;
+    root.querySelectorAll("[data-dim]").forEach((button) => {
+      const active = (button.getAttribute("data-dim") === "3d") === state.pitched;
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+      button.classList.toggle("is-on", active);
+    });
     map.easeTo({
       pitch: state.pitched ? 52 : 0,
       duration: libs.reduceMotion ? 0 : 650
     });
+  }
+
+  root.querySelectorAll("[data-dim]").forEach((button) => {
+    button.addEventListener("click", () => setPitch(button.getAttribute("data-dim") === "3d"));
   });
 
   dayInput.addEventListener("input", () => scheduleDraw(true));
@@ -488,7 +504,8 @@ function bind(root, libs) {
     const query = params.toString();
     cta.href = "contact.html" + (query ? "?" + query : "") + "#contact-form";
 
-    if (state.mode === "pin") hint.textContent = "Click the map to drop a pin.";
+    if (state.sectionArmed && state.mode === "idle") hint.textContent = "Click the start of the section, then the end.";
+    else if (state.mode === "pin") hint.textContent = "Click the map to drop a pin.";
     else if (state.mode === "trace" && !state.closed) {
       hint.textContent = "Click each corner. Click the first point, or Close shape, to finish.";
     } else if (state.closed) hint.textContent = "Outline closed. Undo to adjust a corner.";
@@ -633,6 +650,10 @@ function bind(root, libs) {
 
   function dropMarker(fly) {
     marker.setLngLat([state.pin.lng, state.pin.lat]).addTo(map);
+    if (studio) {
+      studio.focus(fly);
+      return;
+    }
     if (!fly) return;
     map.flyTo({
       center: [state.pin.lng, state.pin.lat],
@@ -756,6 +777,19 @@ function bind(root, libs) {
     panel.classList.add("is-open");
     handle.setAttribute("aria-expanded", "true");
   }
+
+  studio = createStudio({
+    map,
+    turf: libs.turf,
+    sunCalc: libs.sunCalc,
+    root,
+    state,
+    reduceMotion: libs.reduceMotion,
+    setPitch,
+    redraw: () => scheduleDraw(false),
+    initialCenter: { lng: HOME.lng, lat: HOME.lat }
+  });
+  if (studyLayers) studio.mount();
 
   return {
     resize() {

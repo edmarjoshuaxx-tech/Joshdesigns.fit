@@ -189,7 +189,7 @@
       <div class="site-study__intro">
         <p class="site-study__kicker">Site study</p>
         <h2 id="site-study-heading">Read the lot before the first line.</h2>
-        <p class="site-study__lede">Search an address or drop a pin, then trace the parcel. Area, sun, and the buildings around it — a first look.</p>
+        <p class="site-study__lede">Search an address or drop a pin, then trace the parcel. A circular study reads the buildings, ground, sun, and wind around it.</p>
       </div>
 
       <div class="site-study__stage">
@@ -208,8 +208,8 @@
         <div class="site-study__tools" aria-label="Map view">
           <button type="button" data-zoom="in" aria-label="Zoom in">+</button>
           <button type="button" data-zoom="out" aria-label="Zoom out">−</button>
-          <button type="button" data-pitch aria-pressed="true" aria-label="Toggle map angle">3D</button>
         </div>
+        <div class="site-study__north" data-north aria-hidden="true"><span>N</span><i></i></div>
 
         <aside class="site-study__panel" data-panel aria-label="Site readings">
           <button
@@ -253,6 +253,101 @@
               <button type="button" data-action="clear" disabled>Clear</button>
               <button type="button" data-action="unpin" disabled>Remove pin</button>
             </div>
+
+            <label class="site-study__slider">
+              <span>Study radius <strong data-radius-label>250 m</strong></span>
+              <input data-radius type="range" min="100" max="500" step="20" value="250" aria-label="Study radius in meters">
+            </label>
+
+            <div class="site-study__switchrow">
+              <div class="site-study__switch" role="group" aria-label="Map dimension">
+                <button type="button" data-dim="2d" aria-pressed="false">2D</button>
+                <button type="button" data-dim="3d" aria-pressed="true" class="is-on">3D</button>
+              </div>
+              <div class="site-study__switch" role="group" aria-label="Map theme">
+                <button type="button" data-theme="light" aria-pressed="true" class="is-on">Light</button>
+                <button type="button" data-theme="dark" aria-pressed="false">Dark</button>
+              </div>
+            </div>
+
+            <div class="site-study__tiles" role="group" aria-label="Study modes">
+              <button type="button" data-studio="diagram" aria-pressed="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16"></rect><rect x="8" y="9" width="8" height="6"></rect></svg>
+                Diagram
+              </button>
+              <button type="button" data-studio="explode" aria-pressed="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16h16M6 12h12M8 8h8"></path></svg>
+                Explode
+              </button>
+              <button type="button" data-studio="ratios" aria-pressed="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7"></circle><path d="M12 5v7l5 3"></path></svg>
+                Ratios
+              </button>
+              <button type="button" data-studio="analysis" aria-pressed="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 16a7 7 0 0 1 14 0"></path><path d="M12 16V9"></path></svg>
+                Analysis
+              </button>
+              <button type="button" data-studio="section" aria-pressed="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 16l5-6 4 3 5-7 4 4"></path></svg>
+                Section
+              </button>
+              <button type="button" data-studio="report" aria-pressed="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h7l4 4v12H7z"></path><path d="M14 4v4h4M9 13h6M9 17h6"></path></svg>
+                Report
+              </button>
+            </div>
+
+            <div class="site-study__layers" role="group" aria-label="Map layers">
+              <button type="button" data-layer="buildings" aria-pressed="true" class="is-on">Buildings</button>
+              <button type="button" data-layer="vegetation" aria-pressed="true" class="is-on">Vegetation</button>
+              <button type="button" data-layer="water" aria-pressed="true" class="is-on">Water</button>
+              <button type="button" data-layer="roads" aria-pressed="true" class="is-on">Roads</button>
+              <button type="button" data-layer="paved" aria-pressed="true" class="is-on">Paved</button>
+            </div>
+            <p class="site-study__fine" data-study-note></p>
+
+            <div data-panel-mode="diagram" hidden>
+              <p class="site-study__hint">Figure-ground. Buildings in ink, ground held back, labels quiet.</p>
+            </div>
+            <div data-panel-mode="explode" hidden>
+              <div class="site-study__switch" role="group" aria-label="Stack">
+                <button type="button" data-stack="explode" aria-pressed="true" class="is-on">Explode</button>
+                <button type="button" data-stack="flat" aria-pressed="false">Stack</button>
+              </div>
+              <ol class="site-study__stack">
+                <li>Buildings</li>
+                <li>Vegetation</li>
+                <li>Roads</li>
+                <li>Ground</li>
+              </ol>
+            </div>
+            <div data-panel-mode="ratios" hidden>
+              <div data-ratios></div>
+            </div>
+            <div data-panel-mode="analysis" hidden>
+              <button type="button" class="site-study__textbtn" data-play-sun>Play the day</button>
+              <p class="site-study__fine">Amber dots are sun hours. The time slider still moves the shadows.</p>
+              <div data-wind></div>
+              <p class="site-study__fine" data-slope>Elevation loads with this view.</p>
+            </div>
+            <div data-panel-mode="section" hidden>
+              <button type="button" class="site-study__textbtn" data-section-draw>Draw a cut</button>
+              <div data-section-view></div>
+            </div>
+            <form data-panel-mode="report" data-report-form hidden>
+              <p class="site-study__hint">The report is free. A name and email unlock the download, and the same note is sent to Josh.</p>
+              <label class="site-study__field">Name
+                <input name="name" type="text" autocomplete="name" required>
+              </label>
+              <label class="site-study__field">Email
+                <input name="email" type="email" autocomplete="email" required>
+              </label>
+              <label class="site-study__field">Message
+                <textarea name="message" rows="3" placeholder="Optional"></textarea>
+              </label>
+              <button type="submit" class="site-study__textbtn">Send and download the report</button>
+              <p class="site-study__fine" data-report-status role="status"></p>
+            </form>
 
             <p class="site-study__place" data-place>No pin yet</p>
 
@@ -302,7 +397,7 @@
 
             <a class="site-study__cta" data-cta href="contact.html#contact-form">talk to josh about this site</a>
             <p class="site-study__disclaimer">preliminary site insight — not a survey or zoning ruling.</p>
-            <p class="site-study__credit">Geocoding © OpenStreetMap via Photon and Nominatim. Map © OpenFreeMap, OpenMapTiles, and OpenStreetMap.</p>
+            <p class="site-study__credit">Geocoding © OpenStreetMap via Photon and Nominatim. Map © OpenFreeMap, OpenMapTiles, and OpenStreetMap. Wind and elevation © Open-Meteo.</p>
 
             <div data-phase="wind" hidden></div>
             <div data-phase="slope" hidden></div>
