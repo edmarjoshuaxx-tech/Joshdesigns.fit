@@ -30,6 +30,7 @@
   
   <link rel="preload" as="image" href="images/hero-open-poster.jpg" fetchpriority="high">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/site-analysis.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -184,6 +185,134 @@
   </div>
 
   <main id="main">
+    <section class="site-study" id="site-study" aria-labelledby="site-study-heading">
+      <div class="site-study__intro">
+        <p class="site-study__kicker">Site study</p>
+        <h2 id="site-study-heading">Read the lot before the first line.</h2>
+        <p class="site-study__lede">Search an address or drop a pin, then trace the parcel. Area, sun, and the buildings around it — a first look.</p>
+      </div>
+
+      <div class="site-study__stage">
+        <div
+          class="site-study__map"
+          data-map
+          data-lenis-prevent
+          data-lenis-prevent-wheel
+          role="application"
+          aria-label="Site map"
+        >
+          <p class="site-study__status" data-status>The map loads when this study comes into view.</p>
+          <button type="button" class="site-study__retry" data-retry hidden>Try again</button>
+        </div>
+
+        <div class="site-study__tools" aria-label="Map view">
+          <button type="button" data-zoom="in" aria-label="Zoom in">+</button>
+          <button type="button" data-zoom="out" aria-label="Zoom out">−</button>
+          <button type="button" data-pitch aria-pressed="true" aria-label="Toggle map angle">3D</button>
+        </div>
+
+        <aside class="site-study__panel" data-panel aria-label="Site readings">
+          <button
+            type="button"
+            class="site-study__handle"
+            data-sheet
+            aria-expanded="false"
+            aria-controls="site-study-body"
+          >
+            <span class="site-study__grab" aria-hidden="true"></span>
+            <span>Site readings</span>
+          </button>
+
+          <form class="site-study__search" data-search-form role="search">
+            <label class="site-study__label" for="site-study-q">Address</label>
+            <input
+              id="site-study-q"
+              data-search
+              type="search"
+              name="q"
+              placeholder="Search an address"
+              autocomplete="off"
+              enterkeyhint="search"
+              role="combobox"
+              aria-autocomplete="list"
+              aria-expanded="false"
+              aria-controls="site-study-results"
+            >
+            <ul class="site-study__results" id="site-study-results" data-results role="listbox" hidden></ul>
+          </form>
+
+          <div class="site-study__body" id="site-study-body" data-lenis-prevent>
+            <p class="site-study__hint" data-hint>Search an address, or drop a pin, then trace the lot.</p>
+            <div class="site-study__modes">
+              <button type="button" data-mode="pin" aria-pressed="false">Drop a pin</button>
+              <button type="button" data-mode="trace" aria-pressed="false">Trace the lot</button>
+            </div>
+            <div class="site-study__edits">
+              <button type="button" data-action="undo">Undo</button>
+              <button type="button" data-action="close" disabled>Close shape</button>
+              <button type="button" data-action="clear" disabled>Clear</button>
+              <button type="button" data-action="unpin" disabled>Remove pin</button>
+            </div>
+
+            <p class="site-study__place" data-place>No pin yet</p>
+
+            <div class="site-study__readings" aria-live="polite">
+              <div class="site-study__metric">
+                <span class="site-study__label">Lot area</span>
+                <p class="site-study__figure" data-area-m>—</p>
+                <p class="site-study__sub"><span data-area-sqm>— sqm</span><span data-area-ft>Trace a closed lot.</span></p>
+              </div>
+              <div class="site-study__metric">
+                <span class="site-study__label">Perimeter</span>
+                <p class="site-study__value" data-perimeter>—</p>
+              </div>
+              <div class="site-study__metric">
+                <span class="site-study__label">Approx. width × depth</span>
+                <p class="site-study__value" data-dimensions>—</p>
+                <p class="site-study__fine">Axis-aligned bounds, not a surveyed frontage.</p>
+              </div>
+              <p class="site-study__edges" data-edges></p>
+              <p class="site-study__fine" data-kink hidden>The outline crosses itself, so the area is approximate.</p>
+            </div>
+
+            <div class="site-study__sun">
+              <div class="site-study__sun-copy">
+                <span class="site-study__label">Sun</span>
+                <label class="site-study__slider">
+                  <span>Date <strong data-date>3 November</strong> · <span data-season>Autumn</span></span>
+                  <input data-day type="range" min="1" max="365" value="307" aria-label="Date and season">
+                </label>
+                <label class="site-study__slider">
+                  <span>Time of day <strong data-clock>—</strong></span>
+                  <input data-time type="range" min="0" max="1435" step="5" value="720" aria-label="Time of day">
+                </label>
+                <p class="site-study__value"><span data-sunrise>—</span> sunrise · <span data-sunset>—</span> sunset</p>
+                <p class="site-study__value" data-angles>—</p>
+                <p class="site-study__fine">Times follow longitude, near local solar time. Shadows are cast from nearby building heights.</p>
+              </div>
+              <svg class="site-study__dial" viewBox="0 0 88 88" aria-hidden="true">
+                <circle class="site-study__dial-ring" cx="44" cy="44" r="34"></circle>
+                <text x="44" y="13" text-anchor="middle">N</text>
+                <g class="site-study__dial-arrow" data-dial-arrow>
+                  <line x1="44" y1="44" x2="44" y2="14"></line>
+                  <circle cx="44" cy="14" r="2.5"></circle>
+                </g>
+              </svg>
+            </div>
+
+            <a class="site-study__cta" data-cta href="contact.html#contact-form">talk to josh about this site</a>
+            <p class="site-study__disclaimer">preliminary site insight — not a survey or zoning ruling.</p>
+            <p class="site-study__credit">Geocoding © OpenStreetMap via Photon and Nominatim. Map © OpenFreeMap, OpenMapTiles, and OpenStreetMap.</p>
+
+            <div data-phase="wind" hidden></div>
+            <div data-phase="slope" hidden></div>
+            <div data-phase="hazards" hidden></div>
+            <div data-phase="summary" hidden></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
     <section class="editorial-band" aria-labelledby="practice-heading">
       <div class="editorial-band__inner">
         <p class="editorial-kicker">Philippine-licensed architect</p>
@@ -289,5 +418,6 @@
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
   <script src="js/main.js"></script>
   <script src="js/custom-cursor.js"></script>
+  <script type="module" src="js/site-study/boot.js"></script>
 </body>
 </html>
