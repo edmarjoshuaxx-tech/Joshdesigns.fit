@@ -7,8 +7,8 @@
 1. Copy `projects/template/` to `projects/your-project-name/`.
 2. Replace `cover.jpg` with the project image. Add more pictures beside it if you need them.
 3. In the new `index.html`, replace `[PROJECT TITLE]`, the one-line story, `[LOCATION]`, `[YEAR]`, `[CATEGORY]`, `[SCOPE]`, `[ROLE, e.g. Designer / Modeler]`, and the two description paragraphs. Update the canonical URL and the Open Graph URL to `https://joshdesigns.fit/projects/your-project-name/`. Point the “Next project” link at another project.
-4. In `projects.html`, copy the template card. Point the link at `projects/your-project-name/` and the image at `projects/your-project-name/cover.jpg`. Set `data-category` to `architecture`, `revit`, or `renderings`, and replace `[CATEGORY]`, `[LOCATION]`, `[YEAR]`, and `[SCOPE]`.
-5. In `sitemap.xml`, copy the template `<url>` block and set `<loc>` to `https://joshdesigns.fit/projects/your-project-name/`.
+4. In `projects.html`, the starter card is inside an HTML comment so `[PROJECT TITLE]` is not shown. Uncomment that article only for the new project. Point the link at `projects/your-project-name/` and the image at `projects/your-project-name/cover.jpg`. Set `data-category` to `architecture`, `revit`, or `renderings`, and replace `[CATEGORY]`, `[LOCATION]`, `[YEAR]`, and `[SCOPE]`.
+5. `projects/template/` is omitted from `sitemap.xml` and blocked in `robots.txt`. Add a `<url>` block for the new project and set `<loc>` to `https://joshdesigns.fit/projects/your-project-name/`. Remove `noindex` from the copied page.
 
 ## Or copy one file
 
