@@ -1,0 +1,666 @@
+/* Below-hero refinement. Does not restyle the opening film, the cream
+   editorial band, or the site-study stage. */
+
+:root {
+  --section-padding: clamp(5.75rem, 11vw, 8.75rem) clamp(1.25rem, 4.5vw, 4rem);
+  --ease-reveal: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html {
+  overflow-x: clip;
+}
+
+body.nav-open {
+  overflow: hidden;
+}
+
+::selection {
+  background: rgba(138, 79, 40, 0.32);
+  color: inherit;
+}
+
+main > section:not(.site-study):not(.editorial-band),
+.services-strip,
+.project-detail,
+footer {
+  letter-spacing: -0.012em;
+}
+
+section,
+[id] {
+  scroll-margin-top: 5.25rem;
+}
+
+/* Type scale — section titles, not the film or the cream band */
+main > section:not(.site-study):not(.editorial-band):not(.cta) h2,
+.project-detail h2 {
+  font-size: clamp(2rem, 4.2vw, 3.15rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  margin-bottom: 1.35rem;
+}
+
+h1.page-title {
+  margin: 0 0 1.15rem;
+  max-width: 14ch;
+  font-family: var(--font-serif);
+  font-size: clamp(2.75rem, 6.4vw, 5.25rem);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.page-kicker {
+  margin: 0 0 0.9rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+.section-intro {
+  max-width: 38rem;
+  margin-bottom: 2.5rem;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.011em;
+}
+
+.lede {
+  max-width: 22em;
+  margin: 0 0 1rem;
+  font-family: var(--font-serif);
+  font-size: clamp(1.45rem, 2.4vw, 1.85rem);
+  font-weight: 500;
+  line-height: 1.22;
+  letter-spacing: -0.03em;
+}
+
+.practice-copy {
+  max-width: 38rem;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.practice-copy + .practice-copy {
+  margin-top: 0.9rem;
+}
+
+/* Line-rise headlines. Hidden only after html.js, so a failed script stays readable. */
+.ml {
+  display: block;
+  overflow: hidden;
+  margin: -0.08em -0.14em -0.16em;
+  padding: 0.08em 0.14em 0.16em;
+}
+
+.ml > span {
+  display: block;
+}
+
+.js .mask-lines:not(.is-in) .ml > span {
+  transform: translateY(110%);
+}
+
+.js .mask-lines.is-in .ml > span {
+  animation: ml-up 0.7s var(--ease-out-quint) both;
+  animation-delay: calc(0.04s + var(--i, 0) * 0.14s);
+}
+
+@keyframes ml-up {
+  from {
+    transform: translateY(110%);
+  }
+}
+
+/* Word blur, used on one closing headline per page. */
+.js .blur-text {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap: 0.08em;
+}
+
+.bt-word {
+  display: inline-block;
+  margin-right: 0.28em;
+}
+
+.bt-word:last-child {
+  margin-right: 0;
+}
+
+.js .blur-text:not(.is-in) .bt-word {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(28px);
+}
+
+.js .blur-text.is-in .bt-word {
+  animation: bt-in 0.7s ease-out both;
+  animation-delay: calc(var(--i) * 100ms);
+}
+
+@keyframes bt-in {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(40px);
+  }
+  55% {
+    opacity: 0.55;
+    filter: blur(4px);
+    transform: translateY(-4px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+/* Reveals stay visible if the head script never runs. */
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.js .reveal {
+  transition: opacity 0.8s var(--ease-reveal), transform 0.8s var(--ease-reveal);
+}
+
+.js .reveal:not(.is-visible) {
+  opacity: 0;
+  transform: translate3d(0, 32px, 0);
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Buttons inside the page, not the film CTA */
+main .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin-top: 1.25rem;
+  padding: 0.7rem 1.55rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+  box-shadow: 0 4px 14px rgba(44, 36, 28, 0.12);
+  transition: transform 0.2s var(--ease-out-quint), background 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+main .btn:hover {
+  background: var(--near-black);
+  border-color: var(--near-black);
+  color: var(--white);
+  transform: translateY(-1px);
+}
+
+main .btn:active {
+  transform: scale(0.98);
+}
+
+main .cta .btn {
+  background: var(--hero-cream);
+  border-color: var(--hero-cream);
+  color: var(--near-black);
+  box-shadow: none;
+}
+
+main .cta .btn:hover {
+  background: transparent;
+  border-color: var(--hero-cream);
+  color: var(--hero-cream);
+}
+
+main .btn-secondary {
+  background: transparent;
+  color: var(--near-black);
+  box-shadow: none;
+}
+
+.menu-toggle {
+  position: relative;
+}
+
+.menu-toggle::before {
+  content: "";
+  position: absolute;
+  inset: -10px;
+}
+
+/* Work cards */
+.featured-grid,
+.projects-grid:not(.is-list) {
+  gap: clamp(1.15rem, 2vw, 1.75rem);
+}
+
+.project-card {
+  border: 0;
+  border-radius: 1.35rem;
+  background: var(--white);
+  box-shadow: 0 4px 16px rgba(44, 36, 28, 0.08);
+  transition: transform 0.35s var(--ease-out-quint), box-shadow 0.35s ease;
+}
+
+.project-card:hover {
+  border-color: transparent;
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(44, 36, 28, 0.12);
+}
+
+.projects-grid.is-list .project-card:hover,
+.project-card:has(img):hover img {
+  transform: scale(1.05);
+}
+
+.projects-grid.is-list .project-card:hover {
+  transform: none;
+}
+
+.project-card img {
+  height: clamp(210px, 28vw, 300px);
+  transition: transform 0.7s var(--ease-out-quint);
+}
+
+.projects-grid.is-list .project-card img {
+  height: 100%;
+  min-height: 140px;
+}
+
+.project-card:hover img {
+  transform: scale(1.05);
+}
+
+.projects-grid.is-list .project-card:hover img {
+  transform: none;
+}
+
+.project-info {
+  padding: 1.15rem 1.3rem 1.35rem;
+}
+
+.project-card .project-category {
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+}
+
+.study-name {
+  margin: 0.4rem 0 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 1.5vw, 1.35rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.project-info h3 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 1.6vw, 1.4rem);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+/* Home service row */
+.services-strip {
+  margin: 0;
+  padding: clamp(4.5rem, 8vw, 6.5rem) clamp(1.25rem, 4.5vw, 4rem);
+  background: transparent;
+  border: 0;
+}
+
+.services-strip .container {
+  text-align: left;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  counter-reset: svc;
+}
+
+.services-strip .service-item {
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: left;
+}
+
+.trust-strip .service-item {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.services-strip .service-item h4::before {
+  content: counter(svc, decimal-leading-zero);
+  display: block;
+  margin-bottom: 0.7rem;
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: var(--amber);
+}
+
+.services-strip .service-item {
+  counter-increment: svc;
+}
+
+.trust-strip .service-item {
+  counter-increment: none;
+}
+
+.services-strip .service-item h4 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.35rem, 2vw, 1.7rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+.services-strip .service-item p {
+  max-width: 28ch;
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+/* Service ledger on the services page */
+.service-ledger {
+  counter-reset: ledger;
+}
+
+.service-ledger .service-card {
+  position: relative;
+  margin: 0;
+  padding: 2.1rem 0 2.1rem 4.5rem;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  border-top: 1px solid var(--border);
+}
+
+.service-ledger .service-card:last-of-type {
+  border-bottom: 1px solid var(--border);
+}
+
+.service-ledger .service-card::before {
+  content: counter(ledger, decimal-leading-zero);
+  position: absolute;
+  top: 2.15rem;
+  left: 0;
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: var(--amber);
+}
+
+.service-ledger .service-card {
+  counter-increment: ledger;
+}
+
+.service-ledger .service-card h3 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.45rem, 2.3vw, 1.9rem);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.service-ledger .service-card p,
+.service-ledger .service-card li {
+  max-width: 46rem;
+}
+
+.service-ledger .rates {
+  margin-top: 0.9rem;
+  color: var(--grey);
+  font-size: 0.82rem;
+  font-style: normal;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Closing band */
+.cta {
+  padding: clamp(5.5rem, 12vw, 8.5rem) clamp(1.25rem, 4vw, 2rem);
+}
+
+.cta h2 {
+  max-width: 14em;
+  margin-right: auto;
+  margin-left: auto;
+  font-size: clamp(2.4rem, 5.2vw, 4.15rem);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+}
+
+.cta p {
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+/* Projects toolbar */
+.projects-toolbar {
+  margin-bottom: 2rem;
+}
+
+.filter-btn,
+.view-btn {
+  min-height: 44px;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+}
+
+.work-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 1.75rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.work-link::after {
+  content: "→";
+  margin-left: 0.55rem;
+  transition: transform 0.25s var(--ease-out-quint);
+}
+
+.work-link:hover::after {
+  transform: translateX(3px);
+}
+
+/* About */
+.about-grid {
+  gap: clamp(1.75rem, 4vw, 4.5rem);
+  align-items: start;
+}
+
+.about-grid img {
+  width: min(100%, 340px);
+  max-width: none;
+  aspect-ratio: 784 / 1168;
+  object-fit: cover;
+  border: 0;
+  border-radius: 1.35rem;
+  box-shadow: 0 12px 32px rgba(44, 36, 28, 0.1);
+}
+
+.about-copy h2 {
+  margin-top: 2.25rem;
+  margin-bottom: 0.85rem;
+  font-size: clamp(1.35rem, 2vw, 1.6rem);
+}
+
+.skill-tag {
+  min-height: 36px;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+/* Short pages keep the footer at the bottom. The home film is unchanged. */
+body:not(.home) {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+body:not(.home) main {
+  flex: 1;
+}
+
+/* Contact */
+.contact-section .section-intro {
+  max-width: 34rem;
+  margin-bottom: 0.25rem;
+}
+
+.contact-mail {
+  margin-top: 1.6rem;
+  font-family: var(--font-serif);
+  font-size: clamp(1.45rem, 2.6vw, 2.15rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.contact-mail a {
+  color: var(--near-black);
+}
+
+.contact-mail a {
+  letter-spacing: 0;
+}
+
+/* Project pages */
+.project-detail {
+  max-width: 960px;
+  padding-top: clamp(4.5rem, 8vw, 6.5rem);
+  padding-bottom: clamp(4rem, 8vw, 6rem);
+}
+
+.project-detail h1 {
+  max-width: 16ch;
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+}
+
+.project-gallery img {
+  border: 0;
+  border-radius: 1.25rem;
+}
+
+.next-project a {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  letter-spacing: -0.03em;
+}
+
+/* Forms, ready for when a real endpoint replaces [FORM_ID] */
+.form-group input,
+.form-group select,
+.form-group textarea {
+  min-height: 48px;
+  border-radius: 0.75rem;
+}
+
+.form-group textarea {
+  min-height: 8.5rem;
+}
+
+footer {
+  padding: 2.75rem 1.25rem max(2.75rem, env(safe-area-inset-bottom));
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 800px) {
+  .about-grid {
+    grid-template-columns: minmax(240px, 340px) minmax(0, 1fr);
+  }
+
+  .about-grid img {
+    margin: 0;
+  }
+}
+
+@media (max-width: 720px) {
+  .projects-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filters {
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+
+  .filter-btn,
+  .view-btn {
+    flex: 0 0 auto;
+  }
+
+  .service-ledger .service-card {
+    padding-top: 3.4rem;
+    padding-left: 0;
+  }
+
+  .service-ledger .service-card::before {
+    top: 1.15rem;
+  }
+
+  main .btn {
+    width: auto;
+  }
+
+  .hero .btn {
+    width: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal,
+  .js .reveal:not(.is-visible) {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .js .mask-lines:not(.is-in) .ml > span,
+  .js .mask-lines.is-in .ml > span,
+  .bt-word,
+  .js .blur-text:not(.is-in) .bt-word,
+  .js .blur-text.is-in .bt-word {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .project-card,
+  .project-card:hover,
+  .project-card:hover img,
+  main .btn:hover,
+  main .btn:active {
+    transform: none !important;
+  }
+}

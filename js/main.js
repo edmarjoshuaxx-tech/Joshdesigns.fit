@@ -100,16 +100,28 @@
     var navLinks = document.querySelector(".nav-links");
     if (!menuToggle || !navLinks) return;
 
-    menuToggle.addEventListener("click", function () {
-      var open = navLinks.classList.toggle("active");
+    function setOpen(open) {
+      navLinks.classList.toggle("active", open);
       menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+      document.body.classList.toggle("nav-open", open);
+    }
+
+    menuToggle.addEventListener("click", function () {
+      setOpen(!navLinks.classList.contains("active"));
     });
 
     navLinks.querySelectorAll("a").forEach(function (a) {
       a.addEventListener("click", function () {
-        navLinks.classList.remove("active");
-        menuToggle.setAttribute("aria-expanded", "false");
+        setOpen(false);
       });
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && navLinks.classList.contains("active")) setOpen(false);
+    });
+
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 768 && navLinks.classList.contains("active")) setOpen(false);
     });
   }
 
@@ -494,13 +506,20 @@
         filterBtns.forEach(function (b) {
           b.classList.remove("active");
           b.setAttribute("aria-selected", "false");
+          b.setAttribute("aria-pressed", "false");
         });
         btn.classList.add("active");
         btn.setAttribute("aria-selected", "true");
+        btn.setAttribute("aria-pressed", "true");
 
         var filter = btn.getAttribute("data-filter");
 
         projectCards.forEach(function (card) {
+          if (card.hasAttribute("data-pending")) {
+            card.hidden = true;
+            card.style.display = "none";
+            return;
+          }
           var match = filter === "all" || card.getAttribute("data-category") === filter;
           card.hidden = !match;
           card.style.display = match ? "" : "none";

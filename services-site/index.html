@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script>document.documentElement.classList.add("js");</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f1e7">
   <title>Revit, BIM & Visualization Support | Josh Designs</title>
   <meta name="description" content="Remote Revit, BIM, CAD-to-Revit, and visualization production support for architects and engineers. Licensed architect quality, fast turnaround.">
   <link rel="canonical" href="https://joshdesigns.fit/services-site/">
@@ -14,6 +16,11 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_PH">
   <meta property="og:site_name" content="Josh Designs">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Revit, BIM & Visualization Support for Architects and Engineers">
+  <meta name="twitter:description" content="Remote production support, fast turnaround, licensed architect quality.">
+  <meta name="twitter:image" content="https://joshdesigns.fit/images/hero.jpg">
+
   <meta property="og:image:alt" content="Modern architectural exterior illustrating BIM and visualization support">
   <meta property="og:image:height" content="784">
   <meta property="og:image:width" content="1168">
@@ -23,8 +30,10 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,560&family=Outfit:wght@300;400;500;600&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,560&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/refine.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -45,9 +54,6 @@
         "@type": "PostalAddress",
         "addressCountry": "PH"
       },
-      "areaServed": "[AREA SERVED]",
-      "identifier": "[LICENSE NUMBER]",
-      "priceRange": "[PRICE]",
       "knowsAbout": [
         "Revit modeling",
         "CAD drafting",
@@ -56,66 +62,54 @@
         "MEP backgrounds",
         "Construction documents"
       ],
-      "sameAs": [
-        "[LINKEDIN_URL]",
-        "[UPWORK_URL]"
-      ],
       "makesOffer": [
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
             "name": "Revit Modeling"
-          },
-          "price": "[PRICE]",
-          "priceCurrency": "[CURRENCY]"
+          }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
             "name": "CAD Drafting"
-          },
-          "price": "[PRICE]",
-          "priceCurrency": "[CURRENCY]"
+          }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
             "name": "Visualization"
-          },
-          "price": "[PRICE]",
-          "priceCurrency": "[CURRENCY]"
+          }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
             "name": "CAD-to-Revit Conversion"
-          },
-          "price": "[PRICE]",
-          "priceCurrency": "[CURRENCY]"
+          }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
             "name": "Construction Document Cleanup"
-          },
-          "price": "[PRICE]",
-          "priceCurrency": "[CURRENCY]"
+          }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
             "name": "MEP Backgrounds"
-          },
-          "price": "[PRICE]",
-          "priceCurrency": "[CURRENCY]"
+          }
         }
-      ]
+      ],
+      "areaServed": {
+        "@type": "Country",
+        "name": "Philippines"
+      }
     }
   ]
 }
@@ -129,8 +123,8 @@
   <nav class="nav" aria-label="Main navigation">
     <div class="nav-container">
       <a href="../index.html" class="logo">Josh</a>
-      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
-      <ul class="nav-links">
+      <button class="menu-toggle" aria-label="Toggle menu" aria-controls="site-nav" aria-expanded="false">☰</button>
+      <ul class="nav-links" id="site-nav">
         <li><a href="../index.html">Home</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#work">Work</a></li>
@@ -247,7 +241,7 @@
       <div class="featured-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
         <div class="service-card reveal">
           <h3>Hourly support</h3>
-          <p>Starting at [PRICE]/hour</p>
+          <p class="pending" hidden>Starting at [PRICE]/hour</p>
           <ul>
             <li>Flexible overflow capacity</li>
             <li>Best for ongoing or variable scopes</li>
@@ -255,7 +249,7 @@
         </div>
         <div class="service-card reveal">
           <h3>Fixed-price project</h3>
-          <p>Starting at [PRICE]</p>
+          <p class="pending" hidden>Starting at [PRICE]</p>
           <ul>
             <li>Defined deliverables and timeline</li>
             <li>Best for conversions and CD sets</li>
@@ -263,7 +257,7 @@
         </div>
         <div class="service-card reveal">
           <h3>Monthly retainer</h3>
-          <p>Starting at [PRICE] for [HOURS]/month</p>
+          <p class="pending" hidden>Starting at [PRICE] for [HOURS]/month</p>
           <ul>
             <li>Priority scheduling</li>
             <li>Best for teams with steady production needs</li>
@@ -278,91 +272,109 @@
       <div class="projects-grid">
         <article class="project-card" data-category="revit">
           <a href="../projects/project-1.html">
-            <img src="../images/project-1-01.jpg" alt="[PROJECT 1 TITLE] living room interior" loading="lazy">
+            <img width="1168" height="784" decoding="async" src="../images/project-1-01.jpg" alt="Living room interior" loading="lazy">
             <div class="project-info">
               <span class="project-category">Revit Modeling</span>
-              <h3>[PROJECT 1 TITLE]</h3>
+              <p class="study-name">Living room interior</p>
+              <div class="pending" hidden>
+<h3>[PROJECT 1 TITLE]</h3>
               <div class="project-details">
                 <span>[LOCATION]</span>
                 <span>[YEAR]</span>
                 <span>Revit Modeling</span>
                 <span>[SCOPE]</span>
               </div>
+</div>
             </div>
           </a>
         </article>
         <article class="project-card" data-category="rendering">
           <a href="../projects/project-2.html">
-            <img src="../images/project-2-01.jpg" alt="[PROJECT 2 TITLE] modern house exterior" loading="lazy">
+            <img width="1168" height="784" decoding="async" src="../images/project-2-01.jpg" alt="Modern house exterior" loading="lazy">
             <div class="project-info">
               <span class="project-category">Rendering</span>
-              <h3>[PROJECT 2 TITLE]</h3>
+              <p class="study-name">Modern house exterior</p>
+              <div class="pending" hidden>
+<h3>[PROJECT 2 TITLE]</h3>
               <div class="project-details">
                 <span>[LOCATION]</span>
                 <span>[YEAR]</span>
                 <span>Rendering</span>
                 <span>[SCOPE]</span>
               </div>
+</div>
             </div>
           </a>
         </article>
         <article class="project-card" data-category="cad">
           <a href="../projects/project-3.html">
-            <img src="../images/project-3-01.jpg" alt="[PROJECT 3 TITLE] kitchen interior" loading="lazy">
+            <img width="1168" height="784" decoding="async" src="../images/project-3-01.jpg" alt="Kitchen interior" loading="lazy">
             <div class="project-info">
               <span class="project-category">CAD / Conversion</span>
-              <h3>[PROJECT 3 TITLE]</h3>
+              <p class="study-name">Kitchen interior</p>
+              <div class="pending" hidden>
+<h3>[PROJECT 3 TITLE]</h3>
               <div class="project-details">
                 <span>[LOCATION]</span>
                 <span>[YEAR]</span>
                 <span>CAD / Conversion</span>
                 <span>[SCOPE]</span>
               </div>
+</div>
             </div>
           </a>
         </article>
         <article class="project-card" data-category="revit">
           <a href="../projects/project-4.html">
-            <img src="../images/project-4-01.jpg" alt="[PROJECT 4 TITLE] living room interior" loading="lazy">
+            <img width="1168" height="784" decoding="async" src="../images/project-4-01.jpg" alt="Living room interior" loading="lazy">
             <div class="project-info">
               <span class="project-category">Revit Modeling</span>
-              <h3>[PROJECT 4 TITLE]</h3>
+              <p class="study-name">Living room interior</p>
+              <div class="pending" hidden>
+<h3>[PROJECT 4 TITLE]</h3>
               <div class="project-details">
                 <span>[LOCATION]</span>
                 <span>[YEAR]</span>
                 <span>Revit Modeling</span>
                 <span>[SCOPE]</span>
               </div>
+</div>
             </div>
           </a>
         </article>
         <article class="project-card" data-category="cd">
           <a href="../projects/project-5.html">
-            <img src="../images/project-5-01.jpg" alt="[PROJECT 5 TITLE] modern house exterior" loading="lazy">
+            <img width="1168" height="784" decoding="async" src="../images/project-5-01.jpg" alt="Modern house exterior" loading="lazy">
             <div class="project-info">
               <span class="project-category">CD Cleanup</span>
-              <h3>[PROJECT 5 TITLE]</h3>
+              <p class="study-name">Modern house exterior</p>
+              <div class="pending" hidden>
+<h3>[PROJECT 5 TITLE]</h3>
               <div class="project-details">
                 <span>[LOCATION]</span>
                 <span>[YEAR]</span>
                 <span>CD Cleanup</span>
                 <span>[SCOPE]</span>
               </div>
+</div>
             </div>
           </a>
         </article>
         <article class="project-card" data-category="rendering">
           <a href="../projects/project-6.html">
-            <img src="../images/project-6-01.jpg" alt="[PROJECT 6 TITLE] kitchen interior" loading="lazy">
+            <img width="1168" height="784" decoding="async" src="../images/project-6-01.jpg" alt="Kitchen interior" loading="lazy">
             <div class="project-info">
               <span class="project-category">Rendering</span>
-              <h3>[PROJECT 6 TITLE]</h3>
+              <p class="study-name">Kitchen interior</p>
+              <div class="pending" hidden>
+<h3>[PROJECT 6 TITLE]</h3>
               <div class="project-details">
                 <span>[LOCATION]</span>
                 <span>[YEAR]</span>
                 <span>Rendering</span>
                 <span>[SCOPE]</span>
               </div>
+</div>
             </div>
           </a>
         </article>
@@ -408,10 +420,13 @@
 
     <!-- Final CTA + form -->
     <section class="cta reveal" id="quote">
-      <h2>Request a quote</h2>
+      <h2 class="blur-text">Request a quote</h2>
       <p>Share a short brief and I’ll reply within one business day.</p>
+      <a class="btn" href="mailto:hello@joshdesigns.fit">Email Josh</a>
     </section>
 
+    <!-- Restore by removing hidden after replacing [FORM_ID]. -->
+    <div class="pending" hidden>
     <section>
       <!-- Formspree form. Replace [FORM_ID] with your form id. Submits without JavaScript. -->
       <form id="contact-form" class="contact-form reveal" action="https://formspree.io/f/[FORM_ID]" method="POST" data-multistep data-success="Thanks. Your quote request was sent, and I'll reply within one business day." data-error="The request could not be sent. Please try again, or email hello@joshdesigns.fit.">
@@ -508,14 +523,16 @@
         </div>
       </form>
     </section>
+    </div>
   </main>
 
   <footer>
     <p>&copy; <span id="year"></span> Josh · <a href="https://joshdesigns.fit">joshdesigns.fit</a></p>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
-  <script src="../js/main.js"></script>
-  <script src="../js/custom-cursor.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
+  <script src="../js/main.js" defer></script>
+  <script src="../js/custom-cursor.js" defer></script>
+  <script src="../js/refine.js" defer></script>
 </body>
 </html>

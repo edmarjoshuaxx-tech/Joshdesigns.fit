@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script>document.documentElement.classList.add("js");</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f1e7">
   <title>Proposal draft | Josh</title>
   <meta name="description" content="Private browser-only draft for an Upwork proposal. Nothing entered here is sent anywhere.">
   <meta name="robots" content="noindex, nofollow">
@@ -11,8 +13,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,560&family=Outfit:wght@300;400;500;600&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,560&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/refine.css">
   <style>
     .form-status { margin: 0 0 1rem; padding: 0.8rem 1rem; border-radius: 0; }
     .form-status:empty { display: none; margin: 0; padding: 0; }
@@ -24,8 +28,8 @@
   <nav class="nav" aria-label="Main navigation">
     <div class="nav-container">
       <a href="../index.html" class="logo">Josh</a>
-      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
-      <ul class="nav-links">
+      <button class="menu-toggle" aria-label="Toggle menu" aria-controls="site-nav" aria-expanded="false">☰</button>
+      <ul class="nav-links" id="site-nav">
         <li><a href="../index.html">Home</a></li>
         <li><a href="../projects.html">Projects</a></li>
         <li><a href="../services.html">Services</a></li>
@@ -76,8 +80,9 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
-  <script src="../js/main.js"></script>
-  <script src="../js/custom-cursor.js"></script>
+  <script src="../js/main.js" defer></script>
+  <script src="../js/custom-cursor.js" defer></script>
+  <script src="../js/refine.js" defer></script>
   <script>
     (function () {
       var SERVICES = {
@@ -163,7 +168,9 @@
           '',
           'Rate: [RATE]',
           '',
-          'I am a Philippine-licensed architect (License No. [LICENSE NUMBER]). I typically reply within one business day.',
+          'I am a Philippine-licensed architect. I typically reply within one business day.',
+          // Restore the license line when the number is known:
+          // 'I am a Philippine-licensed architect (License No. [LICENSE NUMBER]). I typically reply within one business day.',
           '',
           'Josh',
           'hello@joshdesigns.fit'

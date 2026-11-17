@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script>document.documentElement.classList.add("js");</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f1e7">
   <title>Josh | Architect | Revit & CAD Drafting | Visualization</title>
   <meta name="description" content="Portfolio of Josh, a Philippine-licensed architect specializing in Revit modeling, CAD drafting, and photorealistic visualization.">
   <link rel="canonical" href="https://joshdesigns.fit/">
@@ -15,6 +17,11 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_PH">
   <meta property="og:site_name" content="Josh Designs">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Josh | Architect Portfolio">
+  <meta name="twitter:description" content="Architect | Revit & CAD Drafting | Visualization">
+  <meta name="twitter:image" content="https://joshdesigns.fit/images/hero-open-poster.jpg">
+
   <meta property="og:image:alt" content="Dusk view of a modern residence with warm interior light and a pale facade">
   <meta property="og:image:width" content="3840">
   <meta property="og:image:height" content="2576">
@@ -26,10 +33,12 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,560&family=Outfit:wght@300;400;500;600&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,560&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   
   <link rel="preload" as="image" href="images/hero-open-poster.jpg" fetchpriority="high">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/refine.css">
   <link rel="stylesheet" href="css/site-analysis.css">
 <script type="application/ld+json">
 {
@@ -51,9 +60,6 @@
         "@type": "PostalAddress",
         "addressCountry": "PH"
       },
-      "areaServed": "[AREA SERVED]",
-      "identifier": "[LICENSE NUMBER]",
-      "priceRange": "[PRICE]",
       "knowsAbout": [
         "Revit modeling",
         "CAD drafting",
@@ -62,66 +68,54 @@
         "MEP backgrounds",
         "Construction documents"
       ],
-      "sameAs": [
-        "[LINKEDIN_URL]",
-        "[UPWORK_URL]"
-      ],
       "makesOffer": [
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
             "name": "Revit Modeling"
-          },
-          "price": "[PRICE]",
-          "priceCurrency": "[CURRENCY]"
+          }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
             "name": "CAD Drafting"
-          },
-          "price": "[PRICE]",
-          "priceCurrency": "[CURRENCY]"
+          }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
             "name": "Visualization"
-          },
-          "price": "[PRICE]",
-          "priceCurrency": "[CURRENCY]"
+          }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
             "name": "CAD-to-Revit Conversion"
-          },
-          "price": "[PRICE]",
-          "priceCurrency": "[CURRENCY]"
+          }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
             "name": "Construction Document Cleanup"
-          },
-          "price": "[PRICE]",
-          "priceCurrency": "[CURRENCY]"
+          }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
             "name": "MEP Backgrounds"
-          },
-          "price": "[PRICE]",
-          "priceCurrency": "[CURRENCY]"
+          }
         }
-      ]
+      ],
+      "areaServed": {
+        "@type": "Country",
+        "name": "Philippines"
+      }
     }
   ]
 }
@@ -136,8 +130,8 @@
   <nav class="nav" aria-label="Main navigation">
     <div class="nav-container">
       <a href="index.html" class="logo">Josh</a>
-      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
-      <ul class="nav-links">
+      <button class="menu-toggle" aria-label="Toggle menu" aria-controls="site-nav" aria-expanded="false">☰</button>
+      <ul class="nav-links" id="site-nav">
         <li><a href="index.html" aria-current="page">Home</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="services.html">Services</a></li>
@@ -420,16 +414,21 @@
     </section>
 
     <!-- Featured Projects -->
-    <section>
-      <h2 class="reveal">Featured Work</h2>
+    <section class="work-section" aria-labelledby="work-heading">
+      <p class="page-kicker">Portfolio</p>
+      <h2 id="work-heading" class="mask-lines">
+        <span class="ml"><span style="--i:0">Featured work</span></span>
+      </h2>
       <div class="featured-grid">
         <!-- [PROJECT 1 TITLE] - Replace title, image, category, and link -->
         <article class="project-card reveal reveal-delay-1">
           <a href="projects/project-1.html">
-            <img src="images/project-1-01.jpg" alt="[PROJECT 1 TITLE] living room interior" loading="lazy">
+            <img width="1168" height="784" decoding="async" src="images/project-1-01.jpg" alt="Living room interior" loading="lazy">
             <div class="project-info">
               <span class="project-category">Renderings</span>
-              <h3>[PROJECT 1 TITLE]</h3>
+              <p class="study-name">Living room interior</p>
+              <div class="pending" hidden>
+<h3>[PROJECT 1 TITLE]</h3>
               <p>Short description placeholder for the project.</p>
               <div class="project-details">
                 <span>[LOCATION]</span>
@@ -437,6 +436,7 @@
                 <span>Renderings</span>
                 <span>[SCOPE]</span>
               </div>
+</div>
             </div>
           </a>
         </article>
@@ -444,10 +444,12 @@
         <!-- [PROJECT 2 TITLE] -->
         <article class="project-card reveal reveal-delay-2">
           <a href="projects/project-2.html">
-            <img src="images/project-2-01.jpg" alt="[PROJECT 2 TITLE] modern house exterior" loading="lazy">
+            <img width="1168" height="784" decoding="async" src="images/project-2-01.jpg" alt="Modern house exterior" loading="lazy">
             <div class="project-info">
               <span class="project-category">Architecture</span>
-              <h3>[PROJECT 2 TITLE]</h3>
+              <p class="study-name">Modern house exterior</p>
+              <div class="pending" hidden>
+<h3>[PROJECT 2 TITLE]</h3>
               <p>Short description placeholder for the project.</p>
               <div class="project-details">
                 <span>[LOCATION]</span>
@@ -455,6 +457,7 @@
                 <span>Architecture</span>
                 <span>[SCOPE]</span>
               </div>
+</div>
             </div>
           </a>
         </article>
@@ -462,10 +465,12 @@
         <!-- [PROJECT 3 TITLE] -->
         <article class="project-card reveal reveal-delay-3">
           <a href="projects/project-3.html">
-            <img src="images/project-3-01.jpg" alt="[PROJECT 3 TITLE] kitchen interior" loading="lazy">
+            <img width="1168" height="784" decoding="async" src="images/project-3-01.jpg" alt="Kitchen interior" loading="lazy">
             <div class="project-info">
               <span class="project-category">Revit &amp; CAD</span>
-              <h3>[PROJECT 3 TITLE]</h3>
+              <p class="study-name">Kitchen interior</p>
+              <div class="pending" hidden>
+<h3>[PROJECT 3 TITLE]</h3>
               <p>Short description placeholder for the project.</p>
               <div class="project-details">
                 <span>[LOCATION]</span>
@@ -473,10 +478,12 @@
                 <span>Revit &amp; CAD</span>
                 <span>[SCOPE]</span>
               </div>
+</div>
             </div>
           </a>
         </article>
       </div>
+      <a class="work-link" href="projects.html">View projects</a>
     </section>
 
     <!-- Services Strip -->
@@ -498,9 +505,9 @@
     </div>
 
     <!-- CTA -->
-    <section class="cta reveal">
-      <h2>Let's discuss your project</h2>
-      <p>Available for Revit modeling, drafting, and visualization work.</p>
+    <section class="cta">
+      <h2 class="blur-text">Let's discuss your project</h2>
+      <p class="reveal">Available for Revit modeling, drafting, and visualization work.</p>
       <a href="contact.html" class="btn">Get in Touch</a>
     </section>
   </main>
@@ -510,9 +517,10 @@
     <p>&copy; <span id="year"></span> Josh · <a href="https://joshdesigns.fit">joshdesigns.fit</a></p>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/custom-cursor.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/custom-cursor.js" defer></script>
+  <script src="js/refine.js" defer></script>
   <script type="module" src="js/site-study/boot.js"></script>
 </body>
 </html>
