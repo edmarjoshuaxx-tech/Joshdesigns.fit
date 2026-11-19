@@ -78,7 +78,7 @@ test("the page tells the truth before the worker exists", () => {
   assert.doesNotMatch(home, /tool-teaser/);
   assert.match(home, /css\/tools\.css/);
   assert.match(home, /css\/before-after\.css/);
-  assert.match(home, /css\/render-steps\.css/);
-  assert.match(home, /family=Caveat/);
+  assert.doesNotMatch(home, /render-steps\.css/);
+  assert.doesNotMatch(home, /family=Caveat/);
   assert.match(redirect, /\/tools\/render\//);
 });
