@@ -1,0 +1,22 @@
+name = "joshdesigns-render"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+workers_dev = true
+
+# Workers AI binding. Free plan: 10,000 Neurons per day, then requests fail.
+# No API token goes in this file.
+[ai]
+binding = "AI"
+
+# Burst limit per IP, per Cloudflare location. The binding has no separate charge.
+# A daily cap also lives in src/index.js (cache). Period must be 10 or 60.
+[[ratelimits]]
+name = "RENDER_LIMIT"
+namespace_id = "1001"
+
+  [ratelimits.simple]
+  limit = 2
+  period = 60
+
+# Set the Turnstile secret outside git:
+#   npx wrangler secret put TURNSTILE_SECRET
