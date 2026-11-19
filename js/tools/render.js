@@ -15,9 +15,10 @@ function boot(root) {
   const shot = root.querySelector("[data-shot]");
   const shotImg = root.querySelector("[data-shot-img]");
   const compare = root.querySelector("[data-compare]");
+  const compareNote = root.querySelector("[data-compare-note]");
   const before = root.querySelector("[data-before]");
   const after = root.querySelector("[data-after]");
-  const range = root.querySelector("[data-range]");
+  const range = compare.querySelector(".ba__range");
   const download = root.querySelector("[data-download]");
   const turnstileHost = root.querySelector("[data-turnstile]");
   const presets = root.querySelector("[data-presets]");
@@ -65,10 +66,6 @@ function boot(root) {
     if (file) acceptFile(file);
   });
 
-  range.addEventListener("input", () => {
-    compare.style.setProperty("--pos", `${range.value}%`);
-  });
-
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     render();
@@ -97,7 +94,9 @@ function boot(root) {
       previewUrl = prepared.previewUrl;
       shot.hidden = false;
       compare.hidden = true;
+      compareNote.hidden = true;
       cleanBlob = null;
+      download.hidden = true;
       download.disabled = true;
       if (configured) setStatus(status, "ready");
     } catch (err) {
@@ -164,14 +163,25 @@ function boot(root) {
   }
 
   function showResult(beforeUrl, afterUrl, mocked) {
-    before.src = beforeUrl;
-    after.src = afterUrl;
     before.alt = "Your screenshot";
     after.alt = "AI concept image";
+    before.onload = function () {
+      if (before.naturalWidth) {
+        compare.style.setProperty("--ba-ratio", before.naturalWidth + " / " + before.naturalHeight);
+      }
+    };
+    before.src = beforeUrl;
+    after.src = afterUrl;
+    if (before.complete && before.naturalWidth) {
+      compare.style.setProperty("--ba-ratio", before.naturalWidth + " / " + before.naturalHeight);
+    }
+    if (window.BeforeAfter) window.BeforeAfter.init(compare);
     range.value = "50";
-    compare.style.setProperty("--pos", "50%");
+    range.dispatchEvent(new Event("input", { bubbles: true }));
     shot.hidden = true;
     compare.hidden = false;
+    compareNote.hidden = false;
+    download.hidden = false;
     download.disabled = false;
     setStatus(status, mocked ? "preview" : "success");
   }
@@ -303,8 +313,8 @@ async function watermark(blob) {
   const text = "joshdesigns.fit";
   const pad = Math.round(size * 0.7);
   const width = ctx.measureText(text).width;
-  const x = pad;
-  const y = canvas.height - pad - Math.round(size * 1.8);
+  const x = canvas.width - width - pad;
+  const y = canvas.height - pad;
   ctx.lineWidth = Math.max(2, size / 8);
   ctx.strokeStyle = "rgba(44, 36, 28, 0.45)";
   ctx.fillStyle = "rgba(246, 241, 231, 0.88)";

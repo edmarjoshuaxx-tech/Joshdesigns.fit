@@ -28,6 +28,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,560&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
   <link rel="stylesheet" href="../../css/refine.css">
+  <link rel="stylesheet" href="../../css/before-after.css">
   <link rel="stylesheet" href="../../css/tools.css">
   <script type="application/ld+json">
   {
@@ -94,17 +95,38 @@
         <figcaption>Resized in this browser.</figcaption>
       </figure>
 
-      <div class="compare" data-compare hidden>
-        <div class="compare__frame">
-          <img class="compare__before" data-before alt="">
-          <img class="compare__after" data-after alt="">
-          <p class="compare__badge">AI concept image</p>
-          <span class="compare__handle" aria-hidden="true"></span>
-          <input class="compare__range" data-range type="range" min="0" max="100" value="50" aria-label="Show more of the screenshot or the concept">
+      <div class="ba" data-before-after="50" data-compare hidden>
+        <picture class="ba__layer ba__layer--after">
+          <img data-after alt="AI concept image" draggable="false">
+        </picture>
+        <picture class="ba__layer ba__layer--before">
+          <img data-before alt="Your screenshot" draggable="false">
+        </picture>
+        <div class="ba__line" aria-hidden="true"></div>
+        <div class="ba__knob" aria-hidden="true">
+          <svg class="ba__arrows" viewBox="0 0 44 44" aria-hidden="true" focusable="false">
+            <path d="M16 13.5 10 22l6 8.5" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M28 13.5 34 22l-6 8.5" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
         </div>
-        <p class="compare__fine">Drag to compare. The preview carries a joshdesigns.fit mark. The full-size download does not, and it asks for a name and email first.</p>
-        <button type="button" class="btn" data-download disabled>Download full size</button>
+        <span class="ba__chip ba__chip--before" aria-hidden="true">Screenshot</span>
+        <span class="ba__chip ba__chip--after" aria-hidden="true">AI concept</span>
+        <input
+          class="ba__range sr-only"
+          type="range"
+          min="0"
+          max="100"
+          step="1"
+          value="50"
+          aria-label="Compare your screenshot and the AI concept image"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="50"
+          aria-valuetext="50 percent. Line drawing on the left, visualization on the right."
+        >
       </div>
+      <p class="render-compare__note" data-compare-note hidden>Drag to compare. The preview carries a joshdesigns.fit mark. The full-size download does not, and it asks for a name and email first. This is an AI concept image, not a measured drawing.</p>
+      <button type="button" class="btn" data-download hidden disabled>Download full size</button>
       <noscript><p>This tool needs JavaScript to resize the screenshot in your browser.</p></noscript>
     </section>
   </main>
@@ -118,6 +140,7 @@
   <script src="../../js/main.js" defer></script>
   <script src="../../js/custom-cursor.js" defer></script>
   <script src="../../js/refine.js" defer></script>
+  <script src="../../js/before-after.js" defer></script>
   <script type="module" src="../../js/tools/render.js"></script>
 </body>
 </html>

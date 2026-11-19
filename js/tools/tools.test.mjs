@@ -60,6 +60,10 @@ test("the page tells the truth before the worker exists", () => {
   const home = readFileSync(new URL("../../index.html", import.meta.url), "utf8");
   const redirect = readFileSync(new URL("../../render.html", import.meta.url), "utf8");
   assert.match(html, /AI concept image/);
+  assert.match(html, /data-before-after/);
+  assert.match(html, /before-after\.js/);
+  assert.match(html, /before-after\.css/);
+  assert.doesNotMatch(html, /compare__range|compare__frame|data-range/);
   assert.match(html, /confidential client work/);
   assert.match(html, /render-config\.js/);
   assert.match(html, /tools\/render\.js/);
