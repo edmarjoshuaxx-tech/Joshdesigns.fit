@@ -16,9 +16,6 @@
 
    Position is a percentage: the drawing is left of the handle,
    the render is right of it. The value is applied immediately.
-
-   Call BeforeAfter.init() again after inserting a slider, or after
-   replacing its images. A slider that is already bound is left as it is.
    ======================================== */
 (function () {
   "use strict";
@@ -34,13 +31,9 @@
   }
 
   function initBeforeAfter(root) {
-    if (!root || root.nodeType !== 1) return null;
+    if (!root || root.getAttribute("data-ba-ready") === "true") return null;
     var range = root.querySelector(".ba__range");
     if (!range) return null;
-    // Images can arrive after the shell. Rebind only when the control
-    // itself was replaced; the same range keeps its listeners.
-    if (root.__baBound === range) return root;
-    root.__baBound = range;
     root.setAttribute("data-ba-ready", "true");
 
     var dragging = false;
@@ -156,22 +149,8 @@
       .filter(Boolean);
   }
 
-  function init(target) {
-    if (!target || target === document || target === document.documentElement) {
-      return initAll(document);
-    }
-    if (target.nodeType === 11) return initAll(target);
-    if (target.nodeType !== 1) return [];
-    var own = [];
-    if (target.matches("[data-before-after]")) {
-      var slider = initBeforeAfter(target);
-      if (slider) own.push(slider);
-    }
-    return own.concat(initAll(target));
-  }
-
   window.BeforeAfter = {
-    init: init,
+    init: initBeforeAfter,
     initAll: initAll,
   };
 
