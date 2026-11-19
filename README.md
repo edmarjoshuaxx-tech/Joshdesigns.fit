@@ -15,7 +15,7 @@ Until `js/render-config.js` has a worker URL and a Turnstile site key, the page 
    ```
 
 3. `worker/wrangler.toml` already declares the Workers AI binding named `AI`. After deploy, open the worker in the dashboard, go to Settings, then Bindings, and confirm `AI` is a Workers AI binding. The worker calls `@cf/black-forest-labs/flux-2-klein-4b`. Do not switch it to a model that requires a paid billing method.
-4. In the Cloudflare dashboard, open Turnstile and add a widget. Use Managed mode. Add the hostnames `joshdesigns.fit` and `localhost`. Copy the site key.
+4. In the Cloudflare dashboard, open Turnstile and add a widget. Use Managed mode. Add the hostnames `joshdesigns.fit`, `www.joshdesigns.fit`, and `localhost`. Copy the site key.
 5. From `worker/`, store the widget secret outside the repo:
 
    ```bash

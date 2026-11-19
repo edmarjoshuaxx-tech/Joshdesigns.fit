@@ -60,7 +60,9 @@ test("the page tells the truth before the worker exists", () => {
   const home = readFileSync(new URL("../../index.html", import.meta.url), "utf8");
   const redirect = readFileSync(new URL("../../render.html", import.meta.url), "utf8");
   assert.match(html, /AI concept image/);
-  assert.match(html, /data-before-after/);
+  const renderJs = readFileSync(new URL("./render.js", import.meta.url), "utf8");
+  assert.match(renderJs, /BeforeAfter\.init/);
+  assert.match(html, /class="ba"/);
   assert.match(html, /before-after\.js/);
   assert.match(html, /before-after\.css/);
   assert.doesNotMatch(html, /compare__range|compare__frame|data-range/);
@@ -73,6 +75,10 @@ test("the page tells the truth before the worker exists", () => {
   assert.match(COPY.quota, /allowance/);
   assert.match(COPY.unavailable, /not responding/);
   assert.match(home, /data-src="images\/hero-open\.mp4"/);
-  assert.match(home, /class="tool-teaser"/);
+  assert.doesNotMatch(home, /tool-teaser/);
+  assert.match(home, /css\/tools\.css/);
+  assert.match(home, /css\/before-after\.css/);
+  assert.match(home, /css\/render-steps\.css/);
+  assert.match(home, /family=Caveat/);
   assert.match(redirect, /\/tools\/render\//);
 });

@@ -33,7 +33,7 @@ section,
 }
 
 /* Type scale — section titles, not the film or the cream band */
-main > section:not(.site-study):not(.editorial-band):not(.cta):not(.tool-teaser) h2,
+main > section:not(.site-study):not(.editorial-band):not(.cta) h2,
 .project-detail h2 {
   font-size: clamp(2rem, 4.2vw, 3.15rem);
   font-weight: 500;

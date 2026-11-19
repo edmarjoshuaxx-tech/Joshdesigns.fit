@@ -162,28 +162,31 @@ function boot(root) {
     }
   }
 
+  let shownResult = 0;
+
   function showResult(beforeUrl, afterUrl, mocked) {
+    const ticket = ++shownResult;
     before.alt = "Your screenshot";
     after.alt = "AI concept image";
-    before.onload = function () {
-      if (before.naturalWidth) {
-        compare.style.setProperty("--ba-ratio", before.naturalWidth + " / " + before.naturalHeight);
-      }
-    };
-    before.src = beforeUrl;
-    after.src = afterUrl;
-    if (before.complete && before.naturalWidth) {
-      compare.style.setProperty("--ba-ratio", before.naturalWidth + " / " + before.naturalHeight);
-    }
-    if (window.BeforeAfter) window.BeforeAfter.init(compare);
-    range.value = "50";
-    range.dispatchEvent(new Event("input", { bubbles: true }));
     shot.hidden = true;
     compare.hidden = false;
     compareNote.hidden = false;
     download.hidden = false;
     download.disabled = false;
-    setStatus(status, mocked ? "preview" : "success");
+    Promise.all([
+      waitForImage(before, beforeUrl),
+      waitForImage(after, afterUrl)
+    ]).then(function () {
+      if (ticket !== shownResult) return;
+      if (before.naturalWidth) {
+        compare.style.setProperty("--ba-ratio", before.naturalWidth + " / " + before.naturalHeight);
+      }
+      compare.setAttribute("data-before-after", "50");
+      if (window.BeforeAfter) window.BeforeAfter.init(compare);
+      range.value = "50";
+      range.dispatchEvent(new Event("input", { bubbles: true }));
+      setStatus(status, mocked ? "preview" : "success");
+    });
   }
 
   async function runPreview(state) {
@@ -272,6 +275,23 @@ function paint(source, width, height) {
 function blobFrom(canvas, type, quality) {
   return new Promise((resolve, reject) => {
     canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error("image"))), type, quality);
+  });
+}
+
+function waitForImage(img, url) {
+  return new Promise(function (resolve) {
+    let settled = false;
+    function finish() {
+      if (settled) return;
+      settled = true;
+      img.removeEventListener("load", finish);
+      img.removeEventListener("error", finish);
+      resolve();
+    }
+    img.addEventListener("load", finish);
+    img.addEventListener("error", finish);
+    img.src = url;
+    if (img.complete) finish();
   });
 }
 
