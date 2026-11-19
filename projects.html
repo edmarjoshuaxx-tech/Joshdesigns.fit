@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script>document.documentElement.classList.add("js");</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f1e7">
   <title>Projects | Josh Architect Portfolio</title>
   <meta name="description" content="Selected architecture, Revit modeling, CAD drafting, and visualization projects by Josh, licensed architect in the Philippines.">
   <link rel="canonical" href="https://joshdesigns.fit/projects.html">
@@ -14,7 +16,12 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_PH">
   <meta property="og:site_name" content="Josh Designs">
-  <meta property="og:image:alt" content="[PROJECT 1 TITLE] living room interior">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Projects | Josh">
+  <meta name="twitter:description" content="Architecture, Revit & CAD, and Renderings portfolio">
+  <meta name="twitter:image" content="https://joshdesigns.fit/images/project-1-01.jpg">
+
+  <meta property="content="Living room interior">
   <meta property="og:image:height" content="784">
   <meta property="og:image:width" content="1168">
   
@@ -23,8 +30,10 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,560&family=Outfit:wght@300;400;500;600&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,560&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/refine.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -45,9 +54,6 @@
         "@type": "PostalAddress",
         "addressCountry": "PH"
       },
-      "areaServed": "[AREA SERVED]",
-      "identifier": "[LICENSE NUMBER]",
-      "priceRange": "[PRICE]",
       "knowsAbout": [
         "Revit modeling",
         "CAD drafting",
@@ -56,66 +62,54 @@
         "MEP backgrounds",
         "Construction documents"
       ],
-      "sameAs": [
-        "[LINKEDIN_URL]",
-        "[UPWORK_URL]"
-      ],
       "makesOffer": [
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
             "name": "Revit Modeling"
-          },
-          "price": "[PRICE]",
-          "priceCurrency": "[CURRENCY]"
+          }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
             "name": "CAD Drafting"
-          },
-          "price": "[PRICE]",
-          "priceCurrency": "[CURRENCY]"
+          }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
             "name": "Visualization"
-          },
-          "price": "[PRICE]",
-          "priceCurrency": "[CURRENCY]"
+          }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
             "name": "CAD-to-Revit Conversion"
-          },
-          "price": "[PRICE]",
-          "priceCurrency": "[CURRENCY]"
+          }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
             "name": "Construction Document Cleanup"
-          },
-          "price": "[PRICE]",
-          "priceCurrency": "[CURRENCY]"
+          }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
             "name": "MEP Backgrounds"
-          },
-          "price": "[PRICE]",
-          "priceCurrency": "[CURRENCY]"
+          }
         }
-      ]
+      ],
+      "areaServed": {
+        "@type": "Country",
+        "name": "Philippines"
+      }
     }
   ]
 }
@@ -129,8 +123,8 @@
   <nav class="nav" aria-label="Main navigation">
     <div class="nav-container">
       <a href="index.html" class="logo">Josh</a>
-      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
-      <ul class="nav-links">
+      <button class="menu-toggle" aria-label="Toggle menu" aria-controls="site-nav" aria-expanded="false">☰</button>
+      <ul class="nav-links" id="site-nav">
         <li><a href="index.html">Home</a></li>
         <li><a href="projects.html" aria-current="page">Projects</a></li>
         <li><a href="services.html">Services</a></li>
@@ -142,16 +136,16 @@
 
   <main id="main">
     <section>
-      <h2 class="reveal">Projects</h2>
+      <p class="page-kicker">Portfolio</p>
+      <h1 class="page-title mask-lines"><span class="ml"><span style="--i:0">Projects</span></span></h1>
       <p class="section-intro reveal">A selection of work across architecture, Revit modeling, CAD documentation, and visualization.</p>
       
       <div class="projects-toolbar reveal">
-        <!-- Filters -->
-        <div class="filters" role="tablist" aria-label="Filter projects">
-          <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All</button>
-          <button class="filter-btn" data-filter="architecture" role="tab" aria-selected="false">Architecture</button>
-          <button class="filter-btn" data-filter="revit" role="tab" aria-selected="false">Revit &amp; CAD</button>
-          <button class="filter-btn" data-filter="renderings" role="tab" aria-selected="false">Renderings</button>
+        <div class="filters" role="group" aria-label="Filter projects">
+          <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="filter-btn" data-filter="architecture" aria-pressed="false">Architecture</button>
+          <button type="button" class="filter-btn" data-filter="revit" aria-pressed="false">Revit &amp; CAD</button>
+          <button type="button" class="filter-btn" data-filter="renderings" aria-pressed="false">Renderings</button>
         </div>
 
         <div class="view-toggle" role="group" aria-label="Projects view">
@@ -165,113 +159,134 @@
         
         <article class="project-card" data-category="renderings">
           <a href="projects/project-1.html">
-            <img src="images/project-1-01.jpg" alt="[PROJECT 1 TITLE] living room interior" loading="lazy">
+            <img width="1168" height="784" decoding="async" src="images/project-1-01.jpg" alt="Living room interior" loading="lazy">
             <div class="project-info">
               <span class="project-category">Renderings</span>
-              <h3>[PROJECT 1 TITLE]</h3>
+              <p class="study-name">Living room interior</p>
+              <div class="pending" hidden>
+<h3>[PROJECT 1 TITLE]</h3>
               <div class="project-details">
                 <span>[LOCATION]</span>
                 <span>[YEAR]</span>
                 <span>Renderings</span>
                 <span>[SCOPE]</span>
               </div>
+</div>
             </div>
           </a>
         </article>
         
         <article class="project-card" data-category="architecture">
           <a href="projects/project-2.html">
-            <img src="images/project-2-01.jpg" alt="[PROJECT 2 TITLE] modern house exterior" loading="lazy">
+            <img width="1168" height="784" decoding="async" src="images/project-2-01.jpg" alt="Modern house exterior" loading="lazy">
             <div class="project-info">
               <span class="project-category">Architecture</span>
-              <h3>[PROJECT 2 TITLE]</h3>
+              <p class="study-name">Modern house exterior</p>
+              <div class="pending" hidden>
+<h3>[PROJECT 2 TITLE]</h3>
               <div class="project-details">
                 <span>[LOCATION]</span>
                 <span>[YEAR]</span>
                 <span>Architecture</span>
                 <span>[SCOPE]</span>
               </div>
+</div>
             </div>
           </a>
         </article>
         
         <article class="project-card" data-category="revit">
           <a href="projects/project-3.html">
-            <img src="images/project-3-01.jpg" alt="[PROJECT 3 TITLE] kitchen interior" loading="lazy">
+            <img width="1168" height="784" decoding="async" src="images/project-3-01.jpg" alt="Kitchen interior" loading="lazy">
             <div class="project-info">
               <span class="project-category">Revit &amp; CAD</span>
-              <h3>[PROJECT 3 TITLE]</h3>
+              <p class="study-name">Kitchen interior</p>
+              <div class="pending" hidden>
+<h3>[PROJECT 3 TITLE]</h3>
               <div class="project-details">
                 <span>[LOCATION]</span>
                 <span>[YEAR]</span>
                 <span>Revit &amp; CAD</span>
                 <span>[SCOPE]</span>
               </div>
+</div>
             </div>
           </a>
         </article>
         
         <article class="project-card" data-category="renderings">
           <a href="projects/project-4.html">
-            <img src="images/project-4-01.jpg" alt="[PROJECT 4 TITLE] living room interior" loading="lazy">
+            <img width="1168" height="784" decoding="async" src="images/project-4-01.jpg" alt="Living room interior" loading="lazy">
             <div class="project-info">
               <span class="project-category">Renderings</span>
-              <h3>[PROJECT 4 TITLE]</h3>
+              <p class="study-name">Living room interior</p>
+              <div class="pending" hidden>
+<h3>[PROJECT 4 TITLE]</h3>
               <div class="project-details">
                 <span>[LOCATION]</span>
                 <span>[YEAR]</span>
                 <span>Renderings</span>
                 <span>[SCOPE]</span>
               </div>
+</div>
             </div>
           </a>
         </article>
         
         <article class="project-card" data-category="architecture">
           <a href="projects/project-5.html">
-            <img src="images/project-5-01.jpg" alt="[PROJECT 5 TITLE] modern house exterior" loading="lazy">
+            <img width="1168" height="784" decoding="async" src="images/project-5-01.jpg" alt="Modern house exterior" loading="lazy">
             <div class="project-info">
               <span class="project-category">Architecture</span>
-              <h3>[PROJECT 5 TITLE]</h3>
+              <p class="study-name">Modern house exterior</p>
+              <div class="pending" hidden>
+<h3>[PROJECT 5 TITLE]</h3>
               <div class="project-details">
                 <span>[LOCATION]</span>
                 <span>[YEAR]</span>
                 <span>Architecture</span>
                 <span>[SCOPE]</span>
               </div>
+</div>
             </div>
           </a>
         </article>
         
         <article class="project-card" data-category="revit">
           <a href="projects/project-6.html">
-            <img src="images/project-6-01.jpg" alt="[PROJECT 6 TITLE] kitchen interior" loading="lazy">
+            <img width="1168" height="784" decoding="async" src="images/project-6-01.jpg" alt="Kitchen interior" loading="lazy">
             <div class="project-info">
               <span class="project-category">Revit &amp; CAD</span>
-              <h3>[PROJECT 6 TITLE]</h3>
+              <p class="study-name">Kitchen interior</p>
+              <div class="pending" hidden>
+<h3>[PROJECT 6 TITLE]</h3>
               <div class="project-details">
                 <span>[LOCATION]</span>
                 <span>[YEAR]</span>
                 <span>Revit &amp; CAD</span>
                 <span>[SCOPE]</span>
               </div>
+</div>
             </div>
           </a>
         </article>
 
-        <!-- Template card. Copy this article when you copy projects/template/. -->
-        <article class="project-card" data-category="architecture">
+        <!-- Template card. Copy this article when you copy projects/template/. Remove hidden after the title is real. -->
+        <article class="project-card" data-category="architecture" data-pending hidden>
           <a href="projects/template/">
-            <img src="projects/template/cover.jpg" alt="[PROJECT TITLE]" loading="lazy">
+            <img src="projects/template/cover.jpg" alt="Architectural study" loading="lazy">
             <div class="project-info">
               <span class="project-category">[CATEGORY]</span>
-              <h3>[PROJECT TITLE]</h3>
+              <p class="study-name">Architectural study</p>
+              <div class="pending" hidden>
+<h3>[PROJECT TITLE]</h3>
               <div class="project-details">
                 <span>[LOCATION]</span>
                 <span>[YEAR]</span>
                 <span>[CATEGORY]</span>
                 <span>[SCOPE]</span>
               </div>
+</div>
             </div>
           </a>
         </article>
@@ -284,8 +299,9 @@
     <p>&copy; <span id="year"></span> Josh · <a href="https://joshdesigns.fit">joshdesigns.fit</a></p>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/custom-cursor.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/custom-cursor.js" defer></script>
+  <script src="js/refine.js" defer></script>
 </body>
 </html>

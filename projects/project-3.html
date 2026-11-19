@@ -2,19 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script>document.documentElement.classList.add("js");</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>[PROJECT 3 TITLE] | Josh</title>
-  <meta name="description" content="[PROJECT 3 TITLE] - Architecture and visualization project by Josh.">
+  <meta name="theme-color" content="#f6f1e7">
+  <title>Kitchen interior | Josh</title>
+  <meta name="description" content="Kitchen interior. Study by Josh, a Philippine-licensed architect.">
   <link rel="canonical" href="https://joshdesigns.fit/projects/project-3.html">
   
-  <meta property="og:title" content="[PROJECT 3 TITLE] | Josh">
-  <meta property="og:description" content="[PROJECT 3 TITLE] - Architecture and visualization project by Josh.">
+  <meta property="og:title" content="Kitchen interior | Josh">
+  <meta property="og:description" content="Kitchen interior. Study by Josh, a Philippine-licensed architect.">
   <meta property="og:image" content="https://joshdesigns.fit/images/project-3-01.jpg">
   <meta property="og:url" content="https://joshdesigns.fit/projects/project-3.html">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_PH">
   <meta property="og:site_name" content="Josh Designs">
-  <meta property="og:image:alt" content="[PROJECT 3 TITLE] kitchen interior">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kitchen interior | Josh">
+  <meta name="twitter:description" content="Kitchen interior. Study by Josh, a Philippine-licensed architect.">
+  <meta name="twitter:image" content="https://joshdesigns.fit/images/project-3-01.jpg">
+
+  <meta property="content="Kitchen interior">
   <meta property="og:image:height" content="784">
   <meta property="og:image:width" content="1168">
   
@@ -22,8 +29,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,560&family=Outfit:wght@300;400;500;600&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,560&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/refine.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -44,9 +53,6 @@
         "@type": "PostalAddress",
         "addressCountry": "PH"
       },
-      "areaServed": "[AREA SERVED]",
-      "identifier": "[LICENSE NUMBER]",
-      "priceRange": "[PRICE]",
       "knowsAbout": [
         "Revit modeling",
         "CAD drafting",
@@ -55,73 +61,61 @@
         "MEP backgrounds",
         "Construction documents"
       ],
-      "sameAs": [
-        "[LINKEDIN_URL]",
-        "[UPWORK_URL]"
-      ],
       "makesOffer": [
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
             "name": "Revit Modeling"
-          },
-          "price": "[PRICE]",
-          "priceCurrency": "[CURRENCY]"
+          }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
             "name": "CAD Drafting"
-          },
-          "price": "[PRICE]",
-          "priceCurrency": "[CURRENCY]"
+          }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
             "name": "Visualization"
-          },
-          "price": "[PRICE]",
-          "priceCurrency": "[CURRENCY]"
+          }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
             "name": "CAD-to-Revit Conversion"
-          },
-          "price": "[PRICE]",
-          "priceCurrency": "[CURRENCY]"
+          }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
             "name": "Construction Document Cleanup"
-          },
-          "price": "[PRICE]",
-          "priceCurrency": "[CURRENCY]"
+          }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
             "name": "MEP Backgrounds"
-          },
-          "price": "[PRICE]",
-          "priceCurrency": "[CURRENCY]"
+          }
         }
-      ]
+      ],
+      "areaServed": {
+        "@type": "Country",
+        "name": "Philippines"
+      }
     },
     {
       "@type": "CreativeWork",
       "@id": "https://joshdesigns.fit/projects/project-3.html#work",
-      "name": "[PROJECT 3 TITLE]",
+      "name": "Kitchen interior",
       "url": "https://joshdesigns.fit/projects/project-3.html",
-      "description": "[PROJECT 3 TITLE] - Architecture and visualization project by Josh.",
+      "description": "Kitchen interior. Study by Josh, a Philippine-licensed architect.",
       "image": "https://joshdesigns.fit/images/project-3-01.jpg",
       "creator": {
         "@id": "https://joshdesigns.fit/#business"
@@ -139,8 +133,8 @@
   <nav class="nav" aria-label="Main navigation">
     <div class="nav-container">
       <a href="../index.html" class="logo">Josh</a>
-      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
-      <ul class="nav-links">
+      <button class="menu-toggle" aria-label="Toggle menu" aria-controls="site-nav" aria-expanded="false">☰</button>
+      <ul class="nav-links" id="site-nav">
         <li><a href="../index.html">Home</a></li>
         <li><a href="../projects.html">Projects</a></li>
         <li><a href="../services.html">Services</a></li>
@@ -154,32 +148,30 @@
     <article class="project-detail">
       <a href="../projects.html" class="back-link">← Back to Projects</a>
       
-      <h1>[PROJECT 3 TITLE]</h1>
-      <p class="project-story">[One-line story: a concise narrative hook for this project.]</p>
-      
-      <div class="meta project-details">
-        <span>[LOCATION]</span>
-        <span>[YEAR]</span>
-        <span>Revit & CAD</span>
-        <span>[SCOPE]</span>
+      <p class="page-kicker">Revit &amp; CAD</p>
+      <h1 class="page-title mask-lines"><span class="ml"><span style="--i:0">Kitchen interior</span></span></h1>
+      <!-- Restore the hidden block by removing hidden when this study has a name. -->
+      <div class="pending" hidden>
+        <p>[PROJECT 3 TITLE]</p>
+        <p class="project-story">[One-line story: a concise narrative hook for this project.]</p>
+        <div class="meta project-details">
+          <span>[LOCATION]</span>
+          <span>[YEAR]</span>
+          <span>[SCOPE]</span>
+        </div>
       </div>
-      
       <div class="project-gallery" aria-label="Project gallery">
-        <img src="../images/project-3-01.jpg" alt="[PROJECT 3 TITLE] kitchen interior" loading="lazy" class="lightbox-trigger" data-full="../images/project-3-01.jpg">
-        <!-- Add more images: <img src="../images/project-3-02.jpg" alt="..." loading="lazy" class="lightbox-trigger" data-full="../images/project-3-02.jpg"> -->
+        <img width="1168" height="784" decoding="async" src="../images/project-3-01.jpg" alt="Kitchen interior" loading="lazy" class="lightbox-trigger" data-full="../images/project-3-01.jpg">
       </div>
-      
-      <div class="reveal">
+      <div class="pending" hidden>
         <h2>About the Project</h2>
         <p>[Short description of the project. What was the challenge, your contribution, and the outcome? Keep it concise and image-led.]</p>
-        
-        <p style="margin-top: 1rem;">[Additional paragraph if needed.]</p>
-        <p style="margin-top: 1rem; color: var(--grey); font-size: 0.9rem;">Role: [ROLE, e.g. Designer / Modeler] · Software: Revit, Enscape / Lumion</p>
+        <p>[Additional paragraph if needed.]</p>
+        <p>Role: [ROLE, e.g. Designer / Modeler] · Software: Revit, Enscape / Lumion</p>
       </div>
-
       <div class="next-project reveal">
         <span class="next-project__label">Next project</span>
-        <a href="project-4.html">[PROJECT 4 TITLE] →</a>
+        <a href="project-4.html">View<span class="pending" hidden> [PROJECT 4 TITLE]</span></a>
       </div>
     </article>
   </main>
@@ -194,8 +186,9 @@
     <p>&copy; <span id="year"></span> Josh · <a href="https://joshdesigns.fit">joshdesigns.fit</a></p>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
-  <script src="../js/main.js"></script>
-  <script src="../js/custom-cursor.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
+  <script src="../js/main.js" defer></script>
+  <script src="../js/custom-cursor.js" defer></script>
+  <script src="../js/refine.js" defer></script>
 </body>
 </html>

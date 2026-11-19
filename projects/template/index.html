@@ -2,26 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script>document.documentElement.classList.add("js");</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>[PROJECT TITLE] | Josh</title>
-  <meta name="description" content="[PROJECT TITLE] - Architecture and visualization project by Josh.">
+  <meta name="theme-color" content="#f6f1e7">
+  <title>Project template | Josh</title>
+  <meta name="robots" content="noindex">
+  <meta name="description" content="Unpublished project template. Replace the hidden placeholders before publishing.">
   <link rel="canonical" href="https://joshdesigns.fit/projects/template/">
   
-  <meta property="og:title" content="[PROJECT TITLE] | Josh">
-  <meta property="og:description" content="[PROJECT TITLE] - Architecture and visualization project by Josh.">
+  <meta property="og:title" content="Project template | Josh">
+  <meta property="og:description" content="Unpublished project template. Replace the hidden placeholders before publishing.">
   <meta property="og:image" content="https://joshdesigns.fit/projects/template/cover.jpg">
   <meta property="og:url" content="https://joshdesigns.fit/projects/template/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_PH">
   <meta property="og:site_name" content="Josh Designs">
-  <meta property="og:image:alt" content="[PROJECT TITLE] main view">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="[PROJECT TITLE] | Josh">
+  <meta name="twitter:description" content="[PROJECT TITLE] - Architecture and visualization project by Josh.">
+  <meta name="twitter:image" content="https://joshdesigns.fit/projects/template/cover.jpg">
+
+  <meta property="content="Main view">
   
   <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,560&family=Outfit:wght@300;400;500;600&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,560&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/refine.css">
 </head>
 <body class="is-loading">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -31,8 +41,8 @@
   <nav class="nav" aria-label="Main navigation">
     <div class="nav-container">
       <a href="../../index.html" class="logo">Josh</a>
-      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
-      <ul class="nav-links">
+      <button class="menu-toggle" aria-label="Toggle menu" aria-controls="site-nav" aria-expanded="false">☰</button>
+      <ul class="nav-links" id="site-nav">
         <li><a href="../../index.html">Home</a></li>
         <li><a href="../../projects.html">Projects</a></li>
         <li><a href="../../services.html">Services</a></li>
@@ -46,32 +56,28 @@
     <article class="project-detail">
       <a href="../../projects.html" class="back-link">← Back to Projects</a>
       
-      <h1>[PROJECT TITLE]</h1>
-      <p class="project-story">[One-line story: a concise narrative hook for this project.]</p>
-      
-      <div class="meta project-details">
-        <span>[LOCATION]</span>
-        <span>[YEAR]</span>
-        <span>[CATEGORY]</span>
-        <span>[SCOPE]</span>
-      </div>
-      
-      <div class="project-gallery" aria-label="Project gallery">
-        <img src="cover.jpg" alt="[PROJECT TITLE] main view" loading="lazy" class="lightbox-trigger" data-full="cover.jpg">
-        <!-- Add more images: <img src="02.jpg" alt="[PROJECT TITLE] second view" loading="lazy" class="lightbox-trigger" data-full="02.jpg"> -->
-      </div>
-      
-      <div class="reveal">
+      <p class="page-kicker">Template</p>
+      <h1 class="page-title">Project template</h1>
+      <p class="section-intro">This page is a copy source. Placeholders stay in the markup, hidden, until a real project replaces them.</p>
+      <!-- Restore by removing hidden, then replace every placeholder. -->
+      <div class="pending" hidden>
+        <p>[PROJECT TITLE]</p>
+        <p class="project-story">[One-line story: a concise narrative hook for this project.]</p>
+        <div class="meta project-details">
+          <span>[LOCATION]</span>
+          <span>[YEAR]</span>
+          <span>[CATEGORY]</span>
+          <span>[SCOPE]</span>
+        </div>
         <h2>About the Project</h2>
         <p>[Short description of the project. What was the challenge, your contribution, and the outcome? Keep it concise and image-led.]</p>
-        
-        <p style="margin-top: 1rem;">[Additional paragraph if needed.]</p>
-        <p style="margin-top: 1rem; color: var(--grey); font-size: 0.9rem;">Role: [ROLE, e.g. Designer / Modeler] · Software: Revit, Enscape / Lumion</p>
+        <p>[Additional paragraph if needed.]</p>
+        <p>Role: [ROLE, e.g. Designer / Modeler] · Software: Revit, Enscape / Lumion</p>
+        <a href="../project-1.html">[PROJECT 1 TITLE]</a>
+        <!-- Add more images: <img src="02.jpg" alt="[PROJECT TITLE] second view" loading="lazy" class="lightbox-trigger" data-full="02.jpg"> -->
       </div>
-
-      <div class="next-project reveal">
-        <span class="next-project__label">Next project</span>
-        <a href="../project-1.html">[PROJECT 1 TITLE] →</a>
+      <div class="project-gallery" aria-label="Project gallery">
+        <img src="cover.jpg" alt="Project template cover" loading="lazy" class="lightbox-trigger" data-full="cover.jpg">
       </div>
     </article>
   </main>
@@ -86,8 +92,9 @@
     <p>&copy; <span id="year"></span> Josh · <a href="https://joshdesigns.fit">joshdesigns.fit</a></p>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
-  <script src="../../js/main.js"></script>
-  <script src="../../js/custom-cursor.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
+  <script src="../../js/main.js" defer></script>
+  <script src="../../js/custom-cursor.js" defer></script>
+  <script src="../../js/refine.js" defer></script>
 </body>
 </html>
