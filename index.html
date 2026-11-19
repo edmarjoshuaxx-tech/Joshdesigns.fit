@@ -42,6 +42,8 @@
   <link rel="stylesheet" href="css/refine.css">
   <link rel="stylesheet" href="css/site-analysis.css">
   <link rel="stylesheet" href="css/before-after.css">
+  <link rel="stylesheet" href="css/render-steps.css">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -182,6 +184,244 @@
   </div>
 
   <main id="main">
+    <section class="compare-band" aria-labelledby="compare-heading">
+      <p class="page-kicker">Visualization</p>
+      <h2 id="compare-heading" class="mask-lines">
+        <span class="ml"><span style="--i:0">From model to render</span></span>
+      </h2>
+      <p class="compare-band__caption">Drag across the same living room, from the line drawing to the photoreal visualization.</p>
+      <div class="ba" data-before-after>
+        <picture class="ba__layer ba__layer--after">
+          <source
+            type="image/webp"
+            srcset="images/compare-living-after-640.webp 640w, images/compare-living-after-1024.webp 1024w, images/compare-living-after-1280.webp 1280w"
+            sizes="(max-width: 400px) calc(100vw - 2rem), (max-width: 1120px) calc(100vw - 2 * clamp(1.25rem, 4.5vw, 4rem)), calc(1120px - 2 * clamp(1.25rem, 4.5vw, 4rem))"
+          >
+          <img
+            src="images/compare-living-after-1024.jpg"
+            srcset="images/compare-living-after-640.jpg 640w, images/compare-living-after-1024.jpg 1024w, images/compare-living-after-1280.jpg 1280w"
+            sizes="(max-width: 400px) calc(100vw - 2rem), (max-width: 1120px) calc(100vw - 2 * clamp(1.25rem, 4.5vw, 4rem)), calc(1120px - 2 * clamp(1.25rem, 4.5vw, 4rem))"
+            width="1024"
+            height="576"
+            alt="Photoreal visualization of a living room with a brown sectional, two pale chairs, and a black fireplace"
+            loading="lazy"
+            decoding="async"
+            draggable="false"
+          >
+        </picture>
+        <picture class="ba__layer ba__layer--before">
+          <source
+            type="image/webp"
+            srcset="images/compare-living-before-640.webp 640w, images/compare-living-before-1024.webp 1024w, images/compare-living-before-1280.webp 1280w"
+            sizes="(max-width: 400px) calc(100vw - 2rem), (max-width: 1120px) calc(100vw - 2 * clamp(1.25rem, 4.5vw, 4rem)), calc(1120px - 2 * clamp(1.25rem, 4.5vw, 4rem))"
+          >
+          <img
+            src="images/compare-living-before-1024.jpg"
+            srcset="images/compare-living-before-640.jpg 640w, images/compare-living-before-1024.jpg 1024w, images/compare-living-before-1280.jpg 1280w"
+            sizes="(max-width: 400px) calc(100vw - 2rem), (max-width: 1120px) calc(100vw - 2 * clamp(1.25rem, 4.5vw, 4rem)), calc(1120px - 2 * clamp(1.25rem, 4.5vw, 4rem))"
+            width="1024"
+            height="576"
+            alt="Line drawing of the same living room, with the furniture outlined over flat color"
+            loading="lazy"
+            decoding="async"
+            draggable="false"
+          >
+        </picture>
+        <div class="ba__line" aria-hidden="true"></div>
+        <div class="ba__knob" aria-hidden="true">
+          <svg class="ba__arrows" viewBox="0 0 44 44" aria-hidden="true" focusable="false">
+            <path d="M16 13.5 10 22l6 8.5" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M28 13.5 34 22l-6 8.5" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <span class="ba__chip ba__chip--before" aria-hidden="true">Before</span>
+        <span class="ba__chip ba__chip--after" aria-hidden="true">After</span>
+        <input
+          class="ba__range sr-only"
+          type="range"
+          min="0"
+          max="100"
+          step="1"
+          value="50"
+          aria-label="Compare the living room line drawing and the visualization"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="50"
+          aria-valuetext="50 percent. Line drawing on the left, visualization on the right."
+        >
+      </div>
+    </section>
+
+    <section class="render-steps" id="render-steps" aria-labelledby="render-steps-heading">
+      <div class="render-steps__intro reveal">
+        <h2 id="render-steps-heading">Upload. Choose. Render.</h2>
+        <p class="render-steps__sub">Straight from Revit or SketchUp.</p>
+      </div>
+      <ol class="render-steps__grid">
+        <li class="step-card reveal">
+          <div class="step-card__panel" aria-hidden="true">
+            <p class="step-note">Revit / SketchUp view
+              <svg class="step-arrow" viewBox="0 0 68 32" fill="none" aria-hidden="true">
+                <path d="M4 8c18 1 28 14 56 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+                <path d="M50 12.5 62 20.5 48 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </p>
+            <div class="win">
+              <div class="win__bar">
+                <span class="win__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="win__name">View</span>
+              </div>
+              <picture>
+                <source
+                  type="image/webp"
+                  srcset="images/compare-living-before-640.webp 640w, images/compare-living-before-1024.webp 1024w"
+                  sizes="(max-width: 879px) calc(100vw - 4.5rem), 280px"
+                >
+                <img
+                  src="images/compare-living-before-640.jpg"
+                  srcset="images/compare-living-before-640.jpg 640w, images/compare-living-before-1024.jpg 1024w"
+                  sizes="(max-width: 879px) calc(100vw - 4.5rem), 280px"
+                  width="1024"
+                  height="576"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  draggable="false"
+                >
+              </picture>
+            </div>
+          </div>
+          <h3 class="step-card__title">Upload</h3>
+          <p class="step-card__text">Export a view from Revit or SketchUp as a JPEG or PNG and upload it.</p>
+        </li>
+        <li class="step-card reveal reveal-delay-1">
+          <div class="step-card__panel" aria-hidden="true">
+            <p class="step-note">Pick a style, hit Render
+              <svg class="step-arrow" viewBox="0 0 68 32" fill="none" aria-hidden="true">
+                <path d="M6 7c16 2 24 16 52 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+                <path d="M48 12 62 20 47 25" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </p>
+            <div class="preset">
+              <p class="preset__kicker">Style preset</p>
+              <div class="preset__chips">
+                <span class="is-on">Warm modern daylight</span>
+                <span>Dusk exterior</span>
+                <span>Cream interior</span>
+                <span>Tropical Filipino house</span>
+                <span>Concrete minimal</span>
+              </div>
+              <p class="preset__kicker">Time of day</p>
+              <div class="preset__chips">
+                <span>Morning</span>
+                <span class="is-on">Noon</span>
+                <span>Dusk</span>
+              </div>
+              <span class="preset__go">Render</span>
+            </div>
+          </div>
+          <h3 class="step-card__title">Choose</h3>
+          <p class="step-card__text">Pick a style preset and time of day, or add a reference image.</p>
+        </li>
+        <li class="step-card reveal reveal-delay-2">
+          <div class="step-card__panel" aria-hidden="true">
+            <p class="step-note step-note--end">Your render is ready
+              <svg class="step-arrow" viewBox="0 0 68 32" fill="none" aria-hidden="true">
+                <path d="M4 8c18 1 28 14 56 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+                <path d="M50 12.5 62 20.5 48 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </p>
+            <picture class="step-frame">
+              <source
+                type="image/webp"
+                srcset="images/compare-living-after-640.webp 640w, images/compare-living-after-1024.webp 1024w"
+                sizes="(max-width: 879px) calc(100vw - 6rem), 220px"
+              >
+              <img
+                src="images/compare-living-after-640.jpg"
+                srcset="images/compare-living-after-640.jpg 640w, images/compare-living-after-1024.jpg 1024w"
+                sizes="(max-width: 879px) calc(100vw - 6rem), 220px"
+                width="1024"
+                height="576"
+                alt=""
+                loading="lazy"
+                decoding="async"
+                draggable="false"
+              >
+            </picture>
+          </div>
+          <h3 class="step-card__title">Render</h3>
+          <p class="step-card__text">Get a photoreal concept render in seconds.</p>
+        </li>
+      </ol>
+      <p class="render-steps__note reveal">Works from any browser on any device. Nothing to install, no workstation needed.</p>
+      <a class="btn render-steps__cta reveal" href="/tools/render">Try the render tool</a>
+    </section>
+
+    <section class="compare-band compare-band--follow" aria-labelledby="exterior-heading">
+      <h2 id="exterior-heading" class="compare-band__next">Exterior: from line to light</h2>
+      <div class="ba ba--square" data-before-after>
+        <picture class="ba__layer ba__layer--after">
+          <source
+            type="image/webp"
+            srcset="images/compare-pavilion-after-640.webp 640w, images/compare-pavilion-after-1024.webp 1024w"
+            sizes="(max-width: 400px) min(calc(100vw - 2rem), calc(100dvh - 5.25rem)), (max-width: 1120px) min(calc(100vw - 2 * clamp(1.25rem, 4.5vw, 4rem)), calc(100dvh - 5.25rem)), min(calc(1120px - 2 * clamp(1.25rem, 4.5vw, 4rem)), calc(100dvh - 5.25rem))"
+          >
+          <img
+            src="images/compare-pavilion-after-1024.jpg"
+            srcset="images/compare-pavilion-after-640.jpg 640w, images/compare-pavilion-after-1024.jpg 1024w"
+            sizes="(max-width: 400px) min(calc(100vw - 2rem), calc(100dvh - 5.25rem)), (max-width: 1120px) min(calc(100vw - 2 * clamp(1.25rem, 4.5vw, 4rem)), calc(100dvh - 5.25rem)), min(calc(1120px - 2 * clamp(1.25rem, 4.5vw, 4rem)), calc(100dvh - 5.25rem))"
+            width="1024"
+            height="1024"
+            alt="Photoreal visualization of a glass pavilion in an autumn garden, with a deck and rocks"
+            loading="lazy"
+            decoding="async"
+            draggable="false"
+          >
+        </picture>
+        <picture class="ba__layer ba__layer--before">
+          <source
+            type="image/webp"
+            srcset="images/compare-pavilion-before-640.webp 640w, images/compare-pavilion-before-1024.webp 1024w"
+            sizes="(max-width: 400px) min(calc(100vw - 2rem), calc(100dvh - 5.25rem)), (max-width: 1120px) min(calc(100vw - 2 * clamp(1.25rem, 4.5vw, 4rem)), calc(100dvh - 5.25rem)), min(calc(1120px - 2 * clamp(1.25rem, 4.5vw, 4rem)), calc(100dvh - 5.25rem))"
+          >
+          <img
+            src="images/compare-pavilion-before-1024.jpg"
+            srcset="images/compare-pavilion-before-640.jpg 640w, images/compare-pavilion-before-1024.jpg 1024w"
+            sizes="(max-width: 400px) min(calc(100vw - 2rem), calc(100dvh - 5.25rem)), (max-width: 1120px) min(calc(100vw - 2 * clamp(1.25rem, 4.5vw, 4rem)), calc(100dvh - 5.25rem)), min(calc(1120px - 2 * clamp(1.25rem, 4.5vw, 4rem)), calc(100dvh - 5.25rem))"
+            width="1024"
+            height="1024"
+            alt="Line drawing of the same glass pavilion, with a deck and rocks on a white ground"
+            loading="lazy"
+            decoding="async"
+            draggable="false"
+          >
+        </picture>
+        <div class="ba__line" aria-hidden="true"></div>
+        <div class="ba__knob" aria-hidden="true">
+          <svg class="ba__arrows" viewBox="0 0 44 44" aria-hidden="true" focusable="false">
+            <path d="M16 13.5 10 22l6 8.5" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M28 13.5 34 22l-6 8.5" fill="none" stroke="#fff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <span class="ba__chip ba__chip--before" aria-hidden="true">Before</span>
+        <span class="ba__chip ba__chip--after" aria-hidden="true">After</span>
+        <input
+          class="ba__range sr-only"
+          type="range"
+          min="0"
+          max="100"
+          step="1"
+          value="50"
+          aria-label="Compare the pavilion line drawing and the visualization"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="50"
+          aria-valuetext="50 percent. Line drawing on the left, visualization on the right."
+        >
+      </div>
+    </section>
+
     <section class="site-study" id="site-study" aria-labelledby="site-study-heading">
       <div class="site-study__intro">
         <p class="site-study__kicker">Site study</p>
@@ -523,6 +763,7 @@
   <script src="js/main.js" defer></script>
   <script src="js/custom-cursor.js" defer></script>
   <script src="js/refine.js" defer></script>
+  <script src="js/before-after.js" defer></script>
   <script type="module" src="js/site-study/boot.js"></script>
 </body>
 </html>
