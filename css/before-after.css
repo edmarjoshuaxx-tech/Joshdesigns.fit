@@ -1,0 +1,190 @@
+/* Before/after comparison. Reusable on its own; the home page
+   wraps one in .compare-band. Does not style the opening film. */
+
+.compare-band__caption {
+  max-width: 34rem;
+  margin: 0 0 1.5rem;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.compare-band {
+  padding-top: clamp(4.25rem, 8vw, 6.5rem);
+  padding-bottom: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+main > section.compare-band:not(.editorial-band) h2.compare-band__next {
+  margin: 0 0 1.15rem;
+  max-width: 16em;
+  font-family: var(--font-serif);
+  font-size: clamp(1.7rem, 3.2vw, 2.35rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: var(--near-black);
+}
+
+.render-steps + .compare-band {
+  padding-top: clamp(2.5rem, 5vw, 3.75rem);
+}
+
+.ba {
+  --pos: 50%;
+  --ba-ratio: 1024 / 576;
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--ba-ratio);
+  overflow: hidden;
+  border-radius: 12px;
+  background: #e6dccb;
+  cursor: ew-resize;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Square pairs stay 1:1. On a short window the column would make
+   them taller than the viewport, so the side is capped and the
+   frame is centered. 5.25rem clears the fixed nav. */
+.ba--square {
+  --ba-ratio: 1 / 1;
+  width: min(100%, calc(100dvh - 5.25rem));
+  max-height: calc(100dvh - 5.25rem);
+  margin-inline: auto;
+}
+
+.ba__layer {
+  position: absolute;
+  inset: 0;
+  display: block;
+  margin: 0;
+}
+
+.ba img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.ba img.fade-img {
+  opacity: 1;
+  transition: none;
+}
+
+.ba__layer--before {
+  z-index: 1;
+}
+
+.ba__layer--before img {
+  clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+}
+
+.ba__line,
+.ba__knob,
+.ba__chip {
+  position: absolute;
+  pointer-events: none;
+}
+
+.ba__line {
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  left: var(--pos);
+  width: 2px;
+  background: #fff;
+  transform: translateX(-50%);
+}
+
+.ba__knob {
+  z-index: 3;
+  top: 50%;
+  left: var(--pos);
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.28),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  transform: translate(-50%, -50%);
+}
+
+.ba__arrows {
+  display: block;
+  width: 44px;
+  height: 44px;
+}
+
+.ba__chip {
+  z-index: 4;
+  top: 12px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font-family: var(--font-sans), "Outfit", "Helvetica Neue", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.ba__chip--before {
+  left: 12px;
+}
+
+.ba__chip--after {
+  right: 12px;
+}
+
+.ba.is-hide-before .ba__chip--before,
+.ba.is-hide-after .ba__chip--after {
+  opacity: 0;
+}
+
+.ba__range {
+  pointer-events: none;
+}
+
+.ba:has(.ba__range:focus-visible) {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+html.has-custom-cursor .ba,
+html.has-custom-cursor .ba *,
+html.is-ba-dragging,
+html.is-ba-dragging * {
+  cursor: ew-resize !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ba__chip {
+    transition: none;
+  }
+}
+
+.ba.is-reduced .ba__chip {
+  transition: none;
+}
+
+@media (max-width: 400px) {
+  .ba {
+    border-radius: 10px;
+  }
+}

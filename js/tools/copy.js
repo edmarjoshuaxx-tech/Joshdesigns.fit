@@ -1,0 +1,20 @@
+export const COPY = {
+  unconfigured: "This demo is not configured yet. The page is ready, and concepts start once the worker address and the Turnstile key are in place.",
+  quota: "The free daily allowance is used up. Try again tomorrow, or ask Josh for a finished rendering.",
+  rate: "Too many concepts in a short time. Wait a minute and try again.",
+  unavailable: "The render service is not responding. Your screenshot stayed on this device. Try again later, or ask Josh for a finished rendering.",
+  turnstile: "The check could not be confirmed. Complete it again, then retry.",
+  image: "Use a JPEG or PNG screenshot.",
+  large: "That file is too large to resize here. Export a smaller JPEG or PNG and try again.",
+  preset: "Choose a style first.",
+  loading: "Making a concept image. This can take a little while.",
+  success: "Concept ready. This is an AI concept image, not a measured drawing.",
+  preview: "Layout preview. No model was called. The picture is a stand-in made in this browser.",
+  ready: "Resized in this browser. Nothing has been sent yet.",
+  confidential: "Don't upload confidential client work. The screenshot is sent for this request only and is not stored.",
+  gateTitle: "Unlock the full-size image",
+  gateBody: "A name and email unlock the download, and a short note is sent to Josh. The picture stays in this browser and is not attached.",
+  gatePending: "The download is starting. The first request also asks Josh to confirm the form email once.",
+  gateSent: "Sent. The full-size image is downloading.",
+  gateFail: "The note could not be sent. The download stays locked. Try again, or email hello@joshdesigns.fit."
+};

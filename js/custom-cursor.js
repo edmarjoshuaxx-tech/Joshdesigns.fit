@@ -81,8 +81,11 @@
 
     var target = document.elementFromPoint(x, y);
     var covered = target && target.closest && target.closest(OVERLAY);
+    var comparing =
+      document.documentElement.classList.contains("is-ba-dragging") ||
+      (target && target.closest && target.closest(".ba"));
 
-    if (covered) {
+    if (covered || comparing) {
       root.classList.remove("is-on");
       root.classList.remove("is-hover");
       return;
